@@ -1,0 +1,60 @@
+<?php
+
+// function to log to console for debugging
+function debug_to_console($data) {
+  $output = $data;
+  if (is_array($output))
+      $output = implode(',', $output);
+  echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
+// replaces authors email with their name in recipe when displayed
+function displayAuthor(string $authorEmail, array $users) : string
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $author = $users[$i];
+        if ($authorEmail === $author['email']) {
+            return $author['full_name'] . ' (' . $author['age'] . ' ans)';
+        }
+    }
+    return 'utilisateur inconnu';
+}
+
+// checks that recipe is valid ie, enabled
+function isValidRecipe(array $recipe) : bool
+{
+    if (array_key_exists('is_enabled', $recipe)) {
+        $isEnabled = $recipe['is_enabled'];
+    } else {
+        $isEnabled = false;
+    }
+    return $isEnabled;
+}
+
+// gets all recipes which are valid
+function getRecipes(array $recipes) : array
+{
+    $validRecipes = [];
+
+    foreach($recipes as $recipe) {
+        if (isValidRecipe($recipe)) {
+            $validRecipes[] = $recipe;
+        }
+    }
+    return $validRecipes;
+}
+
+function display_recipe(array $recipe) : string
+{
+    $recipe_content = '';
+
+    if ($recipe['is_enabled']) {
+        $recipe_content = '<article>';
+        $recipe_content .= '<h3>' . $recipe['title'] . '</h3>';
+        $recipe_content .= '<div>' . $recipe['recipe'] . '</div>';
+        $recipe_content .= '<i>' . $recipe['author'] . '</i>';
+        $recipe_content .= '</article>';
+    }
+    
+    return $recipe;
+}
