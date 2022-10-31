@@ -10,7 +10,7 @@ $recipe = $postCreateData['recipe'];
 // if empty recipe info, do nothing, but show error message
 if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
   {
-    echo('');
+    $errorMessage = 'You need a title and a recipe to submit the form';
   }	else {
     // otherwise enter recipe into database & show message
     $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
@@ -43,7 +43,7 @@ if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
           <h1>Oops !</h1> 
           <div class="card">
             <div class="card-body">
-            <p class="card-title">You need a title and a recipe to submit the form</p>
+            <p class="card-title"><?php echo($errorMessage); ?></p>
             </div>
           </div>
         <? else: ?>
