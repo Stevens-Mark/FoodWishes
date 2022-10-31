@@ -1,6 +1,6 @@
-<!-- contact.php -->
+<?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,23 +15,23 @@
       <?php include_once('include/header.php'); ?>
 
       <!-- Contact form -->
-        <h1>Contactez nous</h1>
+        <h1>Contact Us</h1>
           <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help">
-                  <div id="email-help" class="form-text">Nous ne revendrons pas votre email.</div>
+                  <div id="email-help" class="form-text">We will not resell your email.</div>
               </div>
               <div class="mb-3">
                   <label for="message" class="form-label">Votre message</label>
-                  <textarea class="form-control" placeholder="Exprimez vous" id="message" name="message"></textarea>
+                  <textarea class="form-control" placeholder="Express yourself" id="message" name="message"></textarea>
               </div>
               <!-- File upload ! -->
               <div class="mb-3">
-                  <label for="screenshot" class="form-label">Votre capture d'écran</label>
+                  <label for="screenshot" class="form-label">Your screenshot</label>
                   <input type="file" class="form-control" id="screenshot" name="screenshot" />
               </div>
-              <button type="submit" class="btn btn-primary">Envoyer</button>
+              <button type="submit" class="btn btn-primary">Send</button>
           </form>
           <br />
     </div>
@@ -39,7 +39,5 @@
     <!-- include footer -->
     <?php include_once('include/footer.php'); ?>
 
-  <!-- bootstrap script needed here so navbar toggle functionality will work -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
