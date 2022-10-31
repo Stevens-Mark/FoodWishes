@@ -20,28 +20,45 @@ function displayAuthor(string $authorEmail, array $users) : string
     return 'utilisateur inconnu';
 }
 
-// checks that recipe is valid ie, enabled
-function isValidRecipe(array $recipe) : bool
-{
-    if (array_key_exists('is_enabled', $recipe)) {
-        $isEnabled = $recipe['is_enabled'];
-    } else {
-        $isEnabled = false;
-    }
-    return $isEnabled;
-}
+// // checks that recipe is valid ie, enabled
+// function isValidRecipe(array $recipe) : bool
+// {
+//     if (array_key_exists('is_enabled', $recipe)) {
+//         $isEnabled = $recipe['is_enabled'];
+//     } else {
+//         $isEnabled = false;
+//     }
+//     return $isEnabled;
+// }
 
-// gets all recipes which are valid
-function getRecipes(array $recipes) : array
+// // gets all recipes which are valid
+// function getRecipes(array $recipes) : array
+// {
+//     $validRecipes = [];
+
+//     foreach($recipes as $recipe) {
+//         if (isValidRecipe($recipe)) {
+//             $validRecipes[] = $recipe;
+//         }
+//     }
+//     return $validRecipes;
+// }
+
+function getRecipes(array $recipes, int $limit) : array
 {
-    $validRecipes = [];
+    $valid_recipes = [];
+    $counter = 0;
 
     foreach($recipes as $recipe) {
-        if (isValidRecipe($recipe)) {
-            $validRecipes[] = $recipe;
+        if ($counter == $limit) {
+            return $valid_recipes;
         }
+
+        $valid_recipes[] = $recipe;
+        $counter++;
     }
-    return $validRecipes;
+
+    return $valid_recipes;
 }
 
 function display_recipe(array $recipe) : string

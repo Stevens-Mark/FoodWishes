@@ -23,18 +23,14 @@
 
       <!-- If the user exists, the recipes are displayed -->
       <?php if(isset($loggedUser)): ?>
-        <!-- Display recipe cards - loop through the recipes -->
-        <?php foreach($recipes as $recipe) : ?>
-              <!-- if key exists & the value is true, dislay card -->
-              <!-- <php if (array_key_exists('is_enabled', $recipe) && $recipe['is_enabled'] == true): ?> -->
-
+        <!-- Display recipe cards - loop through the recipes up until limit-->
+        <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
                 <article>
                     <h3><?php echo $recipe['title']; ?></h3>
                     <div><?php echo $recipe['recipe']; ?></div>
-                    <i><?php echo $recipe['author']; ?></i>
+                    <i><?php echo displayAuthor($recipe['author'], $users ); ?></i>
                 </article>
 
-              <!-- <php endif; ?> -->
         <?php endforeach ?>
         <!-- log out button -->
         <?php include_once('include/logoutButton.php'); ?>

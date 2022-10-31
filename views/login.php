@@ -63,12 +63,12 @@ if (isset($_SESSION['LOGGED_USER'])) {
         <?php endif; ?>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@example.com">
+            <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com">
             <div id="email-help" class="form-text">The email used to create the account.</div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password">
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>

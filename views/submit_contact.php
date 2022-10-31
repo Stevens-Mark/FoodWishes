@@ -1,17 +1,9 @@
 <?php
 session_start();
 
-// $postData = $_POST;
-
-// if (!isset($postData['email']) || !isset($postData['message']))
-// {
-// 	echo('Il faut un email et un message pour soumettre le formulaire.');
-//     return;
-// }	
-
-// $email = $postData['email'];
-// $message = $postData['message'];
-
+$postData = $_POST;
+$email = $postData['email'];
+$message = $postData['message'];
 ?>
 
 <!DOCTYPE html>
@@ -28,26 +20,27 @@ session_start();
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
-
-        <?php include_once('include/header.php'); ?>
-
-        <h1>Message Received !</h1>       
-        <div class="card">
-            <div class="card-body">
-              <!-- If info entered by user not valid, show message -->
-              <?php if ( (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) || (!isset($_POST['message']) || empty($_POST['message'])) ): ?>
-                  <p class="card-title">You need an email and a message to submit the form.</p>
-              <? else: ?>
-                <!-- otherwise display information -->
-                  <h2 class="card-title">Reminder of your information</h2>
-                  <p class="card-text"><b>Email</b> : <?php echo($_POST['email']); ?></p>
-                  <p class="card-text"><b>Message</b> : <?php echo strip_tags($_POST['message']); ?></p>
-                  <p class="card-text"><b>File</b> : <?php validateUpload() ?></p>
-              <?php endif; ?> 
+      <?php include_once('include/header.php'); ?>
+      <!-- If info entered by user not valid, show message -->
+      <?php if ( (!isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) || (!isset($message) || empty($message)) ): ?>
+          <h1>Oops !</h1>       
+          <div class="card">
+              <div class="card-body">
+                <p class="card-title">You need an email and a message to submit the form.</p>
             </div>
-        </div>
-      </div>
-        <?php include_once('include/footer.php'); ?>
+          </div>
+        <? else: ?>
+          <!-- otherwise display information -->
+            <h1>Message Received !</h1>       
+            <div class="card">
+              <h2 class="card-title">Reminder of your information</h2>
+              <p class="card-text"><b>Email</b> : <?php echo($email); ?></p>
+              <p class="card-text"><b>Message</b> : <?php echo strip_tags($message); ?></p>
+              <p class="card-text"><b>File</b> : <?php validateUpload() ?></p>
+            </div>
+          </div>
+      <?php endif; ?> 
     </div>
+    <?php include_once('include/footer.php'); ?>
 </body>
 </html>

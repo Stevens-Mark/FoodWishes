@@ -1,6 +1,6 @@
 <?php
 
-// Récupération des variables à l'aide du client MySQL
+// Retrieving variables using the MySQL client
 $usersStatement = $mysqlClient->prepare('SELECT * FROM users');
 $usersStatement->execute();
 $users = $usersStatement->fetchAll();
@@ -14,8 +14,6 @@ if(isset($_GET['limit']) && is_numeric($_GET['limit'])) {
 } else {
     $limit = 100;
 }
-
-
 
 
   // EXAMPLE 1
@@ -38,3 +36,5 @@ if(isset($_GET['limit']) && is_numeric($_GET['limit'])) {
   // ]);
 
   // $recipes = $recipesStatement->fetchAll();
+
+  ?>

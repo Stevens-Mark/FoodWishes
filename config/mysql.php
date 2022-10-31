@@ -2,7 +2,7 @@
     // try to connect to database & if not throw error
     // try
     // {
-    //   $db = new PDO(  // Often this object is identified by the variable $conn or $db
+    //   $mysqlClient = new PDO(  // Often this object is identified by the variable $conn or $db
     //     'mysql:host=localhost;
     //     dbname=we_love_food;
     //     charset=utf8',
@@ -15,8 +15,6 @@
     // {
     //     die('Error: ' . $e->getMessage());
     // }
-
-
 
     const MYSQL_HOST = 'localhost';
     const MYSQL_PORT = 3306;
@@ -34,5 +32,4 @@
     } catch(Exception $exception) {
         die('Erreur : '.$e->getMessage());
     }
-
 
