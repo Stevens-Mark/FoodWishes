@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
 
 $postData = $_POST;

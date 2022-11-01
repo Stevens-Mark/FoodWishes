@@ -61,7 +61,7 @@ function getRecipes(array $recipes, int $limit) : array
     return $valid_recipes;
 }
 
-function display_recipe(array $recipe) : string
+function displayRecipe(array $recipe) : string
 {
     $recipe_content = '';
 

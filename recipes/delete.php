@@ -2,6 +2,7 @@
 
   // load all data to be used 
   include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/config/user.php");
   include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
@@ -15,13 +16,14 @@
     echo $errorMessage;
     return;
   }	else {
-    // otherwise retrieve the recipe
+    // otherwise retrieve the recipe to be deleted
     $retrieveRecipe = $mysqlClient->prepare('SELECT * FROM `recipes` WHERE recipe_id = :recipe_id');
     $retrieveRecipe->execute([
       'recipe_id' => $recipe_id,
     ]);
     $recipe = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,24 +46,23 @@
         <div class="card">
           <div class="card-body">
             <form action="post_delete.php" method="POST">
-                <div class="mb-3 visually-hidden">
-                    <label for="id" class="form-label">Recipe ID</label>
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
-                </div>
-                <div class="mb-3">
-                    <h2><?php echo($recipe['title']); ?></h2>
-                    <p>Author : <i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
-            </div>
-          </div>      
+              <div class="mb-3 visually-hidden">
+                <label for="id" class="form-label">Recipe ID</label>
+                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
               </div>
+              <div class="mb-3">
+                <h2><?php echo($recipe['title']); ?></h2>
+                <p>Author : <i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+              </div>
+          </div>      
+        </div>
               <p class="m-2">Are you sure ?</p>
-                <button type="submit" class="btn btn-danger m-2">Delete</button>
+              <!-- disable delete button if user is not owner or recipe -->
+              <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'disabled' : '' ); ?> >Delete</button>
             </form>
           <br />
     </div>
-
     <!-- include footer -->
     <?php include_once('../include/footer.php'); ?>
-
 </body>
 </html>

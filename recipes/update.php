@@ -2,6 +2,7 @@
 
   // load all data to be used 
   include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
