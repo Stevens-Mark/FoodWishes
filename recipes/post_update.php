@@ -1,24 +1,24 @@
 <?php
 session_start();
-include_once('../config/mysql.php');
-include_once('../variables/variables.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
 
-$postCreateData = $_POST;
-$title = $postCreateData['title'];
-$recipe = $postCreateData['recipe'];
+$postData = $_POST;
+$recipe_id = $postData['id'];
+$title = $postData['title'];
+$recipe = $postData['recipe'];
 
-// if empty recipe info, do nothing, but show error message
-if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
+// if recipe info missing, do nothing, but show error message
+if ( !isset($recipe_id) || (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
   {
-    $errorMessage = 'You need a title and a recipe to submit the form';
+    $errorMessage = 'Some information to update the recipe is missing';
   }	else {
-    // otherwise enter recipe into database & show message
-    $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
+    // otherwise update recipe in database & show message
+    $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
     $insertRecipe->execute([
       'title' => $title,
       'recipe'=> $recipe,
-      'author' => $_SESSION['LOGGED_USER'],
-      'is_enabled' => 1,
+      'recipe_id' => $recipe_id,
     ]);
   }
 ?>
@@ -37,7 +37,7 @@ if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
-      <?php include_once('include/header.php'); ?>
+      <?php include_once('../include/header.php'); ?>
       <!-- If info entered by user not valid, show message -->
       <?php if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) ): ?>      
           <h1>Oops !</h1> 
@@ -47,17 +47,17 @@ if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
             </div>
           </div>
         <? else: ?>
-          <!-- otherwise display recipe information -->
-          <h1>Recipe Received !</h1> 
+          <!-- otherwise display updated recipe information -->
+          <h1>Recipe Updated !</h1> 
           <div class="card">
             <div class="card-body">
-              <h2 class="card-title">Your Recipe information</h2>
+              <h2 class="card-title">Your Updated Recipe information</h2>
               <p class="card-text"><b>Title</b> : <?php echo($title); ?></p>
               <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
             </div>
           </div>
       <?php endif; ?>    
     </div>
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once('../include/footer.php'); ?>
 </body>
 </html>

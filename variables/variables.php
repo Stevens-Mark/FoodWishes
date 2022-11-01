@@ -15,6 +15,13 @@ if(isset($_GET['limit']) && is_numeric($_GET['limit'])) {
     $limit = 100;
 }
 
+// used for linking files & links to pages
+$rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+
+
+
+
 
   // EXAMPLE 1
   

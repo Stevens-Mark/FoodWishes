@@ -12,7 +12,7 @@
     <div class="container">
 
       <!-- include header -->
-      <?php include_once('include/header.php'); ?>
+      <?php include_once('../include/header.php'); ?>
 
       <!-- Create recipe form -->
         <h1>Add A Recipe</h1>
@@ -24,8 +24,8 @@
                   <div id="title-help" class="form-text">Choose a title for your recipe.</div>
               </div>
               <div class="mb-3">
-                  <label for="recipe" class="form-label">Votre recipe</label>
-                  <textarea class="form-control" placeholder="Put recipe details here only" id="recipe" name="recipe"></textarea>
+                  <label for="recipe" class="form-label">Recipe Description</label>
+                  <textarea class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
@@ -33,7 +33,7 @@
     </div>
 
     <!-- include footer -->
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once('../include/footer.php'); ?>
 
 </body>
 </html>

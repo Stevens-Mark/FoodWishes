@@ -25,12 +25,15 @@
       <?php if(isset($loggedUser)): ?>
         <!-- Display recipe cards - loop through the recipes up until limit-->
         <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
-                <article>
+                <article class="my-4">
                     <h3><?php echo $recipe['title']; ?></h3>
                     <div><?php echo $recipe['recipe']; ?></div>
                     <i><?php echo displayAuthor($recipe['author'], $users ); ?></i>
+                    <div>
+                      <a class="btn btn-warning my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
+                      <a class="btn btn-danger m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
+                    </div>
                 </article>
-
         <?php endforeach ?>
         <!-- log out button -->
         <?php include_once('include/logoutButton.php'); ?>

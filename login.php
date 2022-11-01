@@ -57,8 +57,9 @@ if (isset($_SESSION['LOGGED_USER'])) {
     <form action="index.php" method="post">
         <!-- If error message (see above) then show it -->
         <?php if(isset($errorMessage)) : ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo($errorMessage); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
         <div class="mb-3">
@@ -72,9 +73,11 @@ if (isset($_SESSION['LOGGED_USER'])) {
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
-      <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
+    <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
-      <div class="alert alert-success" role="alert">
-          Hello <?php echo($loggedUser['email']); ?> !
-      </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Hello <?php echo($loggedUser['email']); ?> !
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
+
