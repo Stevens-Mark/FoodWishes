@@ -1,5 +1,7 @@
 <?php
 
+include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
+
 $postData = $_POST;
  // Validation, or not, of login info entered by user...
 if (isset($postData['email']) &&  isset($postData['password'])) {
@@ -62,6 +64,7 @@ if (isset($_SESSION['LOGGED_USER'])) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <h2>Log In</h2>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com">
@@ -76,7 +79,7 @@ if (isset($_SESSION['LOGGED_USER'])) {
     <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Hello <?php echo($loggedUser['email']); ?> !
+        Hello <?php echo displayName($loggedUser['email'], $users ); ?> !
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>

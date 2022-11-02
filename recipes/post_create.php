@@ -39,6 +39,7 @@ if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
       <?php include_once('../include/header.php'); ?>
+
       <!-- If info entered by user not valid, show message -->
       <?php if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) ): ?>      
           <h1>Oops !</h1> 
@@ -57,7 +58,8 @@ if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
               <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
             </div>
           </div>
-      <?php endif; ?>    
+      <?php endif; ?>   
+ 
     </div>
     <?php include_once('../include/footer.php'); ?>
 </body>

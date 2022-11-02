@@ -20,7 +20,7 @@
     <!-- include header -->
     <?php include_once('include/header.php'); ?>
       <div class="alert alert-success" role="alert">
-        Logged out !
+        You are now logged out !
     </div>
   </div>
     <!-- include footer -->

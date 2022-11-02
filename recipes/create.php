@@ -19,7 +19,6 @@
 
       <!-- Create recipe form -->
         <h1>Add A Recipe</h1>
-
           <form action="post_create.php" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Recipe Title</label>
@@ -34,9 +33,7 @@
           </form>
           <br />
     </div>
-
     <!-- include footer -->
     <?php include_once('../include/footer.php'); ?>
-
 </body>
 </html>

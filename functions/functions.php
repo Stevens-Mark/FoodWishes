@@ -20,6 +20,18 @@ function displayAuthor(string $authorEmail, array $users) : string
     return 'utilisateur inconnu';
 }
 
+// display username
+function displayName(string $authorEmail, array $users) : string
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $author = $users[$i];
+        if ($authorEmail === $author['email']) {
+            return $author['full_name'];
+        }
+    }
+    return 'utilisateur inconnu';
+}
+
 // // checks that recipe is valid ie, enabled
 // function isValidRecipe(array $recipe) : bool
 // {

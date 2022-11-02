@@ -56,7 +56,7 @@
               </div>
           </div>      
         </div>
-              <p class="m-2">Are you sure ?</p>
+              <p class="m-2"><?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'Are you sure ?' ); ?></p>
               <!-- disable delete button if user is not owner or recipe -->
               <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'disabled' : '' ); ?> >Delete</button>
             </form>
