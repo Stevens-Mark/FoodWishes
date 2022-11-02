@@ -8,6 +8,8 @@ $postCreateData = $_POST;
 $title = $postCreateData['title'];
 $recipe = $postCreateData['recipe'];
 
+
+
 // if empty recipe info, do nothing, but show error message
 if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) )
   {

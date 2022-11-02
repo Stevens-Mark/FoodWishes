@@ -64,7 +64,7 @@ if (isset($_SESSION['LOGGED_USER'])) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
-        <h2>Log In</h2>
+        <h1>Log In</h1>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com">
