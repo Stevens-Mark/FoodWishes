@@ -27,7 +27,7 @@
               </div>
               <div class="mb-3">
                   <label for="recipe" class="form-label">Recipe Description</label>
-                  <textarea class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"></textarea>
+                  <textarea rows="10"  class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>

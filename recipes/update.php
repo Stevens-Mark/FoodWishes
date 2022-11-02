@@ -55,7 +55,7 @@
               </div>
               <div class="mb-3">
                   <label for="recipe" class="form-label">Recipe Description</label>
-                  <textarea class="form-control" aria-describedby="description-help" id="recipe" name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
+                  <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
                   <div id="description-help" class="form-text">Put updated recipe details here</div>
               </div>
               <button type="submit" class="btn btn-warning">Update</button>
