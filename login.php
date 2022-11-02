@@ -32,7 +32,7 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
             $_SESSION['LOGGED_USER'] = $loggedUser['email'];
         } else {
           // otherwise display error message
-            $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
+            $errorMessage = sprintf('The information sent does not allow you to be identified : (%s/%s)',
                 $postData['email'],
                 $postData['password']
             );
