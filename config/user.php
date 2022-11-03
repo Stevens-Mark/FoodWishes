@@ -12,5 +12,7 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 } else {
     // throw new Exception('You must be authenticated !');
     header('Location: '.$rootUrl.'index.php');
-    // echo 'Either, You are not logged in or you are not a valid user !';
 }
+
+// meaning of ?? Null Coalescing Operator
+// assigns $_COOKIE['LOGGED_USER'] variable  to $loggedUser if the $_COOKIE['LOGGED_USER'] variable exists or has a value that is not NULL, otherwise  $_SESSION['LOGGED_USER']' is assigned instead

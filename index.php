@@ -17,9 +17,7 @@
     <!-- include header -->
     <?php include_once('include/header.php'); ?>
 
-      
-
-      <!-- Inclusion du formulaire de connexion -->
+      <!-- include log in form -->
       <?php include_once('login.php'); ?>
 
       <!-- If the user exists, the recipes are displayed -->

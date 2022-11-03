@@ -23,6 +23,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo($rootUrl). 'recipes/create.php'; ?>">Add A Recipe</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo($rootUrl). 'mail.php'; ?>">Mail</a>
+          </li>
         </ul>
       </div>
     </div>

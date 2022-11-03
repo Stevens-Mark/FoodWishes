@@ -21,7 +21,9 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
 
 
 
-
+// define variables and set to empty values
+$emailErr = $passwordErr =  "";
+//  $email = $gender = $comment =  "";
 
   // EXAMPLE 1
   

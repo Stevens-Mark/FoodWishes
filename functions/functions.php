@@ -108,7 +108,7 @@ function validateUpload() {
         $newFilename = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
         move_uploaded_file(
           $_FILES['screenshot']['tmp_name'],
-          '../uploads/' . $newFilename);
+          'uploads/' . $newFilename);
     
         echo "Uploaded as : " .$newFilename ." !";
         return;
@@ -116,4 +116,11 @@ function validateUpload() {
     }
   }
   echo "There was a problem so no file uploaded!"; 
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
 }
