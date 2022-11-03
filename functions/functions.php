@@ -100,7 +100,7 @@ function validateUpload() {
       $fileInfo = pathinfo($_FILES['screenshot']['name']);
       $extension = $fileInfo['extension'];
       $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-      if (in_array($extension, $allowedExtensions))
+      if (in_array(strtolower($extension), $allowedExtensions))
       {
         // We can validate the file and store it permanently with unique name
         $uploadedFile = str_replace(' ', '_', $_FILES['screenshot']['name']);

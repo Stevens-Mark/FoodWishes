@@ -29,8 +29,9 @@
               </div>
               <!-- File upload ! -->
               <div class="mb-3">
-                  <label for="screenshot" class="form-label">Your screenshot</label>
-                  <input type="file" class="form-control" id="screenshot" name="screenshot" />
+                  <label for="image" class="form-label">Your File</label>
+                  <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help" />
+                  <div id="image-help" class="form-text">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
@@ -42,4 +43,4 @@
 
 </body>
 </html>
-action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
+<!-- action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" -->

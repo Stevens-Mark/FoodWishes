@@ -1,59 +1,60 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
-$postData = $_POST;
- // User Validation? set cookie/session or display error message...
-if (isset($postData['email']) &&  isset($postData['password'])) {
-    foreach ($users as $user) {
-      if (
-          $user['email'] === $postData['email'] &&
-          $user['password'] === $postData['password']
-      ) {
-          $loggedUser = ['email' => $user['email'], ];
+  $emailErr = $passwordErr =  "";
+  $postData = $_POST;
 
-        //  Cookie : If user/password match save to cookie the email for future validation
-          // setcookie(
-          //   'LOGGED_USER',
-          //   $loggedUser['email'],
-          //   [
-          //     'expires' => time() + 1*24*3600,  // expires in 1 day
-          //     'secure' => true,
-          //     'httponly' => true,
-          //   ]
-          // );
-          // if user found, save the user's email in session
-          $_SESSION['LOGGED_USER'] = $loggedUser['email'];
-      } else {
-          // otherwise display error message
-          $errorMessage = sprintf(
-            'The information sent does not allow you to be identified : (%s/%s)',
-            $postData['email'],
-            $postData['password']
-          );
-      }
+  // User Validation? set cookie/session or display error message...
+  if (isset($postData['email']) &&  isset($postData['password'])) {
+      foreach ($users as $user) {
+        if (
+            $user['email'] === $postData['email'] &&
+            $user['password'] === $postData['password']
+        ) {
+            $loggedUser = ['email' => $user['email'], ];
+
+          //  Cookie : If user/password match save to cookie the email for future validation
+            // setcookie(
+            //   'LOGGED_USER',
+            //   $loggedUser['email'],
+            //   [
+            //     'expires' => time() + 1*24*3600,  // expires in 1 day
+            //     'secure' => true,
+            //     'httponly' => true,
+            //   ]
+            // );
+            // if user found, save the user's email in session
+            $_SESSION['LOGGED_USER'] = $loggedUser['email'];
+        } else {
+            // otherwise display error message
+            $errorMessage = sprintf(
+              'The information sent does not allow you to be identified : (%s/%s)',
+              $postData['email'],
+              $postData['password']
+            );
+        }
+    }
   }
-}
 
-// If the cookie is already present then set login credentials to cookie value
-//  otherwise use session value
-if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
-  $loggedUser = [
-      'email' => $_COOKIE['LOGGED_USER'] ?? $_SESSION['LOGGED_USER'],
-  ];
-}
+  // If the cookie is already present then set login credentials to cookie value
+  //  otherwise use session value
+  if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
+    $loggedUser = [
+        'email' => $_COOKIE['LOGGED_USER'] ?? $_SESSION['LOGGED_USER'],
+    ];
+  }
 
-// show relevant error message next to input where user forgot information
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($postData["email"])) {
-    $emailErr = "You forgot to enter your email.";
-  } 
-  if (empty($postData["password"])) {
-    $passwordErr = "You forgot to enter your password.";
-  } 
-}
-
+  // show relevant error message next to input where user forgot information
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($postData["email"])) {
+      $emailErr = "You forgot to enter your email.";
+    } 
+    if (empty($postData["password"])) {
+      $passwordErr = "You forgot to enter your password.";
+    } 
+  }
 ?>
 
 <!-- If user not identified display the login form -->
@@ -73,13 +74,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if(empty($emailErr)) : ?>
               <div id="email-help" class="form-text">The email used to create the account.</div>
             <?php else: ?>
-              <span class="text-danger"><?php echo $emailErr;?></span>
+              <span class="text-danger"><?php echo $emailErr; ?></span>
             <?php endif; ?>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" autocomplete="current-password">
-            <span class="text-danger"><?php echo $passwordErr;?></span>
+            <span class="text-danger"><?php echo $passwordErr; ?></span>
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
