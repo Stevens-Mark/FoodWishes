@@ -79,7 +79,8 @@
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password">
+            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" aria-describedby="password-help"  placeholder="H4rD_2_Gue55">
+            <div id="password-help" class="form-text">The password used to create the account.</div>
             <span class="text-danger"><?php echo $passwordErr; ?></span>
         </div>
         <button type="submit" class="btn btn-primary">Send</button>

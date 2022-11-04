@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" name="age" autocomplete="age" aria-describedby="age-help" placeholder="xx years" value="<?php echo $age;?>">
+            <input type="number" class="form-control" id="age" name="age" autocomplete="age" aria-describedby="age-help" placeholder="In years" value="<?php echo $age;?>">
             <div id="age-help" class="form-text">Enter your age in years.</div>
             <span class="text-danger"><?php echo $ageErr;?></span>
           </div>
@@ -140,13 +140,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help">
+            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" placeholder="H4rD_2_Gue55">
             <div id="password-help" class="form-text">At least 8 characters, 1 upper case, 1 lower case & 1 number.</div>
             <span class="text-danger"><?php echo $passwordErr;?></span>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" >
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" placeholder="H4rD_2_Gue55">
             <div id="confirm-help" class="form-text">Re-type the same password as above.</div> 
             <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>

@@ -20,7 +20,7 @@
           <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help">
+                  <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@example.com">
                   <div id="email-help" class="form-text">We will not resell your email.</div>
               </div>
               <div class="mb-3">

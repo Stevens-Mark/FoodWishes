@@ -22,7 +22,7 @@
           <form action="post_create.php" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Recipe Title</label>
-                  <input type="title" class="form-control" id="title" name="title" aria-describedby="title-help">
+                  <input type="title" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Your Recipe Title">
                   <div id="title-help" class="form-text">Choose a title for your recipe.</div>
               </div>
               <div class="mb-3">
