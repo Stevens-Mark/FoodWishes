@@ -20,7 +20,8 @@
   $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
     // $recipes = $recipesStatement->fetchAll();
-  
+
+
   // EXAMPLE 1
   
   // $sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = TRUE';
