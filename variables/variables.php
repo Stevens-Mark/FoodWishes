@@ -19,6 +19,8 @@
   $rootPath = $_SERVER['DOCUMENT_ROOT'];
   $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
+    // $recipes = $recipesStatement->fetchAll();
+ 
 
   // EXAMPLE 1
   
@@ -38,9 +40,5 @@
   //   'author' => $_SESSION['LOGGED_USER'],
   //   'is_enabled' => true,
   // ]);
-
-  // $recipes = $recipesStatement->fetchAll();
-
-
 
   ?>
