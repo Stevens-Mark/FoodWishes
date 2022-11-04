@@ -5,33 +5,38 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty values
-  $full_name = $email = $password = $age = "";
-  $full_nameErr = $emailErr = $ageErr = $passwordErr = "";
+  $full_name = $email = $password = $confirmPassword = $age = "";
+  $full_nameErr = $emailErr = $ageErr = $passwordErr = $confirmPasswordErr = "";
+  $passwordFail = $confirmPasswordFail = false;
 
   // form validation
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // name
   if (empty($_POST["full_name"])) {
-    $full_nameErr = "Name is required";
+    $full_nameErr = "Name is required.";
   } else {
     $full_name = test_input($_POST["full_name"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
-      $full_nameErr = "Only letters and white space allowed";
+      $full_nameErr = "Only letters and white space allowed.";
     }
   }
 
+  // age
   if (empty($_POST["age"])) {
-    $ageErr = "Age is required";
+    $ageErr = "Age is required.";
   } else {
     $age = test_input($_POST["age"]);
    }
 
+   // email
   if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
+    $emailErr = "Email is required.";
   } else {
     $email = test_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Invalid email format";
+      $emailErr = "Invalid email format.";
     }
     
     // check if email in database already
@@ -40,22 +45,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isMail->execute(['email' => $email, ]);
     $user = $isMail->fetch(PDO::FETCH_ASSOC);
     if (isset($user) && !empty($user)) {
-      $emailErr = 'This email address is used already !';
+      $emailErr = 'This email address is in use already !';
       $email = '';
     }
   }
 
+  // password
   if (empty($_POST["password"])) {
-    $passwordErr = "Password is required";
+    $passwordErr = " Password is required";
+    $passwordFail = true;
   } else {
+    // Validate password strength
     $password = test_input($_POST["password"]);
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number = preg_match('@[0-9]@', $password);
+    $specialchars = preg_match('@[^\w]@', $password);
+    if (!$uppercase || !$lowercase || !$number || !$specialchars || strlen($password) < 8) {
+    $passwordErr = "Password is not strong enough.";
+    $passwordFail = true;
   }
+  // confirm password
+  if (empty($_POST["confirmPassword"])) {
+    $confirmPasswordErr = "A confirmation Password is required.";
+    $confirmPasswordFail = true;
+  } else {
+    $confirmPassword = test_input($_POST["confirmPassword"]);
+    if ($password != $confirmPassword ) {
+      $confirmPasswordErr = "The passwords don't match.";
+      $confirmPasswordFail = true;
+    }
+  }
+
+}
    // if all data correct: enter user into database & show success message
   if ( 
     ( isset($full_name) && !empty($full_name) ) && 
     ( isset($age) && !empty($age) ) && 
     ( (isset($email) && !empty($email)) ) && 
-    ( isset($password) && !empty($password) ) 
+    ( isset($password) && !empty($password) && !$passwordFail && !$confirmPasswordFail ) 
     )
   {
      $insertUser = $mysqlClient->prepare('INSERT INTO users(full_name, age, email, password) VALUES (:full_name, :age, :email, :password)');
@@ -112,8 +140,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password">
+            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help">
+            <div id="password-help" class="form-text">At least 8 characters, 1 upper case, 1 lower case & 1 number.</div>
             <span class="text-danger"><?php echo $passwordErr;?></span>
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" >
+            <div id="confirm-help" class="form-text">Re-type the same password as above.</div> 
+            <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>
           <button type="submit" class="btn btn-primary">Send</button>
         </form>
