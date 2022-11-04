@@ -150,3 +150,10 @@ if( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['err
     <?php include_once('include/footer.php'); ?>
 </body>
 </html>
+
+<!-- Infomration chnage in php.ini file -->
+<!-- upload_max_filesize = 5M (changed this from 2M)
+post_max_size = 8M (changed this from 8M)
+max_execution_time = 60 (changed this from 30)
+max_input_time = 120 (changed this from 60)
+memory_limit = 128M (Changed this from 128M) -->

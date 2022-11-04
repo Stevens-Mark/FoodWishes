@@ -88,36 +88,6 @@ function displayRecipe(array $recipe) : string
     return $recipe;
 }
 
-// function to check uploaded file
-function validateUpload() {
-  // Let's test if the file has been sent and if there is no error
-  if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
-  {
-    // Let's test if the file is not too big
-    if ($_FILES['screenshot']['size'] <= 1000000)
-    {
-      // Let's test if the extension is allowed
-      $fileInfo = pathinfo($_FILES['screenshot']['name']);
-      $extension = $fileInfo['extension'];
-      $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-      if (in_array(strtolower($extension), $allowedExtensions))
-      {
-        // We can validate the file and store it permanently with unique name
-        $uploadedFile = str_replace(' ', '_', $_FILES['screenshot']['name']);
-        $pieces = explode(".", $uploadedFile);
-        $newFilename = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
-        move_uploaded_file(
-          $_FILES['screenshot']['tmp_name'],
-          'uploads/' . $newFilename);
-    
-        echo "Uploaded as : " .$newFilename ." !";
-        return;
-      }
-    }
-  }
-  echo "There was a problem so no file uploaded!"; 
-}
-
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);

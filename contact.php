@@ -15,7 +15,7 @@
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
 
-      <!-- Contact form -->
+      <!-- Contact Us form -->
         <h1>Contact Us</h1>
           <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
