@@ -44,10 +44,10 @@ The site is not very inspiring (yet another recipe website, why is Openclassroom
 
 Once downloaded, install it. There are afew options. If you are offered to install MAMP Pro, say no, because it is a paid program and you won't need it. MAMP alone is enough.<br/>
 
-- Clone this repository onto your computer and put it in<br/>
+Clone this repository onto your computer and put it in<br/>
 
-- [x] C:MAMP/htdocs under Windows ;
-- [x]/Applications/MAMP/htdocs under Mac.<br/>
+- [x] C:MAMP/htdocs under Windows 
+- [x] /Applications/MAMP/htdocs under Mac.<br/>
 
 Note: If you decide to keep the project elsewhere, don't forget to change the server document root: <br/>
 To do this: Once you've started MAMP, click on MAMP > preferences > Webserver & change document root to the relevant folder<br/>
@@ -62,7 +62,8 @@ Click on MAMP > preferences > PHP & change the Standard version to 7.3.7<br/>
 - Install Database
 
 When MAMP has successfully launched Apache and MySQL, click on the "Open WebStart Page" button in the middle, which allows you to open the MAMP home page in your browser.<br/>
-- Click Tools > phpMyAdmin : This will open a new window, giving you access to the MYSQL database. You can import the database file ``creation_base.sql` you will find in the folder `SQL` to setup the database for this project.
+
+Click Tools > phpMyAdmin : This will open a new window, giving you access to the MYSQL database. You can import the database file ``creation_base.sql` you will find in the folder `SQL` to setup the database for this project.
 
 
 - Run the Api:
@@ -117,10 +118,10 @@ Le site n'est pas très inspirant (encore un autre site de recettes, pourquoi Op
 
 Une fois téléchargé, installez-le. Il y a quelques options. Si on vous propose d'installer MAMP Pro, dites non, car c'est un programme payant et vous n'en aurez pas besoin. MAMP seul suffit.<br/>
 
-- Clonez ce référentiel sur votre ordinateur et placez-le dans<br/>
+Clonez ce référentiel sur votre ordinateur et placez-le dans<br/>
 
-- [x] C:MAMP/htdocs sous Windows ;
-- [x]/Applications/MAMP/htdocs sous Mac.<br/>
+- [x] C:MAMP/htdocs sous Windows 
+- [x] /Applications/MAMP/htdocs sous Mac.<br/>
 
 Remarque : Si vous décidez de conserver le projet ailleurs, n'oubliez pas de modifier la racine du document serveur : <br/>
 Pour ce faire : une fois que vous avez démarré MAMP, cliquez sur MAMP > Préférences > Serveur Web et modifiez la racine du document dans le dossier approprié<br/>
@@ -135,7 +136,7 @@ Cliquez sur MAMP > Préférences > PHP et changez la version Standard en 7.3.7<b
 - Installer la base de données
 
 Lorsque MAMP a lancé avec succès Apache et MySQL, cliquez sur le bouton "Ouvrir la page de démarrage Web" au milieu, ce qui vous permet d'ouvrir la page d'accueil de MAMP dans votre navigateur.<br/>
-- Cliquez sur Outils > phpMyAdmin : Cela ouvrira une nouvelle fenêtre, vous donnant accès à la base de données MYSQL. Vous pouvez importer le fichier de base de données ``creation_base.sql` que vous trouverez dans le dossier `SQL` pour configurer la base de données pour ce projet.
+Cliquez sur Outils > phpMyAdmin : Cela ouvrira une nouvelle fenêtre, vous donnant accès à la base de données MYSQL. Vous pouvez importer le fichier de base de données ``creation_base.sql` que vous trouverez dans le dossier `SQL` pour configurer la base de données pour ce projet.
 
 
 - Exécutez l'API :
