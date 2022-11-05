@@ -21,7 +21,6 @@
 
     // $recipes = $recipesStatement->fetchAll();
 
-
   // EXAMPLE 1
   
   // $sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = TRUE';
