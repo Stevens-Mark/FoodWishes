@@ -15,12 +15,14 @@ session_start();
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
       <?php include_once('include/header.php'); ?>
+      <section>
         <h1>Congratulations !</h1> 
         <div class="card">
           <div class="card-body">
           <p class="card-title">You now have an account & can log in !</p>
           </div>
         </div>
+      </section>
     </div>
     <?php include_once('include/footer.php'); ?>
 </body>

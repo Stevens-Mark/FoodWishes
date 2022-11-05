@@ -40,27 +40,27 @@
       <!-- include header -->
       <?php include_once('../include/header.php'); ?>
 
-      <!-- Update recipe form -->
-        <h1>Update The Recipe</h1>
-
-          <form action="post_update.php" method="POST">
-              <div class="mb-3 visually-hidden">
-                  <label for="id" class="form-label">Recipe ID</label>
-                  <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
-              </div>
-              <div class="mb-3">
-                  <label for="title" class="form-label">New Recipe Title</label>
-                  <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipe['title']); ?>">
-                  <div id="title-help" class="form-text">Choose a title for your recipe.</div>
-              </div>
-              <div class="mb-3">
-                  <label for="recipe" class="form-label">Recipe Description</label>
-                  <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
-                  <div id="description-help" class="form-text">Put updated recipe details here</div>
-              </div>
-              <button type="submit" class="btn btn-warning">Update</button>
-          </form>
-          <br />
+        <section>
+          <h1>Update The Recipe</h1>
+            <form action="post_update.php" method="POST">
+                <div class="mb-3 visually-hidden">
+                    <label for="id" class="form-label">Recipe ID</label>
+                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">New Recipe Title</label>
+                    <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipe['title']); ?>">
+                    <div id="title-help" class="form-text">Choose a title for your recipe.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="recipe" class="form-label">Recipe Description</label>
+                    <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
+                    <div id="description-help" class="form-text">Put updated recipe details here</div>
+                </div>
+                <button type="submit" class="btn btn-warning">Update</button>
+            </form>
+            <br />
+        </section>
     </div>
 
     <!-- include footer -->

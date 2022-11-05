@@ -4,6 +4,8 @@
     include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
     include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 ?>
+<!-- bootstrap script needed here so navbar toggle functionality will work -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,5 +31,3 @@
   </nav>
 </header>
 
-<!-- bootstrap script needed here so navbar toggle functionality will work -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -40,8 +40,7 @@
 
       <!-- include header -->
       <?php include_once('../include/header.php'); ?>
-
-      <!-- Delete recipe form -->
+      <section>
         <h1>Delete The Recipe</h1>
         <div class="card">
           <div class="card-body">
@@ -62,6 +61,7 @@
               <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'disabled' : '' ); ?> >Delete</button>
             </form>
           <br />
+      </section>
     </div>
     <!-- include footer -->
     <?php include_once('../include/footer.php'); ?>

@@ -39,25 +39,27 @@ if ( !isset($recipe_id) || (!isset($title) || empty($title)) || (!isset($recipe)
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
       <?php include_once('../include/header.php'); ?>
-      <!-- If info entered by user not valid, show message -->
-      <?php if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) ): ?>      
-          <h1>Oops !</h1> 
-          <div class="card">
-            <div class="card-body">
-            <p class="card-title"><?php echo($errorMessage); ?></p>
+      <section>
+        <!-- If info entered by user not valid, show message -->
+        <?php if ( (!isset($title) || empty($title)) || (!isset($recipe) || empty($recipe)) ): ?>      
+            <h1>Oops !</h1> 
+            <div class="card">
+              <div class="card-body">
+              <p class="card-title"><?php echo($errorMessage); ?></p>
+              </div>
             </div>
-          </div>
-        <? else: ?>
-          <!-- otherwise display updated recipe information -->
-          <h1>Recipe Updated !</h1> 
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">Your Updated Recipe information</h2>
-              <p class="card-text"><b>Title</b> : <?php echo($title); ?></p>
-              <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
+          <? else: ?>
+            <!-- otherwise display updated recipe information -->
+            <h1>Recipe Updated !</h1> 
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">Your Updated Recipe information</h2>
+                <p class="card-text"><b>Title</b> : <?php echo($title); ?></p>
+                <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
+              </div>
             </div>
-          </div>
-      <?php endif; ?>    
+        <?php endif; ?>    
+      </section>
     </div>
     <?php include_once('../include/footer.php'); ?>
 </body>

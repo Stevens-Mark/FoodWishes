@@ -20,9 +20,9 @@
   <div class="container">
     <!-- include header -->
     <?php include_once('include/header.php'); ?>
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-success mt-2" role="alert">
         You are now logged out !
-    </div>
+      </div>
   </div>
     <!-- include footer -->
     <?php include_once('include/footer.php'); ?>

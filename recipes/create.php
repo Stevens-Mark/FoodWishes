@@ -17,7 +17,7 @@
       <!-- include header -->
       <?php include_once('../include/header.php'); ?>
 
-      <!-- Create recipe form -->
+      <section>
         <h1>Add A Recipe</h1>
           <form action="post_create.php" method="POST">
               <div class="mb-3">
@@ -32,6 +32,7 @@
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
           <br />
+      </section>     
     </div>
     <!-- include footer -->
     <?php include_once('../include/footer.php'); ?>

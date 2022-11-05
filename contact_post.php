@@ -121,15 +121,17 @@ if( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['err
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
       <?php include_once('include/header.php'); ?>
+
       <!-- If info entered by user not valid, show message -->
       <?php if ( (!isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) || (!isset($message) || empty($message)) ): ?>
+        <section>
           <h1>Oops !</h1>       
           <div class="card">
               <div class="card-body">
                 <p class="card-title">You need an email and a message to submit the form.</p>
             </div>
           </div>
-        <? else: ?>
+          <? else: ?>
           <!-- otherwise display information -->
             <h1>Message Received !</h1>       
             <div class="card">
@@ -145,15 +147,12 @@ if( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['err
               <p class="card-text "><b>Status</b> : <?php echo($sentMessage) ?></p>
             </div>
           </div>
+        </section>
       <?php endif; ?> 
+              
     </div>
     <?php include_once('include/footer.php'); ?>
 </body>
 </html>
 
-<!-- Infomration chnage in php.ini file -->
-<!-- upload_max_filesize = 5M (changed this from 2M)
-post_max_size = 8M (changed this from 8M)
-max_execution_time = 60 (changed this from 30)
-max_input_time = 120 (changed this from 60)
-memory_limit = 128M (Changed this from 128M) -->
+

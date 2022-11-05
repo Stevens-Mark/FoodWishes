@@ -62,7 +62,7 @@
     <form action="index.php" method="post">
         <!-- If error message (see above) then show it -->
         <?php if(isset($errorMessage)) : ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
                 <?php echo($errorMessage); ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -87,9 +87,8 @@
     </form>
     <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success mt-2" role="alert">
         Hello <?php echo displayName($loggedUser['email'], $users ); ?> !
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>
 

@@ -14,40 +14,42 @@
 <body class="d-flex flex-column min-vh-100">
   <div class="container">
 
-    <!-- include header -->
-    <?php include_once('include/header.php'); ?>
+      <!-- include header -->
+      <?php include_once('include/header.php'); ?>
 
       <!-- include log in form -->
       <?php include_once('login.php'); ?>
 
       <!-- If the user exists, the recipes are displayed -->
       <?php if(isset($loggedUser)): ?>
-        <h1>Recipes</h1>
-        <div class='recipe-container'>
-              <!-- Display recipe cards - loop through the recipes up until limit-->
-              <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
+        <section>
+          <h1>Recipes</h1>
+          <div class='recipe-container'>
+                <!-- Display recipe cards - loop through the recipes up until limit-->
+                <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
 
-                <article class="card bg-light">
-                  <div class="card-body d-flex flex-column">
-                    <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
-                    <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
-                    <p class="card-text"><?php echo $recipe['recipe']; ?></p>
-                    <div class="mt-auto">
-                    <a class="btn btn-warning btn-sm my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
-                    <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
+                  <article class="card bg-light">
+                    <div class="card-body d-flex flex-column">
+                      <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
+                      <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+                      <p class="card-text"><?php echo $recipe['recipe']; ?></p>
+                      <div class="mt-auto">
+                      <a class="btn btn-warning btn-sm my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
+                      <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              <?php endforeach ?>
-          </div>
-      
-        <!-- log out button -->
-        <?php include_once('include/logoutButton.php'); ?>
+                  </article>
+                <?php endforeach ?>
+            </div>
+        
+          <!-- log out button -->
+          <?php include_once('include/logoutButton.php'); ?>
+        </section>
       <?php endif; ?>
   </div>
   
-    <!-- include footer -->
-    <?php include_once('include/footer.php'); ?>
+  <!-- include footer -->
+  <?php include_once('include/footer.php'); ?>
 
 </body>
 </html>

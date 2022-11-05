@@ -15,8 +15,9 @@
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
 
-      <!-- Contact Us form -->
+     <section>
         <h1>Contact Us</h1>
+         <!-- Contact Us form -->
           <form action="contact_post.php" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
@@ -36,6 +37,7 @@
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
           <br />
+      </section>
     </div>
 
     <!-- include footer -->

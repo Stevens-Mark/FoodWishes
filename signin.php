@@ -116,8 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
 
-      <!-- Create account form -->
-      <h1>Sign Up</h1>
+      <section>
+        <h1>Sign Up</h1>
+              <!-- Create account form -->
         <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
           
           <div class="mb-3">
@@ -150,9 +151,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div id="confirm-help" class="form-text">Re-type the same password as above.</div> 
             <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>
+          
           <button type="submit" class="btn btn-primary">Send</button>
         </form>
         <br />
+      </section>
     </div>
     <!-- include footer -->
 
