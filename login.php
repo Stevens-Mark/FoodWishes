@@ -3,7 +3,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
-  $emailErr = $passwordErr =  "";
+ $emailErr = $passwordErr =  "";
   $postData = $_POST;
 
   // User Validation? set cookie/session or display error message...

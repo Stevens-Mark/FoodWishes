@@ -86,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $confirmPasswordFail = true;
     }
   }
-
 }
 
    // if all data correct: enter user into database & show success message
@@ -129,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <section>
         <h1>Sign Up</h1>
               <!-- Create account form -->
-        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
           
           <div class="mb-3">
             <label for="full_name" class="form-label">Full Name</label>

@@ -1,7 +1,64 @@
 <?php 
   session_start(); 
-  include_once('../config/user.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/user.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
+
+  // define variables and set to empty/boolean values
+  $title = $recipe  = $titleErr = $recipeErr  = "";
+  $titleFail = $recipeFail  = false;
+
+  // form validation
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Recipe title
+    if (empty($_POST["title"])) {
+      $titleErr = "Recipe title is required.";
+      $titleFail = true;
+    } else {
+      $title = test_input($_POST["title"]);
+      // check title length & only contains letters and whitespace
+      if (!preg_match("/^[a-zA-Z-' ]*$/", $title)  || strlen($title) < 2) {
+        $titleErr = "Minimum length is 2 characters & only letters and white space allowed.";
+        $titleFail = true;
+      }
+    }
+
+    // Recipe desciption
+    if (empty($_POST["recipe"])) {
+      $recipeErr = "Recipe description is required.";
+      $recipeFail = true;
+    } else {
+      $recipe = test_input($_POST["recipe"]);
+      // check if name only contains letters and whitespace
+      if (strlen($recipe) < 25) {
+        $recipeErr = "Minimum description length is 25 characters.";
+        $recipeFail = true;
+      }
+    }
+  
+  // if recipe info ok, enter into database & show success message
+  if ( !$titleFail && !$recipeFail )
+    {
+      $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
+      $insertRecipe->execute([
+        'title' => $title,
+        'recipe'=> $recipe,
+        'author' => $_SESSION['LOGGED_USER'],
+        'is_enabled' => 1,
+      ]);
+   
+      // Assign the _POST data to the _SESSION so can pass data to redirected page
+      $_SESSION['recipeData']  = $_POST;
+      session_write_close();
+
+      header('Location: '.$rootUrl.'recipes/createSuccess.php');
+      exit();
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,15 +76,16 @@
 
       <section>
         <h1>Add A Recipe</h1>
-          <form action="post_create.php" method="POST">
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Recipe Title</label>
-                  <input type="title" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Your Recipe Title">
-                  <div id="title-help" class="form-text">Choose a title for your recipe.</div>
+                  <input type="title" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
+                  <span class="text-danger"><?php echo $titleErr;?></span>
               </div>
               <div class="mb-3">
                   <label for="recipe" class="form-label">Recipe Description</label>
-                  <textarea rows="10"  class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"></textarea>
+                  <textarea rows="10"  class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"><?php echo $recipe;?></textarea>
+                  <span class="text-danger"><?php echo $recipeErr;?></span>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
