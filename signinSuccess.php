@@ -1,5 +1,7 @@
 <?php
 session_start();
+$_POST = $_SESSION;
+$full_name = $_POST['full_name'];
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +18,10 @@ session_start();
     <div class="container">
       <?php include_once('include/header.php'); ?>
       <section>
-        <h1>Congratulations !</h1> 
+        <h1>Congratulations ! </h1> 
         <div class="card">
           <div class="card-body">
-          <p class="card-title">You now have an account & can log in !</p>
+          <p class="card-title"><?php echo($full_name); ?>, your account has been created !</p>
           </div>
         </div>
       </section>

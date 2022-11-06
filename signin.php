@@ -4,10 +4,10 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
-  // define variables and set to empty values
-  $full_name = $email = $password = $confirmPassword = $age = "";
+  // define variables and set to empty/boolean values
+  $full_name = $email = $age = $password = $confirmPassword  = "";
   $full_nameErr = $emailErr = $ageErr = $passwordErr = $confirmPasswordErr = "";
-  $passwordFail = $confirmPasswordFail = false;
+  $full_nameFail = $emailFail = $ageFail = $passwordFail = $confirmPasswordFail = false;
 
   // form validation
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,28 +15,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // name
   if (empty($_POST["full_name"])) {
     $full_nameErr = "Name is required.";
+    $full_nameFail = true;
   } else {
     $full_name = test_input($_POST["full_name"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
       $full_nameErr = "Only letters and white space allowed.";
+      $full_nameFail = true;
     }
   }
 
   // age
   if (empty($_POST["age"])) {
     $ageErr = "Age is required.";
+    $ageFail = true;
   } else {
     $age = test_input($_POST["age"]);
-   }
+    if ($age < 16 || $age > 100) {
+      $ageErr = 'Enter a valid age.';
+      $ageFail = true;
+    }
+  }
 
    // email
   if (empty($_POST["email"])) {
     $emailErr = "Email is required.";
+    $emailFail = true;
   } else {
     $email = test_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "Invalid email format.";
+      $emailFail = true;
     }
     
     // check if email in database already
@@ -47,12 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($user) && !empty($user)) {
       $emailErr = 'This email address is in use already !';
       $email = '';
+      $emailFail = true;
     }
   }
 
   // password
   if (empty($_POST["password"])) {
-    $passwordErr = " Password is required";
+    $passwordErr = " Password is required.";
     $passwordFail = true;
   } else {
     // Validate password strength
@@ -78,13 +88,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 }
+
    // if all data correct: enter user into database & show success message
-  if ( 
-    ( isset($full_name) && !empty($full_name) ) && 
-    ( isset($age) && !empty($age) ) && 
-    ( (isset($email) && !empty($email)) ) && 
-    ( isset($password) && !empty($password) && !$passwordFail && !$confirmPasswordFail ) 
-    )
+  if ( !$full_nameFail && !$emailFail && !$ageFail && !$passwordFail && !$confirmPasswordFail ) 
   {
      $insertUser = $mysqlClient->prepare('INSERT INTO users(full_name, age, email, password) VALUES (:full_name, :age, :email, :password)');
     $insertUser->execute([
@@ -93,6 +99,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       'email' => $email,
       'password' => $password,
     ]);
+
+    // Assign the _POST data to the _SESSION so can pass data to redirected page using header.
+    $_SESSION = $_POST;
+    session_write_close();
 
     header('Location: '.$rootUrl.'signinSuccess.php');
     exit();
@@ -129,8 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" name="age" autocomplete="age" aria-describedby="age-help" placeholder="In years" value="<?php echo $age;?>">
-            <div id="age-help" class="form-text">Enter your age in years.</div>
+            <input type="number" class="form-control" id="age" name="age" autocomplete="age" aria-describedby="age-help" placeholder=".." value="<?php echo $age;?>">
+            <div id="age-help" class="form-text">Enter your age in years (between 16 and 100).</div>
             <span class="text-danger"><?php echo $ageErr;?></span>
           </div>
           <div class="mb-3">
@@ -141,13 +151,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" placeholder="H4rD_2_Gue55">
+            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" placeholder="........">
             <div id="password-help" class="form-text">At least 8 characters, 1 upper case, 1 lower case & 1 number.</div>
             <span class="text-danger"><?php echo $passwordErr;?></span>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" placeholder="H4rD_2_Gue55">
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" placeholder="........">
             <div id="confirm-help" class="form-text">Re-type the same password as above.</div> 
             <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>
