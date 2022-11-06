@@ -20,6 +20,7 @@
   $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
   
 
+
   
   // EXAMPLE 1
   

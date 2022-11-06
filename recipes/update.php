@@ -50,7 +50,7 @@
       $recipeFail = true;
     } else {
       $recipe = test_input($_POST["recipe"]);
-      // check if name only contains letters and whitespace
+      // check description length minimum
       if (strlen($recipe) < 25) {
         $recipeErr = "Minimum description length is 25 characters.";
         $recipeFail = true;
