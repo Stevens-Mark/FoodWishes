@@ -1,10 +1,14 @@
-<?php session_start(); 
-
+<?php 
+  session_start(); 
   // load all data to be used 
   include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
   include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
+  
+  // define variables
+  $titleErr = $recipeErr  = "";
+  $titleFail = $recipeFail  = false;
 
   $getData = $_GET;
   $recipe_id = $getData['id'] ?? $_POST["id"];
@@ -23,10 +27,6 @@
     ]);
     $recipe = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
   }
-
-  // define variables and set to empty/boolean values
-  $titleErr = $recipeErr  = "";
-  $titleFail = $recipeFail  = false;
 
   // form validation
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -60,13 +60,13 @@
   // if recipe info ok, update recipe in database & show message
   if ( !$titleFail && !$recipeFail )
     {
-    $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
-    $insertRecipe->execute([
-      'title' => $title,
-      'recipe'=> $recipe,
-      'recipe_id' => $recipe_id,
-    ]);
-   
+      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
+      $insertRecipe->execute([
+          'title' => $title,
+          'recipe'=> $recipe,
+          'recipe_id' => $recipe_id,
+        ]);
+      
       // Assign the _POST data to the _SESSION so can pass data to redirected page
       $_SESSION['recipeData']  = $_POST;
       session_write_close();

@@ -3,7 +3,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
- $emailErr = $passwordErr =  "";
+  $emailErr = $passwordErr =  "";
   $postData = $_POST;
 
   // User Validation? set cookie/session or display error message...
@@ -16,15 +16,15 @@
             $loggedUser = ['email' => $user['email'], ];
 
           //  Cookie : If user/password match save to cookie the email for future validation
-            // setcookie(
-            //   'LOGGED_USER',
-            //   $loggedUser['email'],
-            //   [
-            //     'expires' => time() + 1*24*3600,  // expires in 1 day
-            //     'secure' => true,
-            //     'httponly' => true,
-            //   ]
-            // );
+            setcookie(
+              'LOGGED_USER',
+              $loggedUser['email'],
+              [
+                'expires' => time() + 1*24*3600,  // expires in 1 day
+                'secure' => true,
+                'httponly' => true,
+              ]
+            );
             // if user found, save the user's email in session
             $_SESSION['LOGGED_USER'] = $loggedUser['email'];
         } else {

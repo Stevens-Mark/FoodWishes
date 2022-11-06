@@ -19,6 +19,10 @@
   $rootPath = $_SERVER['DOCUMENT_ROOT'];
   $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
   
+  $SMTPUsername = 'youmail@gmail.com';    // SMTP username 
+  $SMTPPassword = 'generatedByGmail';     // SMTP password : you need to generate an "app password" from google (see their documentation) 
+  $recipientEmail = 'yourmail@gmail.com'
+
 
 
   

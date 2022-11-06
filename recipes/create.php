@@ -43,11 +43,11 @@
     {
       $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
       $insertRecipe->execute([
-        'title' => $title,
-        'recipe'=> $recipe,
-        'author' => $_SESSION['LOGGED_USER'],
-        'is_enabled' => 1,
-      ]);
+          'title' => $title,
+          'recipe'=> $recipe,
+          'author' => $_SESSION['LOGGED_USER'],
+          'is_enabled' => 1,
+        ]);
    
       // Assign the _POST data to the _SESSION so can pass data to redirected page
       $_SESSION['recipeData']  = $_POST;

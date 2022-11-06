@@ -1,5 +1,6 @@
 <?php
 session_start();
+// session: data passed from create or update page
 $_POST = $_SESSION['recipeData'];
 $heading = $_POST['heading'];
 $title = $_POST['title'];

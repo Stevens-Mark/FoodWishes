@@ -6,25 +6,25 @@
 
   // define variables and set to empty/boolean values
   $full_name = $email = $message = "";
-  $full_nameErr = $emailErr = $messageErr = $uploadErr = "";
-  $full_nameFail = $emailFail = $messageFail  = $uploadFail = false;
-  $extensionError = $sizeError = $fileUploaded = false;
+  $full_nameErr = $emailErr = $messageErr = "";
+  $full_nameFail = $emailFail = $messageFail = $fileUploaded = false;
+  $extensionError = $sizeError = false;
 
   // form validation
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // name
-    if (empty($_POST["full_name"])) {
-      $full_nameErr = "Name is required.";
-      $full_nameFail = true;
-    } else {
-      $full_name = test_input($_POST["full_name"]);
-      // check if name only contains letters and whitespace
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
-        $full_nameErr = "Only letters and white space allowed.";
-        $full_nameFail = true;
-      }
-    }
+    // if (empty($_POST["full_name"])) {
+    //   $full_nameErr = "Name is required.";
+    //   $full_nameFail = true;
+    // } else {
+    //   $full_name = test_input($_POST["full_name"]);
+    //   // check if name only contains letters and whitespace
+    //   if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
+    //     $full_nameErr = "Only letters and white space allowed.";
+    //     $full_nameFail = true;
+    //   }
+    // }
   
     // email
     if (empty($_POST["email"])) {
@@ -37,6 +37,7 @@
         $emailFail = true;
       }
     }
+
     // message
     if (empty($_POST["message"])) {
       $messageErr = "Message is required.";
@@ -49,37 +50,48 @@
         $messageFail = true;
       }
     }
-
+    if ( isset($_FILES['image']) && !empty($_FILES['image'])  && $_FILES['image']['error'] == 2 ) {
+      echo 'Something seems to have gone wrong. Please try again.';
+      return;
+    }
+    // Let's test if a file has been added and if so, that there are no errors
     if ( isset($_FILES['image']) && !empty($_FILES['image'])  && $_FILES['image']['error'] == 0 ) {
+
+      // test size
       if($_FILES["image"]["size"] > 2097152 ) { // 2 MB 
-        $uploadErr = "Message is required.";
-        $uploadEail = true;
+        $sizeError = true;
       }
 
-      // Let's test if the extension is allowed
+      // test if extension is allowed
       $fileInfo = pathinfo($_FILES['image']['name']);
       $extension = $fileInfo['extension'] ?? null;
       $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
       if(!in_array(strtolower($extension), $allowedExtensions)) {
-        $uploadErr = "This extension is not allowed, please choose a JPEG, PNG or GIF file.";
-        $uploadEail = true;
         $extensionError = true;
-
       }
  
-    // no errors? We can validate the file and store it temporarily with a unique name
-    if(!($extensionError) && !($sizeError)) {
-      $uploadedFile = str_replace(' ', '_', $_FILES['image']['name']);
-      $pieces = explode(".", $uploadedFile);
-      $newFilename = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
-      move_uploaded_file(
-        $_FILES['image']['tmp_name'],
-        'uploads/' . $newFilename);
+      // no errors? validate the file and store it temporarily with a unique name
+      if(!($extensionError) && !($sizeError)) {
+        $uploadedFile = str_replace(' ', '_', $_FILES['image']['name']);
+        $pieces = explode(".", $uploadedFile);
+        $newFilename = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
+        move_uploaded_file(
+          $_FILES['image']['tmp_name'],
+          'uploads/' . $newFilename);
+      }
     }
 
+    // if contact info ok, send the email
+    if ( !$emailFail && !$messageFail && !$extensionError && !$sizeError )
+    {    
+      // Assign the _POST data to the _SESSION so can pass data to redirected page
+      $_SESSION['contactData']  = $_POST;
+      $_SESSION['newFilename'] = $newFilename;
+      session_write_close();
 
+      header('Location: '.$rootUrl.'contact_post.php');
+      exit();
     }
-
   }
 
 ?>
@@ -119,8 +131,14 @@
               <div class="mb-3">
                   <label for="image" class="form-label">Your File</label>
                   <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
-                  <div id="image-help" class="form-text">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
-                  <span class="text-danger"><?php echo $uploadErr;?></span>
+                  <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
+                 <!-- display file upload errors if needed  -->
+                <?php if(($extensionError)) : ?>
+                  <p class="card-text text-danger" ><b>File Type</b> : <?php echo(" extension not allowed, please choose a JPEG, PNG or GIF file.") ?></p>
+                <?php endif; ?>
+                <?php if(($sizeError)) : ?>
+                  <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 2 MB. </p>
+                <?php endif; ?>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
