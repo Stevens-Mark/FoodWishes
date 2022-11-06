@@ -7,7 +7,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   $getData = $_GET;
-  $recipe_id = $getData['id'];
+  $recipe_id = $getData['id'] ?? $_POST["id"];
 
   // if there is no id which is a number, display an error message 
   if (!isset($recipe_id) || (!is_numeric($recipe_id)))
@@ -23,6 +23,59 @@
     ]);
     $recipe = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
   }
+
+  // define variables and set to empty/boolean values
+  $titleErr = $recipeErr  = "";
+  $titleFail = $recipeFail  = false;
+
+  // form validation
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Recipe title
+    if (empty($_POST["title"])) {
+      $titleErr = "Recipe title is required.";
+      $titleFail = true;
+    } else {
+      $title = test_input($_POST["title"]);
+      // check title length & only contains letters and whitespace
+      if (!preg_match("/^[a-zA-Z-' ]*$/", $title)  || strlen($title) < 2) {
+        $titleErr = "Minimum length is 2 characters & only letters and white space allowed.";
+        $titleFail = true;
+      }
+    }
+
+    // Recipe description
+    if (empty($_POST["recipe"])) {
+      $recipeErr = "Recipe description is required.";
+      $recipeFail = true;
+    } else {
+      $recipe = test_input($_POST["recipe"]);
+      // check if name only contains letters and whitespace
+      if (strlen($recipe) < 25) {
+        $recipeErr = "Minimum description length is 25 characters.";
+        $recipeFail = true;
+      }
+    }
+  
+  // if recipe info ok, update recipe in database & show message
+  if ( !$titleFail && !$recipeFail )
+    {
+    $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
+    $insertRecipe->execute([
+      'title' => $title,
+      'recipe'=> $recipe,
+      'recipe_id' => $recipe_id,
+    ]);
+   
+      // Assign the _POST data to the _SESSION so can pass data to redirected page
+      $_SESSION['recipeData']  = $_POST;
+      session_write_close();
+
+      header('Location: '.$rootUrl.'recipes/success.php');
+      exit();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +95,11 @@
 
         <section>
           <h1>Update The Recipe</h1>
-            <form action="post_update.php" method="POST">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                <div class="mb-3 visually-hidden">
+                    <label for="heading" class="form-label">Update</label>
+                    <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Updated !">
+                </div>
                 <div class="mb-3 visually-hidden">
                     <label for="id" class="form-label">Recipe ID</label>
                     <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
@@ -50,11 +107,13 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">New Recipe Title</label>
                     <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipe['title']); ?>">
-                    <div id="title-help" class="form-text">Choose a title for your recipe.</div>
+                    <div id="title-help" class="form-text">Choose a new title for your recipe.</div>
+                    <span class="text-danger"><?php echo $titleErr;?></span>
                 </div>
                 <div class="mb-3">
                     <label for="recipe" class="form-label">Recipe Description</label>
                     <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
+                    <span class="text-danger"><?php echo $recipeErr;?></span>
                     <div id="description-help" class="form-text">Put updated recipe details here</div>
                 </div>
                 <button type="submit" class="btn btn-warning">Update</button>

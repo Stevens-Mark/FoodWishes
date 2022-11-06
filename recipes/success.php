@@ -1,6 +1,7 @@
 <?php
 session_start();
-$_POST = $_SESSION['recipeData'] ;
+$_POST = $_SESSION['recipeData'];
+$heading = $_POST['heading'];
 $title = $_POST['title'];
 $recipe = $_POST['recipe'];
 ?>
@@ -11,7 +12,7 @@ $recipe = $_POST['recipe'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Received</title>
+    <title>Success !</title>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
         rel="stylesheet"
@@ -21,8 +22,7 @@ $recipe = $_POST['recipe'];
     <div class="container">
       <?php include_once('../include/header.php'); ?>
       <section>
-            <!-- otherwise display recipe information -->
-            <h1>Recipe Received !</h1> 
+            <h1><?php echo($heading); ?></h1> 
             <div class="card">
               <div class="card-body">
                 <h2 class="card-title">Your Recipe information</h2>

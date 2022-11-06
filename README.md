@@ -65,6 +65,14 @@ When MAMP has successfully launched Apache and MySQL, click on the "Open WebStar
 
 Click Tools > phpMyAdmin : This will open a new window, giving you access to the MYSQL database. You can import the database file `creation_base.sql` you will find in the folder `SQL` to setup the database for this project.
 
+- Edit the following values in your `php.ini` file:<br/>
+
+Make sure you edit the correct php.ini file for example: C:\MAMP\conf\php7.3.7<br/>
+upload_max_filesize = 5M (changed this from 2M)<br/>
+post_max_size = 8M (changed this from 8M)<br/>
+max_execution_time = 60 (changed this from 30)<br/>
+max_input_time = 120 (changed this from 60)<br/>
+memory_limit = 128M (Changed this from 128M)<br/>
 
 - Run the Api:
 
@@ -138,6 +146,14 @@ Cliquez sur MAMP > Préférences > PHP et changez la version Standard en 7.3.7<b
 Lorsque MAMP a lancé avec succès Apache et MySQL, cliquez sur le bouton "Ouvrir la page de démarrage Web" au milieu, ce qui vous permet d'ouvrir la page d'accueil de MAMP dans votre navigateur.<br/>
 Cliquez sur Outils > phpMyAdmin : Cela ouvrira une nouvelle fenêtre, vous donnant accès à la base de données MYSQL. Vous pouvez importer le fichier de base de données `creation_base.sql` que vous trouverez dans le dossier `SQL` pour configurer la base de données pour ce projet.
 
+- Modifiez les valeurs suivantes dans votre fichier `php.ini` :<br/>
+
+Assurez-vous de modifier le bon fichier php.ini, par exemple : C:\MAMP\conf\php7.3.7<br/>
+upload_max_filesize = 5M (au lieu de 2M)<br/>
+post_max_size = 8M (au lieu de 8M)<br/>
+max_execution_time = 60 (au lieu de 30)<br/>
+max_input_time = 120 (au lieu de 60)<br/>
+memory_limit = 128M (Changement de 128M)<br/>
 
 - Exécutez l'API :
 
@@ -145,9 +161,3 @@ Si vous avez tout fait correctement, lorsque vous cliquez sur "Mon site Web" sur
 
 
 
-<!-- Information chnage in php.ini file -->
-<!-- upload_max_filesize = 5M (changed this from 2M)
-post_max_size = 8M (changed this from 8M)
-max_execution_time = 60 (changed this from 30)
-max_input_time = 120 (changed this from 60)
-memory_limit = 128M (Changed this from 128M) -->

@@ -25,7 +25,7 @@
       }
     }
 
-    // Recipe desciption
+    // Recipe description
     if (empty($_POST["recipe"])) {
       $recipeErr = "Recipe description is required.";
       $recipeFail = true;
@@ -53,7 +53,7 @@
       $_SESSION['recipeData']  = $_POST;
       session_write_close();
 
-      header('Location: '.$rootUrl.'recipes/createSuccess.php');
+      header('Location: '.$rootUrl.'recipes/success.php');
       exit();
     }
 }
@@ -77,6 +77,10 @@
       <section>
         <h1>Add A Recipe</h1>
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+              <div class="mb-3 visually-hidden">
+                <label for="heading" class="form-label">Create</label>
+                <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Created !">
+              </div>
               <div class="mb-3">
                   <label for="title" class="form-label">Recipe Title</label>
                   <input type="title" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
