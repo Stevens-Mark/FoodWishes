@@ -22,14 +22,3 @@ $deleteRecipe->execute([
 
 header('Location: '.$rootUrl.'index.php');
 ?>
-
-
-<!-- // EXAMPLE 3
-  // $sqlQuery ="SELECT * FROM `recipes` WHERE author = :author AND is_enabled = :is_enabled";
-  // $recipesStatement = $db->prepare($sqlQuery);
-  // $recipesStatement->execute([
-  //   'author' => $_SESSION['LOGGED_USER'],
-  //   'is_enabled' => true,
-  // ]);
-
-  // $recipes = $recipesStatement->fetchAll(); -->
