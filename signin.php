@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $age = test_input($_POST["age"]);
     if ($age < 16 || $age > 100) {
-      $ageErr = 'Enter a valid age.';
+      $ageErr = 'Enter a valid age (16-100 yrs).';
       $ageFail = true;
     }
   }
@@ -132,20 +132,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
           <div class="mb-3">
             <label for="full_name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name" aria-describedby="full_name-help" placeholder="John Doe" value="<?php echo $full_name;?>">
-            <div id="full_name-help" class="form-text">Enter your full name.</div>
+            <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name"  placeholder="John Doe" value="<?php echo $full_name;?>">
             <span class="text-danger"><?php echo $full_nameErr;?></span>
               </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" name="age" autocomplete="age" aria-describedby="age-help" placeholder=".." value="<?php echo $age;?>">
-            <div id="age-help" class="form-text">Enter your age in years (between 16 and 100).</div>
+            <input type="number" class="form-control" id="age" name="age" autocomplete="age" placeholder=".." value="<?php echo $age;?>">
             <span class="text-danger"><?php echo $ageErr;?></span>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" autocomplete="email" aria-describedby="email-help" placeholder="you@example.com" value="<?php echo $email;?>">
-          <div id="email-help" class="form-text">Enter a valid email address.</div>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="email"  placeholder="you@example.com" value="<?php echo $email;?>">
           <span class="text-danger"><?php echo $emailErr;?></span>
           </div>
           <div class="mb-3">
@@ -156,9 +153,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="confirm-help" placeholder="........">
-            <div id="confirm-help" class="form-text">Re-type the same password as above.</div> 
-            <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"  placeholder="Re-type password">
+             <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>
           
           <button type="submit" class="btn btn-primary">Send</button>
