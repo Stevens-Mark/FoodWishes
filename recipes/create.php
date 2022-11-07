@@ -32,8 +32,8 @@
     } else {
       $recipe = test_input($_POST["recipe"]);
       // check description lengthminimum
-      if (strlen($recipe) < 25) {
-        $recipeErr = "Minimum description length is 25 characters.";
+      if (strlen($recipe) < 20) {
+        $recipeErr = "Minimum description length is 20 characters.";
         $recipeFail = true;
       }
     }

@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $full_name = test_input($_POST["full_name"]);
     // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
-      $full_nameErr = "Only letters and white space allowed.";
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)  || strlen($full_name) < 2) {
+      $full_nameErr = "Minimum length is 2 characters & only letters and white space allowed.";
       $full_nameFail = true;
     }
   }
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="full_name" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name"  placeholder="John Doe" value="<?php echo $full_name;?>">
             <span class="text-danger"><?php echo $full_nameErr;?></span>
-              </div>
+          </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
             <input type="number" class="form-control" id="age" name="age" autocomplete="age" placeholder=".." value="<?php echo $age;?>">

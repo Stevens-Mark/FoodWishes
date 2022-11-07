@@ -8,6 +8,8 @@
   $fileUploaded = false;
   $newFilename = $_SESSION['newFilename'];
   $_POST = $_SESSION['contactData'];
+  $full_name = $_POST['full_name'];
+  $subject = $_POST['subject'];
   $email = $_POST['email'];
   $message = $_POST['message'];
 
@@ -35,8 +37,8 @@
   $mail->Port = 465;                          // TCP port to connect to 
   
   // Sender info 
-  $mail->setFrom($email, 'PHPServer'); 
-  $mail->addReplyTo($email, 'Sender'); 
+  $mail->setFrom($email, 'PHPServer: Sender : ' . $full_name); 
+  $mail->addReplyTo($email, $full_name); 
   
   // Add a recipient 
   $mail->addAddress($recipientEmail); 
@@ -48,7 +50,7 @@
   $mail->isHTML(true); 
   
   // Mail subject 
-  $mail->Subject = 'Email from Localhost PHP Project'; 
+  $mail->Subject = $subject; 
   
   // Mail body content 
   $bodyContent = $message; 
@@ -65,7 +67,7 @@
   if(!$mail->send()) { 
       $sentMessage = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo; 
   } else { 
-    $sentMessage = 'Message has been sent... (attachments over 2MB will be automatically removed.'; 
+    $sentMessage = 'Message has been sent... (attachments over 2MB will be automatically removed).'; 
   }
 
   // remove temporary uploaded file if uploaded

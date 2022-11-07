@@ -5,26 +5,26 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty/boolean values
-  $full_name = $email = $message = "";
-  $full_nameErr = $emailErr = $messageErr = "";
-  $full_nameFail = $emailFail = $messageFail = $fileUploaded = false;
+  $full_name = $email = $subject = $message = "";
+  $full_nameErr = $emailErr = $subjectErr = $messageErr = "";
+  $full_nameFail = $emailFail = $subjectFail = $messageFail = $fileUploaded = false;
   $extensionError = $sizeError = false;
 
   // form validation
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // name
-    // if (empty($_POST["full_name"])) {
-    //   $full_nameErr = "Name is required.";
-    //   $full_nameFail = true;
-    // } else {
-    //   $full_name = test_input($_POST["full_name"]);
-    //   // check if name only contains letters and whitespace
-    //   if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)) {
-    //     $full_nameErr = "Only letters and white space allowed.";
-    //     $full_nameFail = true;
-    //   }
-    // }
+    if (empty($_POST["full_name"])) {
+      $full_nameErr = "Name is required.";
+      $full_nameFail = true;
+    } else {
+      $full_name = test_input($_POST["full_name"]);
+      // check if name only contains letters and whitespace
+      if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)  || strlen($full_name) < 2) {
+        $full_nameErr = "Minimum length is 2 characters & only letters and white space allowed.";
+        $full_nameFail = true;
+      }
+    }
   
     // email
     if (empty($_POST["email"])) {
@@ -38,6 +38,19 @@
       }
     }
 
+    // subject
+    if (empty($_POST["subject"])) {
+      $subjectErr = "Subject title is required.";
+      $subjectFail = true;
+    } else {
+      $subject = test_input($_POST["subject"]);
+      // check subject length minimum
+      if (!preg_match("/^[a-zA-Z-' ]*$/",$subject) || strlen($subject) < 5) {
+        $subjectErr = "Minimum length is 5 characters & only letters and white space allowed.";
+        $subjectFail = true;
+      }
+    }
+
     // message
     if (empty($_POST["message"])) {
       $messageErr = "Message is required.";
@@ -45,15 +58,12 @@
     } else {
       $message = test_input($_POST["message"]);
       // check message length minimum
-      if (strlen($message) < 25) {
-        $messageErr = "Minimum description length is 25 characters.";
+      if (strlen($message) < 20) {
+        $messageErr = "Minimum message length is 20 characters.";
         $messageFail = true;
       }
     }
-    if ( isset($_FILES['image']) && !empty($_FILES['image'])  && $_FILES['image']['error'] == 2 ) {
-      echo 'Something seems to have gone wrong. Please try again.';
-      return;
-    }
+
     // Let's test if a file has been added and if so, that there are no errors
     if ( isset($_FILES['image']) && !empty($_FILES['image'])  && $_FILES['image']['error'] == 0 ) {
 
@@ -82,7 +92,7 @@
     }
 
     // if contact info ok, send the email
-    if ( !$emailFail && !$messageFail && !$extensionError && !$sizeError )
+    if ( !$full_nameFail && !$emailFail && !$subjectFail && !$messageFail && !$extensionError && !$sizeError )
     {    
       // Assign the _POST data to the _SESSION so can pass data to redirected page
       $_SESSION['contactData']  = $_POST;
@@ -117,19 +127,29 @@
          <!-- Contact Us form -->
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
+                <label for="full_name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name"  placeholder="John Doe" value="<?php echo $full_name;?>">
+                <span class="text-danger"><?php echo $full_nameErr;?></span>
+              </div>
+              <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@example.com" value="<?php echo $email;?>">
                   <div id="email-help" class="form-text">We will not resell your email.</div>
                   <span class="text-danger"><?php echo $emailErr;?></span>
               </div>
               <div class="mb-3">
-                  <label for="message" class="form-label">Votre message</label>
-                  <textarea class="form-control" placeholder="Express yourself" id="message" name="message"><?php echo $message;?></textarea>
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="....." value="<?php echo $subject;?>">
+                <span class="text-danger"><?php echo $subjectErr;?></span>
+              </div>
+              <div class="mb-3">
+                  <label for="message" class="form-label">Your message</label>
+                  <textarea rows="5" class="form-control" placeholder="Express yourself" id="message" name="message"><?php echo $message;?></textarea>
                   <span class="text-danger"><?php echo $messageErr;?></span>
               </div>
               <!-- File upload ! -->
               <div class="mb-3">
-                  <label for="image" class="form-label">Your File</label>
+                  <label for="image" class="form-label">Your File <i>(optional)</i></label>
                   <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
                   <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
                  <!-- display file upload errors if needed  -->
