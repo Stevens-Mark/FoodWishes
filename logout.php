@@ -3,6 +3,7 @@
 <?php
   if(isset($_POST['logout'])) {
     session_destroy();
+    setcookie('LOGGED_USER', "", time() - 3600);
   }
 ?>
 
