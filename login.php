@@ -25,7 +25,7 @@
                 'httponly' => true,
               ]
             );
-            // if user found, save the user's email in session
+            // // if user found, save the user's email in session
             $_SESSION['LOGGED_USER'] = $loggedUser['email'];
         } else {
             // otherwise display error message
@@ -67,7 +67,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
-        <h1>Log In</h1>
+        <h1 class="mb-4">Log In</h1>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com">

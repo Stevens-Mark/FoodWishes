@@ -114,21 +114,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update The Recipe - Contact Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container">
+    <main class="container">
 
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
 
      <section>
-        <h1>Contact Us</h1>
+        <h1 class="mb-4">Contact Us</h1>
          <!-- Contact Us form -->
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
                 <label for="full_name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name"  placeholder="John Doe" value="<?php echo $full_name;?>">
+                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="John Doe" value="<?php echo $full_name;?>">
                 <span class="text-danger"><?php echo $full_nameErr;?></span>
               </div>
               <div class="mb-3">
@@ -164,7 +164,7 @@
           </form>
           <br />
       </section>
-    </div>
+    </main>
 
     <!-- include footer -->
     <?php include_once('include/footer.php'); ?>

@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Website - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body class="d-flex flex-column min-vh-100">
-  <div class="container">
+  <main class="container">
 
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
@@ -23,12 +24,12 @@
       <!-- If the user exists, the recipes are displayed -->
       <?php if(isset($loggedUser)): ?>
         <section>
-          <h1>Recipes</h1>
+          <h1 class="mb-4">Recipes</h1>
           <div class='recipe-container'>
                 <!-- Display recipe cards - loop through the recipes up until limit-->
                 <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
 
-                  <article class="card bg-light">
+                  <article class="recipe-card card bg-light">
                     <div class="card-body d-flex flex-column">
                       <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
                       <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
@@ -46,7 +47,9 @@
           <?php include_once('include/logoutButton.php'); ?>
         </section>
       <?php endif; ?>
-  </div>
+    
+
+  </main>
   
   <!-- include footer -->
   <?php include_once('include/footer.php'); ?>

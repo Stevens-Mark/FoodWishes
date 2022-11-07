@@ -34,14 +34,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Website - Delete A Recipe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container">
+    <main class="container">
 
       <!-- include header -->
       <?php include_once('../include/header.php'); ?>
       <section>
-        <h1>Delete The Recipe</h1>
+        <h1 class="mb-4">Delete The Recipe</h1>
         <div class="card">
           <div class="card-body">
             <form action="post_delete.php" method="POST">
@@ -56,13 +57,13 @@
               </div>
           </div>      
         </div>
-              <p class="m-2"><?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'Are you sure ?' ); ?></p>
+              <p class="m-2"><?php echo($recipe['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'Are you sure ?' ); ?></p>
               <!-- disable delete button if user is not owner or recipe -->
-              <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $_SESSION['LOGGED_USER'] ? 'disabled' : '' ); ?> >Delete</button>
+              <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Delete</button>
             </form>
           <br />
       </section>
-    </div>
+</main>
     <!-- include footer -->
     <?php include_once('../include/footer.php'); ?>
 </body>

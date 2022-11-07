@@ -7,8 +7,8 @@
 <!-- bootstrap script needed here so navbar toggle functionality will work -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="my-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="<?php echo($rootUrl). 'index.php'; ?>">Recipe Site</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

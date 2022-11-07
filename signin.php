@@ -117,43 +117,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Website - Sign In</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
   </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container">
+    <main class="container">
 
       <!-- include header -->
       <?php include_once('include/header.php'); ?>
 
       <section>
-        <h1>Sign Up</h1>
+        <h1 class="mb-4">Sign Up</h1>
               <!-- Create account form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
           
           <div class="mb-3">
             <label for="full_name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" autocomplete="full_name"  placeholder="John Doe" value="<?php echo $full_name;?>">
+            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="John Doe" value="<?php echo $full_name;?>">
             <span class="text-danger"><?php echo $full_nameErr;?></span>
           </div>
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" name="age" autocomplete="age" placeholder=".." value="<?php echo $age;?>">
+            <input type="number" class="form-control" id="age" name="age"  placeholder=".." value="<?php echo $age;?>">
             <span class="text-danger"><?php echo $ageErr;?></span>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" autocomplete="email"  placeholder="you@example.com" value="<?php echo $email;?>">
+            <input type="email" class="form-control" id="email" name="email" autocomplete="username" placeholder="you@example.com" value="<?php echo $email;?>">
           <span class="text-danger"><?php echo $emailErr;?></span>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" placeholder="........">
+            <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" aria-describedby="password-help" placeholder="........">
             <div id="password-help" class="form-text">At least 8 characters, 1 upper case, 1 lower case & 1 number.</div>
             <span class="text-danger"><?php echo $passwordErr;?></span>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"  placeholder="Re-type password">
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"  autocomplete="new-password" placeholder="Re-type password">
              <span class="text-danger"><?php echo $confirmPasswordErr;?></span>
           </div>
           
@@ -161,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <br />
       </section>
-    </div>
+    </main>
     <!-- include footer -->
 
     <?php include_once('include/footer.php'); ?>
