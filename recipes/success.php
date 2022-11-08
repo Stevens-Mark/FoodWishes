@@ -1,5 +1,9 @@
 <?php
 session_start();
+include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
+include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
+
 // session: data passed from create or update page
 $_POST = $_SESSION['recipeData'];
 $heading = $_POST['heading'];
@@ -19,7 +23,7 @@ $recipe = $_POST['recipe'];
 </head>
 <body class="d-flex flex-column min-vh-100">
     <main class="container">
-      <?php include_once('../include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
       <section>
             <h1 class="mb-4"><?php echo($heading); ?></h1> 
             <div class="card">
@@ -31,6 +35,6 @@ $recipe = $_POST['recipe'];
             </div>
       </section>
     </main>
-    <?php include_once('../include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>

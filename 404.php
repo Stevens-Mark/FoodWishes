@@ -1,4 +1,9 @@
 <?php  
+  // load all data to be used 
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
+
   $error = $_SERVER["REDIRECT_STATUS"];
   $error_title ='';
   $error_message = '';
@@ -18,9 +23,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background: #CBD18F;">
   <main class="container">
-    <?php include_once('include/header.php'); ?>
+    <?php include_once($rootPath.'/include/header.php'); ?>
     <div class="d-flex justify-content-center align-items-center" style="height:calc( 100vh - 112px );">
       <div class="text-center">
         <h1><?php echo($error_title) ?></h1>
@@ -28,6 +33,6 @@
       </div>
     </div>   
   </main>
-  <?php include_once('include/footer.php'); ?>
+  <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>

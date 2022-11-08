@@ -1,5 +1,9 @@
 <?php
 session_start();
+include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
+
+
 $_POST = $_SESSION;
 $full_name = $_POST['full_name'];
 ?>
@@ -16,7 +20,7 @@ $full_name = $_POST['full_name'];
 </head>
 <body class="d-flex flex-column min-vh-100">
     <main class="container">
-      <?php include_once('include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
       <section>
         <h1 class="mb-4">Congratulations ! </h1> 
         <div class="card">
@@ -26,6 +30,6 @@ $full_name = $_POST['full_name'];
         </div>
       </section>
     </main>
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>

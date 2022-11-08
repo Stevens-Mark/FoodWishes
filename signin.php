@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main class="container">
 
       <!-- include header -->
-      <?php include_once('include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
 
       <section>
         <h1 class="mb-4">Sign Up</h1>
@@ -164,6 +164,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </main>
     <!-- include footer -->
 
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>

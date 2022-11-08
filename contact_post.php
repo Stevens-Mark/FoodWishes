@@ -90,19 +90,20 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <main class="container">
-      <?php include_once('include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
         <section>
             <h1 class="mb-4">Message Received !</h1>       
             <div class="card">
-              <h2 class="card-title">Reminder of your information</h2>
-              <p class="card-text"><b>Email</b> : <?php echo strip_tags($email); ?></p>
-              <p class="card-text"><b>Message</b> : <?php echo strip_tags($message); ?></p>
-              <p class="card-text "><b>Status</b> : <?php echo($sentMessage) ?></p>
-            </div>
+              <div class="card-body">
+                <h2 class="card-title">Reminder of your information</h2>
+                <p class="card-text"><b>Email</b> : <?php echo strip_tags($email); ?></p>
+                <p class="card-text"><b>Message</b> : <?php echo strip_tags($message); ?></p>
+                <p class="card-text "><b>Status</b> : <?php echo($sentMessage) ?></p>
+              </div>
           </div>
         </section>            
     </main>
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>
 

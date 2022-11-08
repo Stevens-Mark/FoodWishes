@@ -1,6 +1,8 @@
-<?php session_start(); // $_SESSION ?> 
+<?php 
+  session_start(); // $_SESSION  
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
 
-<?php
   if(isset($_POST['logout'])) {
     session_destroy();
     setcookie('LOGGED_USER', "", time() - 3600);
@@ -20,13 +22,13 @@
 <body class="d-flex flex-column min-vh-100">
   <main class="container">
     <!-- include header -->
-    <?php include_once('include/header.php'); ?>
+    <?php include_once($rootPath.'/include/header.php'); ?>
       <div class="alert alert-success mt-2" role="alert">
         You are now logged out !
       </div>
   </main>
     <!-- include footer -->
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 
 </body>
 </html>

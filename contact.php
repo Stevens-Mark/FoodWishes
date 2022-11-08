@@ -45,8 +45,8 @@
     } else {
       $subject = test_input($_POST["subject"]);
       // check subject length minimum
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$subject) || strlen($subject) < 5) {
-        $subjectErr = "Minimum length is 5 characters & only letters and white space allowed.";
+      if (strlen($subject) < 5) {
+        $subjectErr = "Minimum length is 5 characters.";
         $subjectFail = true;
       }
     }
@@ -58,8 +58,8 @@
     } else {
       $message = test_input($_POST["message"]);
       // check message length minimum
-      if (strlen($message) < 20) {
-        $messageErr = "Minimum message length is 20 characters.";
+      if (strlen($message) < 5) {
+        $messageErr = "Minimum message length is 5 characters.";
         $messageFail = true;
       }
     }
@@ -120,7 +120,7 @@
     <main class="container">
 
       <!-- include header -->
-      <?php include_once('include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
 
      <section>
         <h1 class="mb-4">Contact Us</h1>
@@ -167,8 +167,7 @@
     </main>
 
     <!-- include footer -->
-    <?php include_once('include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 
 </body>
 </html>
-<!-- action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" -->

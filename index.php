@@ -1,4 +1,7 @@
-<?php session_start(); // $_SESSION
+<?php 
+  session_start(); // $_SESSION
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +19,10 @@
   <main class="container">
 
       <!-- include header -->
-      <?php include_once('include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
 
       <!-- include log in form -->
-      <?php include_once('login.php'); ?>
+      <?php include_once($rootPath.'/login.php'); ?>
 
       <!-- If the user exists, the recipes are displayed -->
       <?php if(isset($loggedUser)): ?>
@@ -44,7 +47,7 @@
             </div>
         
           <!-- log out button -->
-          <?php include_once('include/logoutButton.php'); ?>
+          <?php include_once($rootPath.'/include/logoutButton.php'); ?>
         </section>
       <?php endif; ?>
     
@@ -52,7 +55,7 @@
   </main>
   
   <!-- include footer -->
-  <?php include_once('include/footer.php'); ?>
+  <?php include_once($rootPath.'/include/footer.php'); ?>
 
 </body>
 </html>

@@ -40,7 +40,7 @@
     <main class="container">
 
       <!-- include header -->
-      <?php include_once('../include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
       <section>
         <h1 class="mb-4">Delete The Recipe</h1>
         <div class="card">
@@ -65,6 +65,6 @@
       </section>
 </main>
     <!-- include footer -->
-    <?php include_once('../include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>

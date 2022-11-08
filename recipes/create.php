@@ -45,7 +45,7 @@
       $insertRecipe->execute([
           'title' => $title,
           'recipe'=> $recipe,
-          'author' => $_SESSION['LOGGED_USER'],
+          'author' => $loggedUser['email'],
           'is_enabled' => 1,
         ]);
    
@@ -73,7 +73,7 @@
     <main class="container">
 
       <!-- include header -->
-      <?php include_once('../include/header.php'); ?>
+      <?php include_once($rootPath.'/include/header.php'); ?>
 
       <section>
         <h1 class="mb-4">Add A Recipe</h1>
@@ -98,6 +98,6 @@
       </section>     
     </main>
     <!-- include footer -->
-    <?php include_once('../include/footer.php'); ?>
+    <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>
