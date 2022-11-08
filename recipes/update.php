@@ -12,7 +12,7 @@
 
   $getData = $_GET;
   $recipe_id = $getData['id'] ?? $_POST["id"];
-
+ 
   // if there is no id which is a number, display an error message 
   if (!isset($recipe_id) || (!is_numeric($recipe_id)))
   {
@@ -25,7 +25,7 @@
     $retrieveRecipe->execute([
       'recipe_id' => $recipe_id,
     ]);
-    $recipe = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
+    $recipes = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
   }
 
   // form validation
@@ -56,10 +56,11 @@
         $recipeFail = true;
       }
     }
-  
+
   // if recipe info ok, update recipe in database & show message
   if ( !$titleFail && !$recipeFail )
     {
+     
       $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
       $insertRecipe->execute([
           'title' => $title,
@@ -107,13 +108,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">New Recipe Title</label>
-                    <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipe['title']); ?>">
+                    <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipes['title']); ?>">
                     <div id="title-help" class="form-text">Choose a new title for your recipe.</div>
                     <span class="text-danger"><?php echo $titleErr;?></span>
                 </div>
                 <div class="mb-3">
                     <label for="recipe" class="form-label">Recipe Description</label>
-                    <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipe['recipe']); ?></textarea>
+                    <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipes['recipe']); ?></textarea>
                     <span class="text-danger"><?php echo $recipeErr;?></span>
                     <div id="description-help" class="form-text">Put updated recipe details here</div>
                 </div>

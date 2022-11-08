@@ -22,10 +22,7 @@
   // $SMTPUsername = 'youmail@gmail.com';    // SMTP username 
   // $SMTPPassword = 'generatedByGmail';     // SMTP password : you need to generate an "app password" from google (see their documentation) 
   // $recipientEmail = 'yourmail@gmail.com'
-
-
-
-  
+    
   // EXAMPLE 1
   
   // $sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = TRUE';
