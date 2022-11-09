@@ -7,8 +7,8 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
   
   // define variables
-  $titleErr = $recipeErr  = "";
-  $titleFail = $recipeFail  = false;
+  $titleErr = $durationErr = $recipeErr = $ingredientsErr ="";
+  $titleFail = $durationFail = $recipeFail = $ingredientsFail = false;
 
   $getData = $_GET;
   $recipe_id = $getData['id'] ?? $_POST["id"];
@@ -44,6 +44,14 @@
       }
     }
 
+    // cooking duration
+    if (empty($_POST["duration"])) {
+      $durationErr = "Cooking Time is required.";
+      $durationFail = true;
+    } else {
+      $duration = test_input($_POST["duration"]);
+    }
+
     // Recipe description
     if (empty($_POST["recipe"])) {
       $recipeErr = "Recipe description is required.";
@@ -57,15 +65,31 @@
       }
     }
 
-  // if recipe info ok, update recipe in database & show message
-  if ( !$titleFail && !$recipeFail )
+    // Recipe ingredients
+    if (empty($_POST["ingredients"])) {
+      $ingredientsErr = "Ingredients are required.";
+      $ingredientsFail = true;
+    } else {
+      $ingredients = test_input($_POST["ingredients"]);
+      // check description length minimum
+      if (strlen($ingredients) < 10) {
+        $ingredientsErr = "Minimum ingredients length is 10 characters.";
+        $ingredientsFail = true;
+      }
+    }
+
+  // if id matches & recipe info ok, & user is the owner : update recipe in database & show message
+  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail )
     {
      
-      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :recipe_id');  
+      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, duration = :duration, recipe = :recipe, ingredients = :ingredients WHERE recipe_id = :recipe_id AND author = :author');  
       $insertRecipe->execute([
-          'title' => $title,
-          'recipe'=> $recipe,
           'recipe_id' => $recipe_id,
+          'title' => $title,
+          'duration' => $duration,
+          'recipe' => $recipe,
+          'ingredients' => $ingredients,
+          'author' => $loggedUser['email'],
         ]);
       
       // Assign the _POST data to the _SESSION so can pass data to redirected page
@@ -98,27 +122,40 @@
         <section>
           <h1 class="mb-4">Update The Recipe</h1>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-                <div class="mb-3 visually-hidden">
-                    <label for="heading" class="form-label">Update</label>
-                    <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Updated !">
+              <div class="mb-3 visually-hidden">
+                  <label for="heading" class="form-label">Update</label>
+                  <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Updated !">
                 </div>
                 <div class="mb-3 visually-hidden">
-                    <label for="id" class="form-label">Recipe ID</label>
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
+                  <label for="id" class="form-label">Recipe ID</label>
+                  <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">New Recipe Title</label>
-                    <input type="title" class="form-control" id="title" name="title" placeholder="Your New Recipe Title" aria-describedby="title-help" value="<?php echo($recipes['title']); ?>">
-                    <div id="title-help" class="form-text">Choose a new title for your recipe.</div>
-                    <span class="text-danger"><?php echo $titleErr;?></span>
+                  <label for="title" class="form-label">New Recipe Title</label>
+                  <input type="title" class="form-control" id="title" name="title" placeholder="Your new recipe title" aria-describedby="title-help" value="<?php echo strip_tags($recipes['title']); ?>">
+                  <div id="title-help" class="form-text">Choose a new title for your recipe.</div>
+                  <span class="text-danger"><?php echo $titleErr;?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="recipe" class="form-label">Recipe Description</label>
-                    <textarea rows="10" class="form-control" aria-describedby="description-help" id="recipe" placeholder="Put new recipe details here ..."name="recipe"><?php echo strip_tags($recipes['recipe']); ?></textarea>
-                    <span class="text-danger"><?php echo $recipeErr;?></span>
-                    <div id="description-help" class="form-text">Put updated recipe details here</div>
+                  <label for="duration" class="form-label">Cooking time</label>
+                  <input type="time" class="form-control" id="duration" name="duration" min="00:05" max="06:00" value="<?php echo ($recipes['duration']); ?>">
+                  <span class="text-danger"><?php echo $durationErr;?></span>
                 </div>
-                <button type="submit" class="btn btn-warning">Update</button>
+                <div class="mb-3">
+                  <label for="ingredients" class="form-label">Ingredients</label>
+                  <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put new ingredients here ..." aria-describedby="ingredients-help"><?php echo strip_tags($recipes['ingredients']); ?></textarea>
+                  <div id="ingredients-help" class="form-text">Put updated ingredients details here</div>
+                  <span class="text-danger"><?php echo $ingredientsErr;?></span>
+                </div>
+                <div class="mb-3">
+                  <label for="recipe" class="form-label">Recipe Description</label>
+                  <textarea rows="6" class="form-control" id="recipe" name="recipe" placeholder="Put new recipe details here ..."  aria-describedby="description-help"><?php echo strip_tags($recipes['recipe']); ?></textarea>
+                  <div id="description-help" class="form-text">Put updated recipe details here</div>
+                  <span class="text-danger"><?php echo $recipeErr;?></span>
+                </div>
+                  <p class="text-danger mt-2"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>
+                  <!-- disable button if user is not owner of recipe -->
+                  <button type="submit" class="btn btn-warning mt-2" <?php echo($recipes['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Update</button>
             </form>
             <br />
         </section>

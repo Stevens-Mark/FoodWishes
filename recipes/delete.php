@@ -52,14 +52,16 @@
               </div>
               <div class="mb-3">
                 <h2><?php echo($recipe['title']); ?></h2>
-                <p class="card-text"><?php echo $recipe['recipe']; ?></p>
-                <p>Author : <i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+                <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
+                <p class="card-text"><b>Ingredients : </b><?php echo $recipe['ingredients']; ?></p>
+                <p class="card-text"><b>Recipe : </b><?php echo $recipe['recipe']; ?></p>
+                <p class="card-text"><b>Author : </b><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
               </div>
           </div>      
         </div>
-              <p class="m-2"><?php echo($recipe['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'Are you sure ?' ); ?></p>
-              <!-- disable delete button if user is not owner or recipe -->
-              <button type="submit" class="btn btn-danger m-2" <?php echo($recipe['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Delete</button>
+              <p class="text-danger mt-2"><?php echo($recipe['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'This will be PERMANENT. Are you sure ?' ); ?></p>
+              <!-- disable delete button if user is not owner of recipe -->
+              <button type="submit" class="btn btn-danger mt-2" <?php echo($recipe['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Delete</button>
             </form>
           <br />
       </section>

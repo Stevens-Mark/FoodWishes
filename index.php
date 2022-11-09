@@ -36,6 +36,9 @@
                     <div class="card-body d-flex flex-column">
                       <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
                       <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+                      <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
+
+                      <p class="card-text"><?php echo $recipe['ingredients']; ?></p>
                       <p class="card-text"><?php echo $recipe['recipe']; ?></p>
                       <div class="mt-auto">
                       <a class="btn btn-warning btn-sm my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>

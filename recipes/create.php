@@ -6,8 +6,8 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty/boolean values
-  $title = $recipe  = $titleErr = $recipeErr  = "";
-  $titleFail = $recipeFail  = false;
+  $title = $recipe = $duration = $ingredients = $titleErr = $durationErr = $ingredientsErr = $recipeErr  = "";
+  $titleFail = $recipeFail = $ingredientsFail = $durationFail = false;
 
   // form validation
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,26 +25,49 @@
       }
     }
 
+    // cooking duration
+    if (empty($_POST["duration"])) {
+      $durationErr = "Cooking Time is required.";
+      $durationFail = true;
+    } else {
+      $duration = test_input($_POST["duration"]);
+    }
+
     // Recipe description
     if (empty($_POST["recipe"])) {
       $recipeErr = "Recipe description is required.";
       $recipeFail = true;
     } else {
       $recipe = test_input($_POST["recipe"]);
-      // check description lengthminimum
+      // check description length minimum
       if (strlen($recipe) < 20) {
         $recipeErr = "Minimum description length is 20 characters.";
         $recipeFail = true;
       }
     }
+
+    // Recipe ingredients
+    if (empty($_POST["ingredients"])) {
+      $ingredientsErr = "Ingredients are required.";
+      $ingredientsFail = true;
+    } else {
+      $ingredients = test_input($_POST["ingredients"]);
+      // check description length minimum
+      if (strlen($ingredients) < 10) {
+        $ingredientsErr = "Minimum ingredients length is 10 characters.";
+        $ingredientsFail = true;
+      }
+    }
   
   // if recipe info ok, enter into database & show success message
-  if ( !$titleFail && !$recipeFail )
+  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail )
     {
-      $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
+      $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, duration, recipe, ingredients, author, is_enabled) VALUES (:title, :duration, :recipe, :ingredients, :author, :is_enabled)');
       $insertRecipe->execute([
           'title' => $title,
-          'recipe'=> $recipe,
+          'duration' => $duration,
+          'recipe' => $recipe,
+          'ingredients' => $ingredients,
           'author' => $loggedUser['email'],
           'is_enabled' => 1,
         ]);
@@ -88,8 +111,18 @@
                   <span class="text-danger"><?php echo $titleErr;?></span>
               </div>
               <div class="mb-3">
+                  <label for="duration" class="form-label">Cooking time</label>
+                  <input type="time" class="form-control" id="duration" name="duration" min="00:05" max="06:00" value="<?php echo $duration;?>">
+                  <span class="text-danger"><?php echo $durationErr;?></span>
+              </div>
+              <div class="mb-3">
+                  <label for="ingredients" class="form-label">Ingredients</label>
+                  <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put ingredients here ..."><?php echo $ingredients;?></textarea>
+                  <span class="text-danger"><?php echo $ingredientsErr;?></span>
+              </div>
+              <div class="mb-3">
                   <label for="recipe" class="form-label">Recipe Description</label>
-                  <textarea rows="10"  class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"><?php echo $recipe;?></textarea>
+                  <textarea rows="6"  class="form-control"  id="recipe" name="recipe" placeholder="Put recipe details here ..."><?php echo $recipe;?></textarea>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
