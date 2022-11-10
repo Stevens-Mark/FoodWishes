@@ -7,7 +7,7 @@
   // define variables and set to empty/boolean values
   $full_name = $email = $subject = $message = "";
   $full_nameErr = $emailErr = $subjectErr = $messageErr = "";
-  $full_nameFail = $emailFail = $subjectFail = $messageFail = $fileUploaded = false;
+  $full_nameFail = $emailFail = $subjectFail = $messageFail  = false;
   $extensionError = $sizeError = false;
 
   // form validation
@@ -75,7 +75,7 @@
       // test if extension is allowed
       $fileInfo = pathinfo($_FILES['image']['name']);
       $extension = $fileInfo['extension'] ?? null;
-      $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
+      $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
       if(!in_array(strtolower($extension), $allowedExtensions)) {
         $extensionError = true;
       }

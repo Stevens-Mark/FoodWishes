@@ -34,6 +34,7 @@
 
                   <article class="recipe-card card bg-light">
                     <div class="card-body d-flex flex-column">
+                      <img src="recipes/images/<?php echo $recipe['image'] ?$recipe['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="" width='100%' height='200'>
                       <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
                       <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
                       <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>

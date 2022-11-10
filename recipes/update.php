@@ -133,8 +133,8 @@
                 <div class="mb-3">
                   <label for="title" class="form-label">New Recipe Title</label>
                   <input type="title" class="form-control" id="title" name="title" placeholder="Your new recipe title" aria-describedby="title-help" value="<?php echo strip_tags($recipes['title']); ?>">
-                  <div id="title-help" class="form-text">Choose a new title for your recipe.</div>
-                  <span class="text-danger"><?php echo $titleErr;?></span>
+                  <div id="title-help" class="form-text">Choose a new title for your recipe (min 2 letters).</div>
+                  <span class="text-danger"><?php echo $titleErr;?></span> 
                 </div>
                 <div class="mb-3">
                   <label for="duration" class="form-label">Cooking time</label>
@@ -144,13 +144,13 @@
                 <div class="mb-3">
                   <label for="ingredients" class="form-label">Ingredients</label>
                   <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put new ingredients here ..." aria-describedby="ingredients-help"><?php echo strip_tags($recipes['ingredients']); ?></textarea>
-                  <div id="ingredients-help" class="form-text">Put updated ingredients details here</div>
+                  <div id="ingredients-help" class="form-text">Put updated ingredients details here (min 10 characters).</div>
                   <span class="text-danger"><?php echo $ingredientsErr;?></span>
                 </div>
                 <div class="mb-3">
                   <label for="recipe" class="form-label">Recipe Description</label>
                   <textarea rows="6" class="form-control" id="recipe" name="recipe" placeholder="Put new recipe details here ..."  aria-describedby="description-help"><?php echo strip_tags($recipes['recipe']); ?></textarea>
-                  <div id="description-help" class="form-text">Put updated recipe details here</div>
+                  <div id="description-help" class="form-text">Put updated recipe details here (min 20 characters).</div>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
                 </div>
                   <p class="text-danger mt-2"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>

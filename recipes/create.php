@@ -6,8 +6,9 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty/boolean values
-  $title = $recipe = $duration = $ingredients = $titleErr = $durationErr = $ingredientsErr = $recipeErr  = "";
+  $title = $recipe = $duration = $ingredients = $image = $titleErr = $durationErr = $ingredientsErr = $recipeErr  = "";
   $titleFail = $recipeFail = $ingredientsFail = $durationFail = false;
+  $extensionError = $sizeError = false;
 
   // form validation
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,27 +59,53 @@
         $ingredientsFail = true;
       }
     }
-  
-  // if recipe info ok, enter into database & show success message
-  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail )
-    {
-      $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, duration, recipe, ingredients, author, is_enabled) VALUES (:title, :duration, :recipe, :ingredients, :author, :is_enabled)');
-      $insertRecipe->execute([
-          'title' => $title,
-          'duration' => $duration,
-          'recipe' => $recipe,
-          'ingredients' => $ingredients,
-          'author' => $loggedUser['email'],
-          'is_enabled' => 1,
-        ]);
-   
-      // Assign the _POST data to the _SESSION so can pass data to redirected page
-      $_SESSION['recipeData']  = $_POST;
-      session_write_close();
+    // Let's test if a file has been added and if so, that there are no errors
+    if ( isset($_FILES['image']) && !empty($_FILES['image']) ) {
 
-      header('Location: '.$rootUrl.'recipes/success.php');
-      exit();
+      // test size
+      if($_FILES["image"]["size"] > 2097152 ) { // 2 MB 
+        $sizeError = true;
+      }
+
+      // test if extension is allowed
+      $fileInfo = pathinfo($_FILES['image']['name']);
+      $extension = $fileInfo['extension'] ?? null;
+      $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
+      if(!in_array(strtolower($extension), $allowedExtensions)) {
+        $extensionError = true;
+      }
+ 
+      // no errors? validate the file and store it temporarily with a unique name
+      if(!($extensionError) && !($sizeError)) {
+        $uploadedFile = str_replace(' ', '_', $_FILES['image']['name']);
+        $pieces = explode(".", $uploadedFile);
+        $image = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
+        move_uploaded_file(
+          $_FILES['image']['tmp_name'],
+          'images/' . $image);
+      }
     }
+  
+    // if recipe info ok, enter into database & show success message
+    if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail && !$extensionError && !$sizeError )
+      {
+        $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, duration, recipe, ingredients, image, author, is_enabled) VALUES (:title, :duration, :recipe, :ingredients, :image, :author, :is_enabled)');
+        $insertRecipe->execute([
+            'title' => $title,
+            'duration' => $duration,
+            'recipe' => $recipe,
+            'ingredients' => $ingredients,
+            'image' => $image,
+            'author' => $loggedUser['email'],
+            'is_enabled' => 1,
+          ]);
+        // Assign the _POST data to the _SESSION so can pass data to redirected page
+        $_SESSION['recipeData']  = $_POST;
+        session_write_close();
+
+        header('Location: '.$rootUrl.'recipes/success.php');
+        exit();
+      }
 }
 ?>
 
@@ -100,7 +127,7 @@
 
       <section>
         <h1 class="mb-4">Add A Recipe</h1>
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3 visually-hidden">
                 <label for="heading" class="form-label">Create</label>
                 <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Created !">
@@ -124,6 +151,19 @@
                   <label for="recipe" class="form-label">Recipe Description</label>
                   <textarea rows="6"  class="form-control"  id="recipe" name="recipe" placeholder="Put recipe details here ..."><?php echo $recipe;?></textarea>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
+              </div>
+              <!-- File upload ! -->
+              <div class="mb-3">
+                  <label for="image" class="form-label">Your File <i>(optional)</i></label>
+                  <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
+                  <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
+                 <!-- display file upload errors if needed  -->
+                <?php if(($extensionError)) : ?>
+                  <p class="card-text text-danger" ><b>File Type</b> : <?php echo(" extension not allowed, please choose a JPEG, PNG or GIF file.") ?></p>
+                <?php endif; ?>
+                <?php if(($sizeError)) : ?>
+                  <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 2 MB. </p>
+                <?php endif; ?>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
