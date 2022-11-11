@@ -7,7 +7,6 @@
   // define variables and set to empty/boolean values
   $full_name = $email = $age = $password = $confirmPassword  = "";
   $full_nameErr = $emailErr = $ageErr = $passwordErr = $confirmPasswordErr = "";
-  $full_nameFail = $emailFail = $ageFail = $passwordFail = $confirmPasswordFail = false;
 
   // form validation
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -63,9 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
     $specialchars = preg_match('@[^\w]@', $password);
-    if (!$uppercase || !$lowercase || !$number || !$specialchars || strlen($password) < 8) {
-    $passwordErr = "Password is not strong enough.";
+      if (!$uppercase || !$lowercase || !$number || !$specialchars || strlen($password) < 8) {
+      $passwordErr = "Password is not strong enough.";
+    }
   }
+
   // confirm password
   if (empty($_POST["confirmPassword"])) {
     $confirmPasswordErr = "A confirmation Password is required.";
@@ -75,7 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $confirmPasswordErr = "The passwords don't match.";
     }
   }
-}
 
   // if all data correct: enter user into database & show success message
   if ( empty($full_nameErr) && empty($emailErr) && empty($ageErr) && empty($ageErr) && empty($passwordErr) && empty($confirmPasswordErr) )
