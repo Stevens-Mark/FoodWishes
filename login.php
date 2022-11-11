@@ -3,8 +3,9 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
-  $emailErr = $passwordErr =  "";
   $postData = $_POST;
+  $email = $postData['email'] ?? "";
+  $emailErr = $passwordErr =  "";
 
   // User Validation? set cookie/session or display error message...
   if (isset($postData['email']) &&  isset($postData['password'])) {
@@ -20,7 +21,7 @@
               'LOGGED_USER',
               $loggedUser['email'],
               [
-                'expires' => time() + 1*24*3600,  // expires in 1 day
+                'expires' => time() + 7*24*3600,  // expires in 7 day
                 'secure' => true,
                 'httponly' => true,
               ]
@@ -70,7 +71,7 @@
         <h1 class="mb-4">Log In</h1>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com">
+            <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com" value="<?php echo $email;?>">
             <?php if(empty($emailErr)) : ?>
               <div id="email-help" class="form-text">The email used to create the account.</div>
             <?php else: ?>

@@ -88,8 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-   // if all data correct: enter user into database & show success message
-  if ( !$full_nameFail && !$emailFail && !$ageFail && !$passwordFail && !$confirmPasswordFail ) 
+  // if all data correct: enter user into database & show success message
+  // if ( !$full_nameFail && !$emailFail && !$ageFail && !$passwordFail && !$confirmPasswordFail ) 
+  
+  if ( empty($full_nameErr) && empty($emailErr) && empty($ageErr) && empty($ageErr) && empty($passwordErr) && empty($confirmPasswordErr) )
   {
      $insertUser = $mysqlClient->prepare('INSERT INTO users(full_name, age, email, password) VALUES (:full_name, :age, :email, :password)');
     $insertUser->execute([
@@ -143,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" autocomplete="username" placeholder="you@example.com" value="<?php echo $email;?>">
-          <span class="text-danger"><?php echo $emailErr;?></span>
+            <span class="text-danger"><?php echo $emailErr;?></span>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
