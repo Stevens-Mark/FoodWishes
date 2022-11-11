@@ -15,37 +15,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // name
   if (empty($_POST["full_name"])) {
     $full_nameErr = "Name is required.";
-    $full_nameFail = true;
   } else {
     $full_name = test_input($_POST["full_name"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)  || strlen($full_name) < 2) {
       $full_nameErr = "Minimum length is 2 characters & only letters and white space allowed.";
-      $full_nameFail = true;
     }
   }
 
   // age
   if (empty($_POST["age"])) {
     $ageErr = "Age is required.";
-    $ageFail = true;
   } else {
     $age = test_input($_POST["age"]);
     if ($age < 16 || $age > 100) {
       $ageErr = 'Enter a valid age (16-100 yrs).';
-      $ageFail = true;
     }
   }
 
    // email
   if (empty($_POST["email"])) {
     $emailErr = "Email is required.";
-    $emailFail = true;
   } else {
     $email = test_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "Invalid email format.";
-      $emailFail = true;
     }
     
     // check if email in database already
@@ -56,14 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($user) && !empty($user)) {
       $emailErr = 'This email address is in use already !';
       $email = '';
-      $emailFail = true;
     }
   }
 
   // password
   if (empty($_POST["password"])) {
     $passwordErr = " Password is required.";
-    $passwordFail = true;
   } else {
     // Validate password strength
     $password = test_input($_POST["password"]);
@@ -73,24 +65,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $specialchars = preg_match('@[^\w]@', $password);
     if (!$uppercase || !$lowercase || !$number || !$specialchars || strlen($password) < 8) {
     $passwordErr = "Password is not strong enough.";
-    $passwordFail = true;
   }
   // confirm password
   if (empty($_POST["confirmPassword"])) {
     $confirmPasswordErr = "A confirmation Password is required.";
-    $confirmPasswordFail = true;
   } else {
     $confirmPassword = test_input($_POST["confirmPassword"]);
     if ($password != $confirmPassword ) {
       $confirmPasswordErr = "The passwords don't match.";
-      $confirmPasswordFail = true;
     }
   }
 }
 
   // if all data correct: enter user into database & show success message
-  // if ( !$full_nameFail && !$emailFail && !$ageFail && !$passwordFail && !$confirmPasswordFail ) 
-  
   if ( empty($full_nameErr) && empty($emailErr) && empty($ageErr) && empty($ageErr) && empty($passwordErr) && empty($confirmPasswordErr) )
   {
      $insertUser = $mysqlClient->prepare('INSERT INTO users(full_name, age, email, password) VALUES (:full_name, :age, :email, :password)');
@@ -129,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <section>
         <h1 class="mb-4">Sign Up</h1>
-              <!-- Create account form -->
+        <!-- Create account form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
           
           <div class="mb-3">

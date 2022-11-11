@@ -21,7 +21,7 @@
               'LOGGED_USER',
               $loggedUser['email'],
               [
-                'expires' => time() + 7*24*3600,  // expires in 7 day
+                'expires' => time() + 1*24*3600,  // expires in 1 day
                 'secure' => true,
                 'httponly' => true,
               ]
@@ -72,11 +72,8 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" autocomplete="username" aria-describedby="email-help" placeholder="you@example.com" value="<?php echo $email;?>">
-            <?php if(empty($emailErr)) : ?>
-              <div id="email-help" class="form-text">The email used to create the account.</div>
-            <?php else: ?>
-              <span class="text-danger"><?php echo $emailErr; ?></span>
-            <?php endif; ?>
+            <div id="email-help" class="form-text">The email used to create the account.</div>
+            <span class="text-danger"><?php echo $emailErr; ?></span>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -89,7 +86,7 @@
     <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
     <div class="alert alert-success mt-2" role="alert">
-        Hello <?php echo displayName($loggedUser['email'], $users ); ?> !
+        Hello <?php echo ucfirst(displayName($loggedUser['email'], $users )); ?> !
     </div>
 <?php endif; ?>
 

@@ -1,11 +1,10 @@
 <?php
-session_start();
-include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
+  session_start();
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
 
-
-$_POST = $_SESSION;
-$full_name = $_POST['full_name'];
+  $_POST = $_SESSION;
+  $full_name = $_POST['full_name'];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +24,7 @@ $full_name = $_POST['full_name'];
         <h1 class="mb-4">Congratulations ! </h1> 
         <div class="card">
           <div class="card-body">
-          <p class="card-title"><?php echo($full_name); ?>, your account has been created !</p>
+          <p class="card-title"><?php echo ucfirst($full_name); ?>, your account has been created !</p>
           </div>
         </div>
       </section>
