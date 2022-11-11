@@ -59,6 +59,7 @@
         $ingredientsFail = true;
       }
     }
+    
     // Let's test if a file has been added and if so, that there are no errors
     if ( isset($_FILES['image']) && !empty($_FILES['image']) ) {
 

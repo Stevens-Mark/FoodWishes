@@ -1,14 +1,16 @@
 <?php
-session_start();
-include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
-include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
+  session_start();
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/config/mysql.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] .  '/config/user.php');
+  include_once($_SERVER['DOCUMENT_ROOT'] . "/variables/variables.php");
 
-// session: data passed from create or update page
-$_POST = $_SESSION['recipeData'];
-$heading = $_POST['heading'];
-$title = $_POST['title'];
-$recipe = $_POST['recipe'];
+  // session: data passed from create or update page
+  $_POST = $_SESSION['recipeData'];
+  $heading = $_POST['heading'];
+  $title = $_POST['title'];
+  $duration = $_POST['duration'];
+  $ingredients = $_POST['ingredients'];
+  $recipe = $_POST['recipe'];
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +30,10 @@ $recipe = $_POST['recipe'];
             <h1 class="mb-4"><?php echo($heading); ?></h1> 
             <div class="card">
               <div class="card-body">
-                <h2 class="card-title">Your Recipe information</h2>
+                <h2 class="card-title mb-4">Your Recipe information</h2>
                 <p class="card-text"><b>Title</b> : <?php echo strip_tags($title); ?></p>
+                <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($duration)); ?> (HH:mm).</p>
+                <p class="card-text"><b>Ingredients : </b><?php echo strip_tags($ingredients); ?></p>
                 <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
               </div>
             </div>

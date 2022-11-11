@@ -9,6 +9,7 @@
   // define variables
   $titleErr = $durationErr = $recipeErr = $ingredientsErr ="";
   $titleFail = $durationFail = $recipeFail = $ingredientsFail = false;
+  $extensionError = $sizeError = $fileUploaded = false;
 
   $getData = $_GET;
   $recipe_id = $getData['id'] ?? $_POST["id"];
@@ -78,22 +79,59 @@
       }
     }
 
-  // if id matches & recipe info ok, & user is the owner : update recipe in database & show message
-  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail )
+    // Let's test if a file has been added and if so, that there are no errors
+    if ( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0){
+      
+      // test size
+      if($_FILES["image"]["size"] > 2097152 ) { // 2 MB 
+        $sizeError = true;
+      }
+
+      // test if extension is allowed
+      $fileInfo = pathinfo($_FILES['image']['name']);
+      debug_to_console($fileInfo);
+      $extension = $fileInfo['extension'] ?? null;
+      $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
+      if(!in_array(strtolower($extension), $allowedExtensions)) {
+        $extensionError = true;
+      }
+  
+      // no errors? validate the file and store it temporarily with a unique name
+      if(!($extensionError) && !($sizeError)) {
+        $uploadedFile = str_replace(' ', '_', $_FILES['image']['name']);
+        $pieces = explode(".", $uploadedFile);
+        $image = $pieces[0] .'.'.uniqid() . '.' . $pieces[1];
+        move_uploaded_file(
+          $_FILES['image']['tmp_name'],
+          'images/' . $image);
+        $fileUploaded = true;
+      }
+    } else {
+      $image = $recipes['image'];
+    }
+
+  // if id matches & recipe info ok, & user is owner : update recipe in database & show message
+  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail && !$extensionError && !$sizeError )
     {
+
+      // if new uploaded file , user is author then first remove old image from folder
+      if ($fileUploaded && $recipes['image'] && $recipes['author'] == $loggedUser['email']) {
+        unlink($rootPath."/recipes/images/".$recipes['image']);
+      }
      
-      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, duration = :duration, recipe = :recipe, ingredients = :ingredients WHERE recipe_id = :recipe_id AND author = :author');  
+      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, duration = :duration, recipe = :recipe, ingredients = :ingredients, image = :image WHERE recipe_id = :recipe_id AND author = :author');  
       $insertRecipe->execute([
           'recipe_id' => $recipe_id,
           'title' => $title,
           'duration' => $duration,
           'recipe' => $recipe,
           'ingredients' => $ingredients,
+          'image' => $image,
           'author' => $loggedUser['email'],
         ]);
       
       // Assign the _POST data to the _SESSION so can pass data to redirected page
-      $_SESSION['recipeData']  = $_POST;
+      $_SESSION['recipeData'] = $_POST;
       session_write_close();
 
       header('Location: '.$rootUrl.'recipes/success.php');
@@ -121,7 +159,8 @@
 
         <section>
           <h1 class="mb-4">Update The Recipe</h1>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+          <img src="../recipes/images/<?php echo $recipes['image'] ? $recipes['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="" width='300' height='200'>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3 visually-hidden">
                   <label for="heading" class="form-label">Update</label>
                   <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Updated !">
@@ -152,6 +191,19 @@
                   <textarea rows="6" class="form-control" id="recipe" name="recipe" placeholder="Put new recipe details here ..."  aria-describedby="description-help"><?php echo strip_tags($recipes['recipe']); ?></textarea>
                   <div id="description-help" class="form-text">Put updated recipe details here (min 20 characters).</div>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
+                </div>
+                 <!-- File upload ! -->
+                <div class="mb-3">
+                    <label for="image" class="form-label">Your File <i>(optional)</i></label>
+                    <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
+                    <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
+                  <!-- display file upload errors if needed  -->
+                  <?php if(($extensionError)) : ?>
+                    <p class="card-text text-danger" ><b>File Type</b> : <?php echo(" extension not allowed, please choose a JPEG, PNG or GIF file.") ?></p>
+                  <?php endif; ?>
+                  <?php if(($sizeError)) : ?>
+                    <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 2 MB. </p>
+                  <?php endif; ?>
                 </div>
                   <p class="text-danger mt-2"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>
                   <!-- disable button if user is not owner of recipe -->
