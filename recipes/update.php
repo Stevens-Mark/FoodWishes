@@ -8,7 +8,6 @@
   
   // define variables
   $titleErr = $durationErr = $recipeErr = $ingredientsErr ="";
-  $titleFail = $durationFail = $recipeFail = $ingredientsFail = false;
   $extensionError = $sizeError = $fileUploaded = false;
 
   $getData = $_GET;
@@ -35,20 +34,17 @@
     // Recipe title
     if (empty($_POST["title"])) {
       $titleErr = "Recipe title is required.";
-      $titleFail = true;
     } else {
       $title = test_input($_POST["title"]);
       // check title length & only contains letters and whitespace
       if (!preg_match("/^[a-zA-Z-' ]*$/", $title)  || strlen($title) < 2) {
-        $titleErr = "Minimum length is 2 characters & only letters and white space allowed.";
-        $titleFail = true;
+        $titleErr = "Minimum of 2 characters & only letters and white space allowed.";
       }
     }
 
     // cooking duration
     if (empty($_POST["duration"])) {
       $durationErr = "Cooking Time is required.";
-      $durationFail = true;
     } else {
       $duration = test_input($_POST["duration"]);
     }
@@ -56,26 +52,22 @@
     // Recipe description
     if (empty($_POST["recipe"])) {
       $recipeErr = "Recipe description is required.";
-      $recipeFail = true;
     } else {
       $recipe = test_input($_POST["recipe"]);
       // check description length minimum
       if (strlen($recipe) < 20) {
         $recipeErr = "Minimum description length is 20 characters.";
-        $recipeFail = true;
       }
     }
 
     // Recipe ingredients
     if (empty($_POST["ingredients"])) {
       $ingredientsErr = "Ingredients are required.";
-      $ingredientsFail = true;
     } else {
       $ingredients = test_input($_POST["ingredients"]);
       // check description length minimum
       if (strlen($ingredients) < 10) {
         $ingredientsErr = "Minimum ingredients length is 10 characters.";
-        $ingredientsFail = true;
       }
     }
 
@@ -110,33 +102,33 @@
       $image = $recipes['image'];
     }
 
-  // if id matches & recipe info ok, & user is owner : update recipe in database & show message
-  if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail && !$extensionError && !$sizeError )
-    {
+    // if id matches, recipe info (ie, no errors) & user is owner : update recipe in database & show message
+    if ( empty($titleErr) && empty($durationErr) && empty($recipeErr) && empty($ingredientsErr) && !$extensionError && !$sizeError )
+      {
 
-      // if new uploaded file , user is author then first remove old image from folder
-      if ($fileUploaded && $recipes['image'] && $recipes['author'] == $loggedUser['email']) {
-        unlink($rootPath."/recipes/images/".$recipes['image']);
-      }
-     
-      $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, duration = :duration, recipe = :recipe, ingredients = :ingredients, image = :image WHERE recipe_id = :recipe_id AND author = :author');  
-      $insertRecipe->execute([
-          'recipe_id' => $recipe_id,
-          'title' => $title,
-          'duration' => $duration,
-          'recipe' => $recipe,
-          'ingredients' => $ingredients,
-          'image' => $image,
-          'author' => $loggedUser['email'],
-        ]);
+        // if new uploaded file , user is author then first remove old image from folder
+        if ($fileUploaded && $recipes['image'] && $recipes['author'] == $loggedUser['email']) {
+          unlink($rootPath."/recipes/images/".$recipes['image']);
+        }
       
-      // Assign the _POST data to the _SESSION so can pass data to redirected page
-      $_SESSION['recipeData'] = $_POST;
-      session_write_close();
+        $insertRecipe = $mysqlClient->prepare('UPDATE recipes SET title = :title, duration = :duration, recipe = :recipe, ingredients = :ingredients, image = :image WHERE recipe_id = :recipe_id AND author = :author');  
+        $insertRecipe->execute([
+            'recipe_id' => $recipe_id,
+            'title' => $title,
+            'duration' => $duration,
+            'recipe' => $recipe,
+            'ingredients' => $ingredients,
+            'image' => $image,
+            'author' => $loggedUser['email'],
+          ]);
+        
+        // Assign the _POST data to the _SESSION so can pass data to redirected page
+        $_SESSION['recipeData'] = $_POST;
+        session_write_close();
 
-      header('Location: '.$rootUrl.'recipes/success.php');
-      exit();
-    }
+        header('Location: '.$rootUrl.'recipes/success.php');
+        exit();
+      }
 }
 
 ?>
@@ -159,7 +151,6 @@
 
         <section>
           <h1 class="mb-4">Update The Recipe</h1>
-          <img src="../recipes/images/<?php echo $recipes['image'] ? $recipes['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="" width='300' height='200'>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3 visually-hidden">
                   <label for="heading" class="form-label">Update</label>
@@ -194,7 +185,7 @@
                 </div>
                  <!-- File upload ! -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">Your File <i>(optional)</i></label>
+                    <label for="image" class="form-label">New recipe Image <i>(optional)</i></label>
                     <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
                     <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
                   <!-- display file upload errors if needed  -->
@@ -205,7 +196,8 @@
                     <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 2 MB. </p>
                   <?php endif; ?>
                 </div>
-                  <p class="text-danger mt-2"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>
+                <p class="text-danger mt-4 mb-0"><b>IMPORTANT : </b> If any fields are completed incorrectly, then ALL the fields will be reset to original content !</p>
+                  <p class="text-danger"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>
                   <!-- disable button if user is not owner of recipe -->
                   <button type="submit" class="btn btn-warning mt-2" <?php echo($recipes['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Update</button>
             </form>

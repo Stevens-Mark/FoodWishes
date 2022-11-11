@@ -6,8 +6,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty/boolean values
-  $title = $recipe = $duration = $ingredients = $image = $titleErr = $durationErr = $ingredientsErr = $recipeErr  = "";
-  $titleFail = $recipeFail = $ingredientsFail = $durationFail = false;
+  $title = $recipe = $duration = $ingredients = $image = $titleErr = $durationErr = $ingredientsErr = $recipeErr = "";
   $extensionError = $sizeError = false;
 
   // form validation
@@ -16,20 +15,17 @@
     // Recipe title
     if (empty($_POST["title"])) {
       $titleErr = "Recipe title is required.";
-      $titleFail = true;
     } else {
       $title = test_input($_POST["title"]);
       // check title length & only contains letters and whitespace
       if (!preg_match("/^[a-zA-Z-' ]*$/", $title)  || strlen($title) < 2) {
-        $titleErr = "Minimum length is 2 characters & only letters and white space allowed.";
-        $titleFail = true;
+        $titleErr = "Minimum of 2 characters & only letters and white space allowed.";
       }
     }
 
     // cooking duration
     if (empty($_POST["duration"])) {
       $durationErr = "Cooking Time is required.";
-      $durationFail = true;
     } else {
       $duration = test_input($_POST["duration"]);
     }
@@ -37,31 +33,27 @@
     // Recipe description
     if (empty($_POST["recipe"])) {
       $recipeErr = "Recipe description is required.";
-      $recipeFail = true;
     } else {
       $recipe = test_input($_POST["recipe"]);
       // check description length minimum
       if (strlen($recipe) < 20) {
         $recipeErr = "Minimum description length is 20 characters.";
-        $recipeFail = true;
       }
     }
 
     // Recipe ingredients
     if (empty($_POST["ingredients"])) {
       $ingredientsErr = "Ingredients are required.";
-      $ingredientsFail = true;
     } else {
       $ingredients = test_input($_POST["ingredients"]);
       // check description length minimum
       if (strlen($ingredients) < 10) {
         $ingredientsErr = "Minimum ingredients length is 10 characters.";
-        $ingredientsFail = true;
       }
     }
     
     // Let's test if a file has been added and if so, that there are no errors
-    if ( isset($_FILES['image']) && !empty($_FILES['image']) ) {
+    if ( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0 ) {
 
       // test size
       if($_FILES["image"]["size"] > 2097152 ) { // 2 MB 
@@ -87,8 +79,8 @@
       }
     }
   
-    // if recipe info ok, enter into database & show success message
-    if ( !$titleFail && !$durationFail && !$recipeFail && !$ingredientsFail && !$extensionError && !$sizeError )
+     // if id matches, recipe info (ie, no errors) & user is owner : update recipe in database & show message
+    if ( empty($titleErr) && empty($durationErr) && empty($recipeErr) && empty($ingredientsErr) && !$extensionError && !$sizeError )   
       {
         $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, duration, recipe, ingredients, image, author, is_enabled) VALUES (:title, :duration, :recipe, :ingredients, :image, :author, :is_enabled)');
         $insertRecipe->execute([
@@ -155,7 +147,7 @@
               </div>
               <!-- File upload ! -->
               <div class="mb-3">
-                  <label for="image" class="form-label">Your File <i>(optional)</i></label>
+                  <label for="image" class="form-label">Recipe Image <i>(optional)</i></label>
                   <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
                   <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
                  <!-- display file upload errors if needed  -->
