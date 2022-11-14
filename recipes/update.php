@@ -200,6 +200,7 @@
                   <p class="text-danger"><?php echo($recipes['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to update this recipe !' : 'Are you sure ?' ); ?></p>
                   <!-- disable button if user is not owner of recipe -->
                   <button type="submit" class="btn btn-warning mt-2" <?php echo($recipes['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Update</button>
+                  <a class="btn btn-info mt-2 mx-2" href="<?php echo($rootUrl)?>recipes/read.php?id=<?php echo($recipe_id ); ?>">Cancel</a>
             </form>
             <br />
         </section>

@@ -41,39 +41,33 @@
 
       <!-- include header -->
       <?php include_once($rootPath.'/include/header.php'); ?>
-      <section>
-        <h1 class="mb-4">Delete The Recipe</h1>
+      <section class="readPage-container mx-auto">
+        <h1 class="mb-4">Recipe</h1>
+
         <div class="card">
-          <div class="card-body">
-            <div class="mb-3">
-              <h2><?php echo($recipe['title']); ?></h2>
-              <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
+          <div class="d-flex flex-column card-body">
+            <div class="d-flex flex-column-reverse flex-lg-row justify-content-between mb-3">
+
+              <div class="me-2" >
+                <h2><?php echo($recipe['title']); ?></h2>
+                <p class="card-text"><b>Author : </b><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+                <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
+              </div>
+
+              <img class="recipe-image readPage-image rounded mb-2" src="<?php echo($rootUrl)?>/recipes/images/<?php echo $recipe['image'] ? $recipe['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="">
+            </div>
+
               <p class="card-text"><b>Ingredients : </b><?php echo $recipe['ingredients']; ?></p>
               <p class="card-text"><b>Recipe : </b><?php echo $recipe['recipe']; ?></p>
-              <p class="card-text"><b>Author : </b><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
-            </div>
+         
           </div>      
         </div>
 
-        <form action="post_delete.php" method="POST">
-          <div class="mb-3 visually-hidden">
-            <label for="id" class="form-label">Recipe ID</label>
-            <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($recipe_id); ?>">
+          <div class="mt-auto">
+            <a class="btn btn-warning btn-sm my-4" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
+            <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
           </div>
-          <div class="mb-3 visually-hidden">
-            <label for="image" class="form-label">Image Name</label>
-            <input type="text" class="form-control" id="image" name="image" value="<?php echo($recipe['image']); ?>">
-          </div>
-          <div class="mb-3 visually-hidden">
-            <label for="author" class="form-label">Recipe ID</label>
-            <input type="hidden" class="form-control" id="author" name="author" value="<?php echo($recipe['author']); ?>">
-          </div>
-            <p class="text-danger mt-2"><?php echo($recipe['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'This will be PERMANENT. Are you sure ?' ); ?></p>
-            <!-- disable delete button if user is not owner of recipe -->
-            <button type="submit" class="btn btn-danger mt-2" <?php echo($recipe['author'] != $loggedUser['email'] ? 'disabled' : '' ); ?> >Delete</button>
-            <a class="btn btn-info mt-2 mx-2" href="<?php echo($rootUrl)?>recipes/read.php?id=<?php echo($recipe_id ); ?>">Cancel</a>
-        </form>
-        <br />
+
       </section>
 </main>
     <!-- include footer -->

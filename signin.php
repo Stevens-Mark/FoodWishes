@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = test_input($_POST["full_name"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$full_name)  || strlen($full_name) < 2) {
-      $full_nameErr = "Minimum length is 2 characters & only letters and white space allowed.";
+      $full_nameErr = "Minimum of 2 characters & only letters and white space allowed.";
     }
   }
 
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isMail->execute(['email' => $email, ]);
     $user = $isMail->fetch(PDO::FETCH_ASSOC);
     if (isset($user) && !empty($user)) {
-      $emailErr = 'This email address is in use already !';
+      $emailErr = 'The email address is in use already !';
       $email = '';
     }
   }
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  // if all data correct: enter user into database & show success message
+  // if all data correct (ie, no errors): enter user into database & show success message
   if ( empty($full_nameErr) && empty($emailErr) && empty($ageErr) && empty($ageErr) && empty($passwordErr) && empty($confirmPasswordErr) )
   {
      $insertUser = $mysqlClient->prepare('INSERT INTO users(full_name, age, email, password) VALUES (:full_name, :age, :email, :password)');

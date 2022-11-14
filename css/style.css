@@ -23,8 +23,18 @@ body {
   background-color: #3A6B35; 
   border-color: #212529; 
   }
- 
-.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open>.dropdown-toggle.btn-warning {
+
+.btn-info {
+  border-color: #212529; 
+  }
+
+.btn-info:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #212529; 
+}
+
+.btn-warning:hover {
   color: #fff;
   background-color: #00b3db;
   border-color: #212529; 
@@ -44,20 +54,46 @@ body {
   cursor: pointer;
 }
 
+.recipe-image {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+
 .recipe-card:hover {
   filter: brightness(100%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
 }
 
+/* Read Recipe page */
+
+.readPage-image {
+  height: 250px;
+}
+
+/* index page */
+
 .logout-button {
   text-align: right;
 }
+
 
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 768px) {
   .recipe-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .readPage-container {
+    width: 75%;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .readPage-image {
+    width: 50%;
   }
 }
 

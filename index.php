@@ -18,47 +18,46 @@
 <body class="d-flex flex-column min-vh-100">
   <main class="container">
 
-      <!-- include header -->
-      <?php include_once($rootPath.'/include/header.php'); ?>
+    <!-- include header -->
+    <?php include_once($rootPath.'/include/header.php'); ?>
 
-      <!-- include log in form -->
-      <?php include_once($rootPath.'/login.php'); ?>
+    <!-- include log in form -->
+    <?php include_once($rootPath.'/login.php'); ?>
 
-      <!-- If the user exists, the recipes are displayed -->
-      <?php if(isset($loggedUser)): ?>
-        <section>
-          <h1 class="mb-4">Recipes</h1>
-          <div class='recipe-container'>
-                <!-- Display recipe cards - loop through the recipes up until limit-->
-                <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
-
-                  <article class="recipe-card card bg-light">
+    <!-- If the user exists, the recipes are displayed -->
+    <?php if(isset($loggedUser)): ?>
+      <section>
+        <h1 class="mb-4">Recipes</h1>
+        <div class='recipe-container'>
+              <!-- Display recipe cards - loop through the recipes up until limit-->
+              <?php foreach(getRecipes($recipes, $limit) as $recipe) : ?>
+          
+                <article class="recipe-card card bg-light">
+                  <a class="text-decoration-none text-dark" href="<?php echo($rootUrl)?>recipes/read.php?id=<?php echo($recipe['recipe_id']); ?>">
                     <div class="card-body d-flex flex-column">
-                      <img src="recipes/images/<?php echo $recipe['image'] ? $recipe['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="" width='100%' height='200'>
+                      <img class="recipe-image rounded-top mb-2" src="<?php echo($rootUrl)?>/recipes/images/<?php echo $recipe['image'] ? $recipe['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="">
                       <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
                       <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
                       <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
-                      <p class="card-text"><?php echo $recipe['ingredients']; ?></p>
+                      <!-- <p class="card-text"><?php echo $recipe['ingredients']; ?></p> -->
                       <p class="card-text"><?php echo $recipe['recipe']; ?></p>
-                      <div class="mt-auto">
+                      <!-- <div class="mt-auto">
                       <a class="btn btn-warning btn-sm my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
                       <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
-                      </div>
+                      </div> -->
                     </div>
-                  </article>
-                <?php endforeach ?>
-            </div>
-        
-          <!-- log out button -->
-          <?php include_once($rootPath.'/include/logoutButton.php'); ?>
-        </section>
-      <?php endif; ?>
-    
+                  </a>
+                </article>
+            
+              <?php endforeach ?>
+          </div>
 
+        <!-- log out button -->
+        <?php include_once($rootPath.'/include/logoutButton.php'); ?>
+      </section>
+    <?php endif; ?>
   </main>
-  
   <!-- include footer -->
   <?php include_once($rootPath.'/include/footer.php'); ?>
-
 </body>
 </html>
