@@ -6,7 +6,7 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   // define variables and set to empty/boolean values
-  $title = $recipe = $duration = $ingredients = $image = $titleErr = $durationErr = $ingredientsErr = $recipeErr = "";
+  $title = $recipe = $summary = $duration = $ingredients = $image = $titleErr = $summaryErr = $durationErr = $ingredientsErr = $recipeErr = "";
   $extensionError = $sizeError = false;
 
   // form validation
@@ -23,22 +23,22 @@
       }
     }
 
+    // Recipe summary/description
+    if (empty($_POST["summary"])) {
+      $summaryErr = "Recipe description is required.";
+    } else {
+      $summary = test_input($_POST["summary"]);
+      // check description length minimum
+      if (strlen($summary) < 20 || strlen($summary) > 500) {
+        $summaryErr = "Description length between 20 and 500 characters.";
+      }
+    }
+
     // cooking duration
     if (empty($_POST["duration"])) {
       $durationErr = "Cooking Time is required.";
     } else {
       $duration = test_input($_POST["duration"]);
-    }
-
-    // Recipe description
-    if (empty($_POST["recipe"])) {
-      $recipeErr = "Recipe description is required.";
-    } else {
-      $recipe = test_input($_POST["recipe"]);
-      // check description length minimum
-      if (strlen($recipe) < 20) {
-        $recipeErr = "Minimum description length is 20 characters.";
-      }
     }
 
     // Recipe ingredients
@@ -51,12 +51,23 @@
         $ingredientsErr = "Minimum ingredients length is 10 characters.";
       }
     }
-    
+
+    // Recipe instructions
+    if (empty($_POST["recipe"])) {
+      $recipeErr = "Recipe instructions are required.";
+    } else {
+      $recipe = test_input($_POST["recipe"]);
+      // check instructions length minimum
+      if (strlen($recipe) < 20) {
+        $recipeErr = "Minimum instructions length is 20 characters.";
+      }
+    }
+  
     // Let's test if a file has been added and if so, that there are no errors
     if ( isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0 ) {
 
       // test size
-      if($_FILES["image"]["size"] > 2097152 ) { // 2 MB 
+      if($_FILES["image"]["size"] > 	1048576  ) { // 1 MB 
         $sizeError = true;
       }
 
@@ -80,11 +91,12 @@
     }
   
      // if id matches, recipe info (ie, no errors) & user is owner : update recipe in database & show message
-    if ( empty($titleErr) && empty($durationErr) && empty($recipeErr) && empty($ingredientsErr) && !$extensionError && !$sizeError )   
+    if ( empty($titleErr) && empty($summaryErr) && empty($durationErr) && empty($recipeErr) && empty($ingredientsErr) && !$extensionError && !$sizeError )   
       {
-        $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, duration, recipe, ingredients, image, author, is_enabled) VALUES (:title, :duration, :recipe, :ingredients, :image, :author, :is_enabled)');
+        $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, summary, duration, recipe, ingredients, image, author, is_enabled) VALUES (:title, :summary, :duration, :recipe, :ingredients, :image, :author, :is_enabled)');
         $insertRecipe->execute([
             'title' => $title,
+            'summary' => $summary,
             'duration' => $duration,
             'recipe' => $recipe,
             'ingredients' => $ingredients,
@@ -127,8 +139,13 @@
               </div>
               <div class="mb-3">
                   <label for="title" class="form-label">Recipe Title</label>
-                  <input type="title" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
                   <span class="text-danger"><?php echo $titleErr;?></span>
+              </div>
+              <div class="mb-3">
+                  <label for="summary" class="form-label">Recipe Description</label>
+                  <textarea rows="2"  class="form-control"  id="summary" name="summary" placeholder="Put brief recipe description here ..."><?php echo $summary;?></textarea>
+                  <span class="text-danger"><?php echo $summaryErr;?></span>
               </div>
               <div class="mb-3">
                   <label for="duration" class="form-label">Cooking time</label>
@@ -141,7 +158,7 @@
                   <span class="text-danger"><?php echo $ingredientsErr;?></span>
               </div>
               <div class="mb-3">
-                  <label for="recipe" class="form-label">Recipe Description</label>
+                  <label for="recipe" class="form-label">Instructions</label>
                   <textarea rows="6"  class="form-control"  id="recipe" name="recipe" placeholder="Put recipe details here ..."><?php echo $recipe;?></textarea>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
               </div>
@@ -149,13 +166,13 @@
               <div class="mb-3">
                   <label for="image" class="form-label">Recipe Image <i>(optional)</i></label>
                   <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
-                  <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 2MB).</div>
+                  <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 1MB).</div>
                  <!-- display file upload errors if needed  -->
                 <?php if(($extensionError)) : ?>
                   <p class="card-text text-danger" ><b>File Type</b> : <?php echo(" extension not allowed, please choose a JPEG, PNG or GIF file.") ?></p>
                 <?php endif; ?>
                 <?php if(($sizeError)) : ?>
-                  <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 2 MB. </p>
+                  <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 1 MB. </p>
                 <?php endif; ?>
               </div>
               <button type="submit" class="btn btn-primary">Send</button>

@@ -46,11 +46,12 @@
         <div class="card">
           <div class="card-body">
             <div class="mb-3">
-              <h2><?php echo($recipe['title']); ?></h2>
+              <h2><?php echo ucfirst($recipe['title']); ?></h2>
+              <p class="card-text"><b>Description : </b><?php echo $recipe['summary']; ?></p>
               <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
               <p class="card-text"><b>Ingredients : </b><?php echo $recipe['ingredients']; ?></p>
-              <p class="card-text"><b>Recipe : </b><?php echo $recipe['recipe']; ?></p>
-              <p class="card-text"><b>Author : </b><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+              <p class="card-text"><b>Instructions : </b><?php echo $recipe['recipe']; ?></p>
+              <p class="card-text"><b>Author : </b><i class="text-muted"><?php echo ucfirst(displayAuthor($recipe['author'], $users)); ?></i></p>
             </div>
           </div>      
         </div>

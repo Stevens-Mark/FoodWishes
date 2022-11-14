@@ -36,15 +36,10 @@
                   <a class="text-decoration-none text-dark" href="<?php echo($rootUrl)?>recipes/read.php?id=<?php echo($recipe['recipe_id']); ?>">
                     <div class="card-body d-flex flex-column">
                       <img class="recipe-image rounded-top mb-2" src="<?php echo($rootUrl)?>/recipes/images/<?php echo $recipe['image'] ? $recipe['image'] : 'ImageDefault_NO_DELETE.png' ?>" alt="">
-                      <h2 class="card-title"><?php echo $recipe['title']; ?></h2>
-                      <p class="card-subtitle mb-2 text-muted"><i><?php echo displayAuthor($recipe['author'], $users ); ?></i></p>
+                      <h2 class="card-title"><?php echo ucfirst($recipe['title']); ?></h2>
+                      <p class="card-subtitle mb-2"><b>Author : </b><i class="text-muted"><?php echo ucfirst(displayAuthor($recipe['author'], $users )); ?></i></p>
                       <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
-                      <!-- <p class="card-text"><?php echo $recipe['ingredients']; ?></p> -->
-                      <p class="card-text"><?php echo $recipe['recipe']; ?></p>
-                      <!-- <div class="mt-auto">
-                      <a class="btn btn-warning btn-sm my-2" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
-                      <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
-                      </div> -->
+                      <p class="card-text"><?php echo $recipe['summary']; ?></p>
                     </div>
                   </a>
                 </article>

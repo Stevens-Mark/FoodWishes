@@ -8,6 +8,7 @@
   $_POST = $_SESSION['recipeData'];
   $heading = $_POST['heading'];
   $title = $_POST['title'];
+  $summary = $_POST['summary'];
   $duration = $_POST['duration'];
   $ingredients = $_POST['ingredients'];
   $recipe = $_POST['recipe'];
@@ -31,10 +32,11 @@
             <div class="card">
               <div class="card-body">
                 <h2 class="card-title mb-4">Your Recipe information</h2>
-                <p class="card-text"><b>Title</b> : <?php echo strip_tags($title); ?></p>
+                <p class="card-text"><b>Title</b> : <?php echo ucfirst(strip_tags($title)); ?></p>
+                <p class="card-text"><b>Description</b> : <?php echo strip_tags($summary); ?></p>
                 <p class="card-text"><b>Time : </b><?php echo date("H:i", strtotime($duration)); ?> (HH:mm).</p>
                 <p class="card-text"><b>Ingredients : </b><?php echo strip_tags($ingredients); ?></p>
-                <p class="card-text"><b>Recipe</b> : <?php echo strip_tags($recipe); ?></p>
+                <p class="card-text"><b>Instructions</b> : <?php echo strip_tags($recipe); ?></p>
               </div>
             </div>
       </section>
