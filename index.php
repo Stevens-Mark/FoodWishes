@@ -35,7 +35,7 @@
 
     <!-- If the user exists, the recipes are displayed -->
     <?php if(isset($loggedUser)): ?>
-      <section>
+      <section class="mb-4">
         <h1 class="mb-4">Recipes</h1>
         <!-- If user enters a search word & no results display message -->
         <?php if(count($recipes) <1) : ?>
@@ -62,8 +62,6 @@
           </div>
 
         <?php endif; ?>
-        <!-- log out button -->
-        <?php include_once($rootPath.'/include/logoutButton.php'); ?>
       </section>
 
     <?php endif; ?>

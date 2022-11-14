@@ -85,8 +85,9 @@
     </form>
     <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
-    <div class="alert alert-success mt-2" role="alert">
-        Hello <?php echo ucfirst(displayName($loggedUser['email'], $users )); ?> !
+    <div class="d-flex align-items-center justify-content-between alert alert-success mt-2" role="alert">
+      <p class="mb-0">Hello <?php echo ucfirst(displayName($loggedUser['email'], $users )); ?> !</p>
+      <?php include_once($rootPath.'/include/logoutButton.php'); ?>
     </div>
 <?php endif; ?>
 
