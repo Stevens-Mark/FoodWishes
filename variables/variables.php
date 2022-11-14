@@ -23,28 +23,6 @@
   // $SMTPPassword = 'generatedByGmail';     // SMTP password : you need to generate an "app password" from google (see their documentation) 
   // $recipientEmail = 'yourmail@gmail.com'
 
-  
 
-  // EXAMPLE 1
-  
-  // $sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = TRUE';
-  // $recipesStatement = $db->prepare($sqlQuery);
-  // $recipesStatement->execute();
-  // $recipes = $recipesStatement->fetchAll(); 
-
-  // EXAMPLE 2
-  // $sqlQuery ="SELECT * FROM `recipes` WHERE author = ?";
-  // $recipesStatement = $db->prepare($sqlQuery);
-  // $recipesStatement->execute([$_SESSION['LOGGED_USER']]);
-  // $recipes = $recipesStatement->fetchAll(); 
-
-  // EXAMPLE 3
-  // $sqlQuery ="SELECT * FROM `recipes` WHERE author = :author AND is_enabled = :is_enabled";
-  // $recipesStatement = $db->prepare($sqlQuery);
-  // $recipesStatement->execute([
-  //   'author' => $_SESSION['LOGGED_USER'],
-  //   'is_enabled' => true,
-  // ]);
-  // $recipes = $recipesStatement->fetchAll(); 
 
   ?>
