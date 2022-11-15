@@ -88,7 +88,7 @@
     <link rel="stylesheet" href="./css/style.css">
     
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="backTwo d-flex flex-column min-vh-100">
     <main class="container">
       <?php include_once($rootPath.'/include/header.php'); ?>
         <section>

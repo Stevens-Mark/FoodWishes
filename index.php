@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<?php echo($rootUrl.'/css/style.css'); ?>">
 
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="backOne d-flex flex-column min-vh-100">
   <main class="container">
 
     <!-- include header -->

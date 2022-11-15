@@ -9,7 +9,6 @@
 
 body {
   background: #CBD18F;
-  /* font-family: "Lato"; */
 }
 
 /* bootstrap overrides */
@@ -90,6 +89,53 @@ body {
   text-align: right;
 }
 
+/* image backgrounds*/
+
+.backOne, .backTwo, .backThree {
+  background: #CBD18F;
+  position: relative; 
+  height: 100%;
+  width: 100%;
+}
+
+.backOne::before {    
+  content: "";
+  background:  #CBD18F url("backgrounds/wine-glass.webp") no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+.backTwo::before {    
+  content: "";
+  background:  #CBD18F url("backgrounds/food-selection.webp") no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.04;
+  z-index: -1;
+}
+
+.backThree::before {    
+  content: "";
+  background:  #CBD18F url("backgrounds/asian-fusion.webp") no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.04;
+  z-index: -1;
+}
 
 /* MEDIA QUERIES */
 

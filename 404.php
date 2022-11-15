@@ -23,7 +23,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo($rootUrl.'/css/style.css'); ?>">
 </head>
-<body class="d-flex flex-column min-vh-100" style="background: #CBD18F;">
+<body class="backTwo d-flex flex-column min-vh-100" style="background: #CBD18F;">
   <main class="container">
     <?php include_once($rootPath.'/include/header.php'); ?>
     <div class="d-flex justify-content-center align-items-center" style="height:calc( 100vh - 144px );">
