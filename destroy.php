@@ -49,17 +49,13 @@
           </div>      
         </div>
 
-        <form action="post_destroy.php" method="POST">
-          <div class="mb-3 ">
+        <form action="destroy_post.php" method="POST">
+          <div class="mb-3 visually-hidden">
             <label for="id" class="form-label">User ID</label>
-            <input type="text" class="form-control" id="id" name="id" value="<?php echo($user['user_id']); ?>">
-          </div>
-          <div class="mb-3 ">
-            <label for="email" class="form-label">email</label>
-            <input type="text" class="form-control" id="email" name="email" value="<?php echo($email); ?>">
+            <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($user['user_id']); ?>">
           </div>
             <p class="text-danger mt-2"><?php echo($email != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this account !' : 'This will be PERMANENT. Are you sure ?' ); ?></p>
-            <!-- disable delete button if user is not owner of user -->
+            <!-- disable delete button if user is not owner of the user account -->
             <button type="submit" class="btn btn-danger mt-2" <?php echo($email != $loggedUser['email'] ? 'disabled' : '' ); ?> >Delete</button>
             <a class="btn btn-info mt-2 mx-2" href="<?php echo($rootUrl)?>index.php">Cancel</a>
         </form>

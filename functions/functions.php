@@ -20,7 +20,7 @@ function displayAuthor(string $authorEmail, array $users) : string
     return 'utilisateur inconnu';
 }
 
-// display username
+// display username (no age)
 function displayName(string $authorEmail, array $users) : string
 {
     for ($i = 0; $i < count($users); $i++) {

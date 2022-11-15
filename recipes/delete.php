@@ -66,7 +66,7 @@
             <input type="text" class="form-control" id="image" name="image" value="<?php echo($recipe['image']); ?>">
           </div>
           <div class="mb-3 visually-hidden">
-            <label for="author" class="form-label">Recipe ID</label>
+            <label for="author" class="form-label">Recipe Author</label>
             <input type="hidden" class="form-control" id="author" name="author" value="<?php echo($recipe['author']); ?>">
           </div>
             <p class="text-danger mt-2"><?php echo($recipe['author'] != $loggedUser['email'] ? 'Sorry, you do not have the permissions to delete this recipe !' : 'This will be PERMANENT. Are you sure ?' ); ?></p>

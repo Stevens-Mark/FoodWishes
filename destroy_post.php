@@ -7,7 +7,6 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   $user_id = $_POST['id'];
-  $email = $_POST['email'];
 
   if (!isset($user_id) || (!is_numeric($user_id)))
   {

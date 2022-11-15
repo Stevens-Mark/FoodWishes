@@ -24,7 +24,7 @@
         <h1 class="mb-4">Congratulations ! </h1> 
         <div class="card">
           <div class="card-body">
-          <p class="card-title"><?php echo ucfirst($full_name); ?>, your account has been created. You can now log into the website ...</p>
+          <p class="card-title"><?php echo ucfirst($full_name); ?>, your account has been created. You can now log in to the website ...</p>
           </div>
         </div>
       </section>
