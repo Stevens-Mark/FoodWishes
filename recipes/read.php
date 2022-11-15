@@ -48,8 +48,8 @@
           <div class="d-flex flex-column card-body">
             <div class="d-flex flex-column-reverse flex-lg-row justify-content-between mb-3">
 
-              <div class="me-2" >
-                <h2><?php echo ucfirst($recipe['title']); ?></h2>
+              <div class="readPage-summary me-2" >
+                <h2 class="readPage-recipeTitle"><?php echo ucfirst($recipe['title']); ?></h2>
                 <p class="card-text"><b>Author : </b><i class="text-muted"><?php echo ucfirst(displayAuthor($recipe['author'], $users)); ?></i></p>
                 <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
               </div>

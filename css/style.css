@@ -79,6 +79,26 @@ body {
   height: 250px;
 }
 
+ /* code below used to stop long titles breaking the design  */
+.readPage-recipeTitle {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 992px)  {
+  .readPage-summary {
+    max-width: 325px;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .readPage-summary {
+    max-width: 400px;
+  }
+}
+
 /* index page */
 
 .search{
