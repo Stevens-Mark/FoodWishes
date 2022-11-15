@@ -48,6 +48,10 @@ body {
   border-color: #212529; 
 }
 
+.logo {
+  width: 150px;
+}
+
 /* Recipe cards styling */
 .recipe-container {
   display: grid;
