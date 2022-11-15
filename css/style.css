@@ -120,7 +120,7 @@ body {
 
 .backOne::before {    
   content: "";
-  background:  #CBD18F url("backgrounds/wine-glass.webp") no-repeat center center;
+  background:  #CBD18F url("/css/backgrounds/wine-glass.webp") no-repeat center center;
   background-size: cover;
   position: absolute;
   top: 0px;
@@ -129,11 +129,12 @@ body {
   left: 0px;
   opacity: 0.08;
   z-index: -1;
+  background-attachment: fixed;
 }
 
 .backTwo::before {    
   content: "";
-  background:  #CBD18F url("backgrounds/food-selection.webp") no-repeat center center;
+  background:  #CBD18F url("/css/backgrounds/food-selection.webp") no-repeat center center;
   background-size: cover;
   position: absolute;
   top: 0px;
@@ -142,11 +143,12 @@ body {
   left: 0px;
   opacity: 0.04;
   z-index: -1;
+  background-attachment: fixed;
 }
 
 .backThree::before {    
   content: "";
-  background:  #CBD18F url("backgrounds/asian-fusion.webp") no-repeat center center;
+  background:  #CBD18F url("/css/backgrounds/asian-fusion.webp") no-repeat center center;
   background-size: cover;
   position: absolute;
   top: 0px;
@@ -155,6 +157,7 @@ body {
   left: 0px;
   opacity: 0.04;
   z-index: -1;
+  background-attachment: fixed;
 }
 
 /* MEDIA QUERIES */
