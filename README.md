@@ -61,7 +61,7 @@ Click on MAMP > preferences > PHP & change the Standard version to 7.3.7<br/>
 
 When MAMP has successfully launched Apache and MySQL, click on the "Open WebStart Page" button in the middle, which allows you to open the MAMP home page in your browser.<br/>
 
-Click Tools > phpMyAdmin : This will open a new window, giving you access to the MYSQL database. You can import the database file `creation_base.sql` you will find in the folder `SQL` to setup the database for this project.
+Click Tools > phpMyAdmin : This will open a new window, giving you access to the MYSQL database. You can import the database file `we_love_food.sql` you will find in the folder `SQL` to setup the database for this project.
 
 - Edit the following values in your `php.ini` file:<br/>
 
@@ -162,7 +162,7 @@ Cliquez sur MAMP > Préférences > PHP et changez la version Standard en 7.3.7<b
 - Installer la base de données
 
 Lorsque MAMP a lancé avec succès Apache et MySQL, cliquez sur le bouton "Ouvrir la page de démarrage Web" au milieu, ce qui vous permet d'ouvrir la page d'accueil de MAMP dans votre navigateur.<br/>
-Cliquez sur Outils > phpMyAdmin : Cela ouvrira une nouvelle fenêtre, vous donnant accès à la base de données MYSQL. Vous pouvez importer le fichier de base de données `creation_base.sql` que vous trouverez dans le dossier `SQL` pour configurer la base de données pour ce projet.
+Cliquez sur Outils > phpMyAdmin : Cela ouvrira une nouvelle fenêtre, vous donnant accès à la base de données MYSQL. Vous pouvez importer le fichier de base de données ``we_love_food.sql` que vous trouverez dans le dossier `SQL` pour configurer la base de données pour ce projet.
 
 - Modifiez les valeurs suivantes dans votre fichier `php.ini` :<br/>
 
