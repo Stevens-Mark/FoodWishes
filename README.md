@@ -8,19 +8,17 @@
 To develop a Full stack web application using an Apache server, a MySQL database and using PHP as the main programming language.<br/> 
 
 For this project I wanted to learn about PHP and MySQL databases to produce a full stack web application. The basis for this project comes from the OpenClassrooms course [Design your website with PHP and MySQL](https://openclassrooms.com/en/courses/918836-concevez-votre-site-web-avec-php-et-mysql) *(in french)*. I used as a starting point...</br> 
-As the course does not explain everything, I found myself completing the functionality the be able to actually send an attachment as well as form validation, for example, which are not coverded in the course.</br>
+As the course does not explain everything, I found myself completing the functionality to be able to actually send an attachment as well as form validation, for example, which are not covered in the course.</br>
 The site is not very inspiring (yet another recipe website, why is Openclassrooms obsessed with recipe websites?) and the css styling is simple, but the idea behind this project was to discover new programming languages and not to produce a production ready application.
 ## Features
-- [x] Create an account page 
-- [x] Log in page 
+- [x] Create/Destroy an account
+- [x] Login / Logout
 - [x] Recipes viewing page
-- [x] Create a recipe page 
-- [x] Read a recipe page
-- [x] Update a recipe page 
-- [x] Delete a recipe page
+- [x] Create/Update/Delete a recipe
+- [x] Upload/update an image
 - [x] Contact Us page  
 - [x] Form validation : valid input/password strength checking, existing user check etc...
-- [x] File Uploading & sending
+- [x] File Uploading, verifying & sending by email
 
 ## Skills
 - [x] Setting up the relevant front-end environment
@@ -111,17 +109,18 @@ Développer une application Web Full stack en utilisant un serveur Apache, une b
 Pour ce projet, je voulais en savoir plus sur les bases de données PHP et MySQL afin de produire une application Web complète. La base de ce projet provient du cours OpenClassrooms [Concevez votre site web avec PHP et MySQL](https://openclassrooms.com/en/courses/918836-concevez-votre-site-web-avec-php-et-mysql) *(en français)*. J'ai utilisé comme point de départ...</br>
 Comme le cours n'explique pas tout, je me suis retrouvé à compléter la fonctionnalité pour pouvoir réellement envoyer une pièce jointe ainsi que la validation de formulaire, par exemple, qui ne sont pas abordés dans le cours.</br>
 Le site n'est pas très inspirant (encore un autre site de recettes, pourquoi Openclassrooms est-il obsédé par les sites de recettes ?) et le style css est simple, mais l'idée derrière ce projet était de découvrir de nouveaux langages de programmation et non de produire une application prête à la production.
+
 ## Fonctionnalités
-- [x] Créer une page de compte
-- [x] Page de connexion
+- [x] Créer/détruire un compte
+- [x] Connexion / Déconnexion
 - [x] Page de visualisation des recettes
-- [x] Créer une page de recette
-- [x] Lire une page de recette
-- [x] Mettre à jour une page de recette
-- [x] Supprimer une page de recette
-- [x] Page Contactez-nous
-- [x] Validation du formulaire : vérification de la force des entrées/mots de passe valides, vérification des utilisateurs existants, etc.
-- [x] Téléchargement et envoi de fichiers
+- [x] Créer/mettre à jour/supprimer une recette
+- [x] Téléchargement/mise à jour d'une image
+- [x] Page "Contactez-nous"  
+- [x] Validation du formulaire : vérification de la validité de la saisie et du mot de passe, vérification de l'existence d'un utilisateur, etc.
+- [x] Téléchargement de fichiers, vérification et envoi par e-mail
+
+Traduit avec www.DeepL.com/Translator (version gratuite)
 
 ## Compétences
 - [x] Mise en place de l'environnement frontal pertinent

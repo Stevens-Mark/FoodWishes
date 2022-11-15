@@ -1,6 +1,7 @@
 <?php 
   session_start(); // $_SESSION
   include_once($_SERVER['DOCUMENT_ROOT'] . '/config/mysql.php');
+  // include_once($_SERVER['DOCUMENT_ROOT'] . '/config/user.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . '/variables/variables.php');
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
@@ -63,8 +64,10 @@
 
         <?php endif; ?>
       </section>
-
+      <div class="text-end">
+      <a class="btn btn-danger mb-4" href="<?php echo($rootUrl)?>destroy.php?id=<?php echo($loggedUser['email']); ?>">Delete Your Account</a></d>
     <?php endif; ?>
+
   </main>
   <!-- include footer -->
   <?php include_once($rootPath.'/include/footer.php'); ?>
