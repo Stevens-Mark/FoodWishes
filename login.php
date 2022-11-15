@@ -83,6 +83,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
+    <br />
     <!--  otherwise, If user connected then show success message (which appears above recipes on home/index page) -->
   <?php else: ?>
     <div class="d-flex align-items-center justify-content-between alert alert-success mt-2" role="alert">
