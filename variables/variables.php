@@ -23,4 +23,5 @@
   // $SMTPPassword = 'generatedByGmail';     // SMTP password : you need to generate an "app password" from google (see their documentation) 
   // $recipientEmail = 'yourmail@gmail.com'
 
+
   ?>

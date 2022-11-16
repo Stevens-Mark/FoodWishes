@@ -19,6 +19,7 @@ The site is not very inspiring (yet another recipe website, why is Openclassroom
 - [x] Contact Us page  
 - [x] Form validation : valid input/password strength checking, existing user check etc...
 - [x] File Uploading, verifying & sending by email
+- [x] Search option
 
 ## Skills
 - [x] Setting up the relevant front-end environment
@@ -119,15 +120,13 @@ Le site n'est pas très inspirant (encore un autre site de recettes, pourquoi Op
 - [x] Page "Contactez-nous"  
 - [x] Validation du formulaire : vérification de la validité de la saisie et du mot de passe, vérification de l'existence d'un utilisateur, etc.
 - [x] Téléchargement de fichiers, vérification et envoi par e-mail
-
-Traduit avec www.DeepL.com/Translator (version gratuite)
+- [x] Recherche de recettes
 
 ## Compétences
 - [x] Mise en place de l'environnement frontal pertinent
 - [x] Développement d'une application web dynamique en PHP
 - [x] Développement d'une application Web à l'aide de la base de données MySQL
 - [x] Gestion des événements du site avec PHP
-
 
 # Installation *(français)*
 
