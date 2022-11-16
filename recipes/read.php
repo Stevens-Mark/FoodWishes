@@ -7,23 +7,43 @@
   include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functions.php");
 
   $getData = $_GET;
-  $recipe_id = $getData['id'];
+  $recipe_Id = $getData['id'];
 
-  // if there is no id which is a number, display an error message 
-  if (!isset($recipe_id) || (!is_numeric($recipe_id)))
+  if (!isset($recipe_Id) && is_numeric($recipe_Id))
   {
     $errorMessage = 'Something seems to have gone wrong. Please try again.';
     echo $errorMessage;
     return;
-  }	else {
-    // otherwise retrieve the recipe to be deleted
-    $retrieveRecipe = $mysqlClient->prepare('SELECT * FROM `recipes` WHERE recipe_id = :recipe_id');
-    $retrieveRecipe->execute([
-      'recipe_id' => $recipe_id,
-    ]);
-    $recipe = $retrieveRecipe->fetch(PDO::FETCH_ASSOC);
-  }
+  }	
+  // retrieve recipe from recipe table & all associated comments from comment table
+  $retrieveRecipeWithCommentsStatement = $mysqlClient->prepare('SELECT * FROM recipes r LEFT JOIN comments c on r.recipe_id = c.recipe_id WHERE r.recipe_id = :recipe_id');
+  $retrieveRecipeWithCommentsStatement->execute([
+      'recipe_id' => $recipe_Id,
+  ]);
 
+  $recipeWithComments = $retrieveRecipeWithCommentsStatement->fetchAll(PDO::FETCH_ASSOC);
+
+  $recipe = [
+    'recipe_id' => $recipeWithComments[0]['recipe_id'],
+    'title' => $recipeWithComments[0]['title'],
+    'summary' => $recipeWithComments[0]['summary'],
+    'duration' => $recipeWithComments[0]['duration'],
+    'ingredients' => $recipeWithComments[0]['ingredients'],
+    'recipe' => $recipeWithComments[0]['recipe'],
+    'author' => $recipeWithComments[0]['author'],
+    'image' => $recipeWithComments[0]['image'],
+    'comments' => [],
+  ];
+  // if comment table not empty then populate all comment data into recipe comment array
+  foreach($recipeWithComments as $comment) {
+      if (!is_null($comment['comment_id'])) {
+          $recipe['comments'][] = [
+              'comment_id' => $comment['comment_id'],
+              'comment' => $comment['comment'],
+              'user_id' => (int) $comment['user_id'],
+          ];
+      }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -63,12 +83,30 @@
           </div>      
         </div>
 
-          <div class="mt-auto">
+          <div class="mt-auto text-end">
             <a class="btn btn-warning btn-sm my-4" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
             <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
           </div>
-
+          <!-- If there are comments then display them  -->
+          <?php if(count($recipe['comments']) > 0): ?>
+          <hr />
+          <h2>Comments</h2>
+         
+              <?php foreach($recipe['comments'] as $comment): ?>
+                <hr />
+                <!-- display each comment & comment author  -->
+                <div class="d-flex justify-content-between">
+                  <p><?php echo($comment['comment']); ?></p>
+                  <p class="readPage-commentor text-end"><i><?php echo(displayUser($comment['user_id'], $users)); ?></i></p>
+                </div>
+              <?php endforeach; ?>
+        
+          <?php endif; ?>
+          <hr />
+          <!-- include comment form  -->
+          <?php include_once($rootPath.'/comments/addComment.php'); ?>
       </section>
+      
 </main>
     <!-- include footer -->
     <?php include_once($rootPath.'/include/footer.php'); ?>

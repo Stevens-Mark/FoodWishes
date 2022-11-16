@@ -5,7 +5,7 @@
     const MYSQL_NAME = 'we_love_food';
     const MYSQL_USER = 'root';
     const MYSQL_PASSWORD = 'root';
-
+  
     try {
         $mysqlClient = new PDO(
             sprintf('mysql:host=%s;dbname=%s;port=%s', MYSQL_HOST, MYSQL_NAME, MYSQL_PORT),

@@ -18,23 +18,27 @@ body {
 }
 
 .form-text {
-  color: rgba(255, 255, 255, 1);
   color: #212529;
+  font-weight: 500;
+}
+
+.form-label {
+  font-weight:500;
 }
 
 .btn-warning {
-   background-color: #E3B448; 
-   border-color: #212529; 
-  }
+  background-color: #E3B448; 
+  border-color: #212529; 
+}
 
 .btn-primary {
   background-color: #3A6B35; 
   border-color: #212529; 
-  }
+}
 
 .btn-info {
   border-color: #212529; 
-  }
+}
 
 .btn-info:hover {
   color: #fff;
@@ -46,6 +50,10 @@ body {
   color: #fff;
   background-color: #00b3db;
   border-color: #212529; 
+}
+
+.text-danger {
+  font-weight:700
 }
 
 .logo {
@@ -81,6 +89,10 @@ body {
 
 .readPage-image {
   height: 250px;
+}
+
+.readPage-commentor {
+  width: 125px;
 }
 
  /* code below used to stop long titles breaking the design  */

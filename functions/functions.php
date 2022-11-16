@@ -17,10 +17,10 @@ function displayAuthor(string $authorEmail, array $users) : string
             return $author['full_name'] . ' (' . $author['age'] . ' ans)';
         }
     }
-    return 'utilisateur inconnu';
+    return 'unknown user';
 }
 
-// display username (no age)
+// display username (no age) for welcome message
 function displayName(string $authorEmail, array $users) : string
 {
     for ($i = 0; $i < count($users); $i++) {
@@ -29,7 +29,30 @@ function displayName(string $authorEmail, array $users) : string
             return $author['full_name'];
         }
     }
-    return 'utilisateur inconnu';
+    return 'unknown user';
+}
+
+function displayUser(int $userId, array $users) : string
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $user = $users[$i];
+        if ($userId === (int) $user['user_id']) {
+            return $user['full_name'] . ' (' . $user['age'] . ' ans)';
+        }
+    }
+    return 'unknown use';
+} 
+
+// get user_Id from email address for comments storing
+function mailToUserId(string $userEmail, array $users) : int
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $user = $users[$i];
+        if ($userEmail === $user['email']) {
+            return $user['user_id'];
+        }
+    }
+    return 0;
 }
 
 // // checks that recipe is valid ie, enabled
