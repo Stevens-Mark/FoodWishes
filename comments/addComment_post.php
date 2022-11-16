@@ -7,7 +7,8 @@
 
   $postData = $_POST;
 
-  if ( !isset($postData['comment']) && !isset($postData['recipe_id']) && !is_numeric($postData['recipe_id']) )
+  if ( !isset($postData['comment']) && !isset($postData['recipe_id']) && !isset($postData['review']) 
+        && !is_numeric($postData['recipe_id']) && !is_numeric($postData['recipe_id']) )
       {
         echo('The comment is invalid.');
         return;
@@ -20,12 +21,14 @@
 
   $comment = $postData['comment'];
   $recipeId = $postData['recipe_id'];
+  $review = $postData['review'];
 
-  $insertComment = $mysqlClient->prepare('INSERT INTO comments(comment, recipe_id, user_id) VALUES (:comment, :recipe_id, :user_id)');
+  $insertComment = $mysqlClient->prepare('INSERT INTO comments(comment, recipe_id, user_id, review) VALUES (:comment, :recipe_id, :user_id, :review)');
   $insertComment->execute([
       'comment' => $comment,
       'recipe_id' => $recipeId,
       'user_id' => mailToUserId($loggedUser['email'], $users),
+      'review' => (int) $review,
   ]);
 
 ?>
@@ -48,6 +51,7 @@
       
       <div class="card">      
         <div class="card-body">
+          <p class="card-text"><b>Note</b> : <?php echo($review); ?> / 5</p>
           <p class="card-text"><b>Your comment</b> : <?php echo strip_tags($comment); ?></p>
         </div>
       </div>

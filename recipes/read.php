@@ -15,13 +15,22 @@
     echo $errorMessage;
     return;
   }	
+
   // retrieve recipe from recipe table & all associated comments from comment table
-  $retrieveRecipeWithCommentsStatement = $mysqlClient->prepare('SELECT * FROM recipes r LEFT JOIN comments c on r.recipe_id = c.recipe_id WHERE r.recipe_id = :recipe_id');
+  $retrieveRecipeWithCommentsStatement = $mysqlClient->prepare('SELECT *, DATE_FORMAT(c.created_at, "%d/%m/%Y") as comment_date FROM recipes r LEFT JOIN comments c on r.recipe_id = c.recipe_id WHERE r.recipe_id = :recipe_id');
   $retrieveRecipeWithCommentsStatement->execute([
       'recipe_id' => $recipe_Id,
   ]);
 
   $recipeWithComments = $retrieveRecipeWithCommentsStatement->fetchAll(PDO::FETCH_ASSOC);
+
+  // retieve average rating 
+  $averageRatingStatment = $mysqlClient->prepare('SELECT ROUND(AVG(c.review),1) as rating FROM recipes r LEFT JOIN comments c on r.recipe_id = c.recipe_id WHERE r.recipe_id = :id');
+  $averageRatingStatment->execute([
+      'id' => $recipe_Id,
+  ]);
+  
+  $averageRating = $averageRatingStatment->fetch(PDO::FETCH_ASSOC);
 
   $recipe = [
     'recipe_id' => $recipeWithComments[0]['recipe_id'],
@@ -33,7 +42,9 @@
     'author' => $recipeWithComments[0]['author'],
     'image' => $recipeWithComments[0]['image'],
     'comments' => [],
+    'rating' => $averageRating['rating'],
   ];
+
   // if comment table not empty then populate all comment data into recipe comment array
   foreach($recipeWithComments as $comment) {
       if (!is_null($comment['comment_id'])) {
@@ -41,6 +52,7 @@
               'comment_id' => $comment['comment_id'],
               'comment' => $comment['comment'],
               'user_id' => (int) $comment['user_id'],
+              'created_at' => $comment['comment_date'],
           ];
       }
   }
@@ -71,6 +83,7 @@
               <div class="readPage-summary me-2" >
                 <h2 class="readPage-recipeTitle"><?php echo ucfirst($recipe['title']); ?></h2>
                 <p class="card-text"><b>Author : </b><i class="text-muted"><?php echo ucfirst(displayAuthor($recipe['author'], $users)); ?></i></p>
+                <p><b>Rated by the community at : </b><?php echo($recipe['rating'] ? $recipe['rating'] ." / 5" : "No rating yet"); ?></p>
                 <p class="card-text mt-4"><b>Time : </b><?php echo date("H:i", strtotime($recipe['duration'])); ?> (HH:mm).</p>
               </div>
 
@@ -94,10 +107,12 @@
          
               <?php foreach($recipe['comments'] as $comment): ?>
                 <hr />
-                <!-- display each comment & comment author  -->
-                <div class="d-flex justify-content-between">
-                  <p><?php echo($comment['comment']); ?></p>
-                  <p class="readPage-commentor text-end"><i><?php echo(displayUser($comment['user_id'], $users)); ?></i></p>
+                <!-- display each average rating, comment & comment author  -->
+                <div class="d-flex justify-content-between flex-wrap">
+                  <p><?php echo($comment['created_at']); ?></p>
+                  <p class="px-2"><?php echo($recipe['rating']); ?> Star(s)</p>
+                  <p class="pe-2" ><?php echo($comment['comment']); ?></p>
+                  <p><i><?php echo(displayUser($comment['user_id'], $users)); ?></i></p>
                 </div>
               <?php endforeach; ?>
         

@@ -9,6 +9,10 @@
     <input class="form-control" type="text" name="recipe_id" value="<?php echo($_GET['id']); ?>" />
   </div>
   <div class="mb-3">
+    <label for="review" class="form-label">Rate the recipe (from 1 to 5)</label>
+    <input type="number" class="form-control" id="review" name="review" min="0" max="5" step="1" />
+  </div>
+  <div class="mb-3">
     <label for="comment" class="form-label">Post a Comment</label>
     <textarea class="form-control" placeholder="Be respectful, we are human." id="comment" name="comment"></textarea>
   </div>
