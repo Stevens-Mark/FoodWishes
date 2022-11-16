@@ -53,6 +53,7 @@
               'comment' => $comment['comment'],
               'user_id' => (int) $comment['user_id'],
               'created_at' => $comment['comment_date'],
+              'review' => $comment['review'],
           ];
       }
   }
@@ -108,10 +109,10 @@
               <?php foreach($recipe['comments'] as $comment): ?>
                 <hr />
                 <!-- display each average rating, comment & comment author  -->
-                <div class="d-flex justify-content-between flex-wrap">
-                  <p><?php echo($comment['created_at']); ?></p>
-                  <p class="px-2"><?php echo($recipe['rating']); ?> Star(s)</p>
-                  <p class="pe-2" ><?php echo($comment['comment']); ?></p>
+                <div class="d-flex flex-wrap">
+                  <p class="mb-0 pe-3"><?php echo($comment['created_at']); ?></p>
+                  <p class="mb-0 pe-3"><?php echo($comment['review']); ?> Star(s)</p>
+                  <p class="mb-0 pe-3" ><?php echo($comment['comment']); ?></p>
                   <p><i><?php echo(displayUser($comment['user_id'], $users)); ?></i></p>
                 </div>
               <?php endforeach; ?>

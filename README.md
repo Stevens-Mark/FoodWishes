@@ -6,10 +6,12 @@
 
 ## Objective
 To develop a Full stack web application using an Apache server, a MySQL database and using PHP as the main programming language.<br/> 
+The site allows users to sign up & share their favourite food recipes as well as comment on other peoples recipes. All the ususal CRUD operations are there & one can even upload pictures of the food. There is also a search option to quickly find recipes based on any word found in the recipe such as ingredients. The User can also send an email (with out without attachment) to the site owner. The forms to conatin some validation too...</br>
 
-For this project I wanted to learn about PHP and MySQL databases to produce a full stack web application. The basis for this project comes from the OpenClassrooms course [Design your website with PHP and MySQL](https://openclassrooms.com/en/courses/918836-concevez-votre-site-web-avec-php-et-mysql) *(in french)*. I used as a starting point...</br> 
-As the course does not explain everything, I found myself completing the functionality to be able to actually send an attachment as well as form validation, for example, which are not covered in the course.</br>
+For this project I wanted to learn about PHP and MySQL databases to produce a full stack web application. The basis for this project comes from the OpenClassrooms course [Design your website with PHP and MySQL](https://openclassrooms.com/en/courses/918836-concevez-votre-site-web-avec-php-et-mysql) *(in french)*. I used the example in the course as a starting point...</br> 
+As the course does not explain everything, I found myself completing the functionality to be able to actually send an attachment, search for items as well as form validation, for example, which are not covered in the course.</br>
 The site is not very inspiring (yet another recipe website, why is Openclassrooms obsessed with recipe websites?) and the css styling is simple, but the idea behind this project was to discover new programming languages and not to produce a production ready application.
+
 ## Features
 - [x] Create/Destroy an account
 - [x] Login / Logout
@@ -106,6 +108,8 @@ Enjoy
 
 ## Objectif
 Développer une application Web Full stack en utilisant un serveur Apache, une base de données MySQL et en utilisant PHP comme langage de programmation principal.<br/>
+To develop a Full stack web application using an Apache server, a MySQL database and using PHP as the main programming language.<br/> 
+The site allows users to sign up & share their favourite food recipes as well as comment on other peoples recipes. All the ususal CRUD operations are there & one can even upload pictures of the food. There is also a search option to quickly find recipes based on any word found in the recipe such as ingredients. The User can also send an email (with out without attachment) to the site owner. The forms to conatin some validation too...</br>
 
 Pour ce projet, je voulais en savoir plus sur les bases de données PHP et MySQL afin de produire une application Web complète. La base de ce projet provient du cours OpenClassrooms [Concevez votre site web avec PHP et MySQL](https://openclassrooms.com/en/courses/918836-concevez-votre-site-web-avec-php-et-mysql) *(en français)*. J'ai utilisé comme point de départ...</br>
 Comme le cours n'explique pas tout, je me suis retrouvé à compléter la fonctionnalité pour pouvoir réellement envoyer une pièce jointe ainsi que la validation de formulaire, par exemple, qui ne sont pas abordés dans le cours.</br>

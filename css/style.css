@@ -179,7 +179,7 @@ body {
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 768px) {
-  .recipe-container {
+  .recipe-container, .comment-container {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -192,6 +192,7 @@ body {
   .readPage-image {
     width: 50%;
   }
+
 }
 
 @media screen and (min-width: 1140px) {

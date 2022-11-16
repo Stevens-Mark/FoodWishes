@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 16, 2022 at 02:44 PM
+-- Generation Time: Nov 16, 2022 at 04:12 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.7
 
@@ -42,7 +42,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `user_id`, `recipe_id`, `comment`, `created_at`, `review`) VALUES
-(1, 57, 89, 'Amazing recipe. Well worth trying!', '2022-11-16 13:51:55', 5);
+(1, 57, 89, 'Amazing recipe, great taste ! Well worth trying!', '2022-11-16 13:51:55', 5);
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`, `age`) VALUES
-(57, 'Tony', 'tony@stark.com', 'Password@123', 66);
+(57, 'Tony Stark', 'tony@stark.com', 'Password@123', 66);
 
 --
 -- Indexes for dumped tables
@@ -130,7 +130,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `recipes`

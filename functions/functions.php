@@ -32,6 +32,7 @@ function displayName(string $authorEmail, array $users) : string
     return 'unknown user';
 }
 
+// display user based on user-Id
 function displayUser(int $userId, array $users) : string
 {
     for ($i = 0; $i < count($users); $i++) {
@@ -53,6 +54,44 @@ function mailToUserId(string $userEmail, array $users) : int
         }
     }
     return 0;
+}
+
+function getRecipes(array $recipes, int $limit) : array
+{
+    $valid_recipes = [];
+    $counter = 0;
+
+    foreach($recipes as $recipe) {
+        if ($counter == $limit) {
+            return $valid_recipes;
+        }
+        $valid_recipes[] = $recipe;
+        $counter++;
+    }
+    return $valid_recipes;
+}
+
+// clean up input data by user
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+function displayRecipe(array $recipe) : string
+{
+    $recipe_content = '';
+
+    if ($recipe['is_enabled']) {
+        $recipe_content = '<article>';
+        $recipe_content .= '<h3>' . $recipe['title'] . '</h3>';
+        $recipe_content .= '<div>' . $recipe['recipe'] . '</div>';
+        $recipe_content .= '<i>' . $recipe['author'] . '</i>';
+        $recipe_content .= '</article>';
+    }
+    
+    return $recipe;
 }
 
 // // checks that recipe is valid ie, enabled
@@ -78,42 +117,3 @@ function mailToUserId(string $userEmail, array $users) : int
 //     }
 //     return $validRecipes;
 // }
-
-function getRecipes(array $recipes, int $limit) : array
-{
-    $valid_recipes = [];
-    $counter = 0;
-
-    foreach($recipes as $recipe) {
-        if ($counter == $limit) {
-            return $valid_recipes;
-        }
-
-        $valid_recipes[] = $recipe;
-        $counter++;
-    }
-
-    return $valid_recipes;
-}
-
-function displayRecipe(array $recipe) : string
-{
-    $recipe_content = '';
-
-    if ($recipe['is_enabled']) {
-        $recipe_content = '<article>';
-        $recipe_content .= '<h3>' . $recipe['title'] . '</h3>';
-        $recipe_content .= '<div>' . $recipe['recipe'] . '</div>';
-        $recipe_content .= '<i>' . $recipe['author'] . '</i>';
-        $recipe_content .= '</article>';
-    }
-    
-    return $recipe;
-}
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
