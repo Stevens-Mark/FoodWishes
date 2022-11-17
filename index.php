@@ -40,7 +40,7 @@
       <section class="mb-4">
         <div class="d-flex align-items-center mb-4">
           <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
-          <h1>Recipes</h1>
+          <h1><?php echo(count($recipes)); ?> Recipes</h1>
         </div>
         <!-- If user enters a search word & no results display message -->
         <?php if(count($recipes) <1) : ?>

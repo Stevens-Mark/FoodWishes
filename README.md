@@ -4,6 +4,13 @@
 
 # PHP/MYSQL Project *(English)*
 
+Open website at [Food Wishes](http://stevensmark.infinityfreeapp.com/index.php) <br/>
+
+You can sign up or use the visitor's credentials below:<br/>
+
+email: visitor@test.com<br/>
+Password: Password@321<br/>
+
 ## Objective
 To develop a Full stack web application using an Apache server, a MySQL database and using PHP as the main programming language.<br/> 
 The site allows users to sign up & share their favourite food recipes as well as comment on other peoples recipes. All the ususal CRUD operations are there & one can even upload pictures of the food. There is also a search option to quickly find recipes based on any word found in the recipe such as ingredients. The User can also send an email (with out without attachment) to the site owner. The forms to conatin some validation too...</br>
@@ -105,6 +112,13 @@ Enjoy
 </p>
 
 # Projet PHP/MYSQL *(français)*
+
+Ouvrir le site web à [Food Wishes](http://stevensmark.infinityfreeapp.com/index.php) <br/>
+
+Vous pouvez vous inscrire ou utiliser les informations d'identification du visiteur ci-dessous :<br/>
+
+e-mail : visitor@test.com<br/>
+Mot de passe : Password@321<br/>
 
 ## Objectif
 Développer une application Web Full stack en utilisant un serveur Apache, une base de données MySQL et en utilisant PHP comme langage de programmation principal.<br/>
