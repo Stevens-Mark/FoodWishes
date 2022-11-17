@@ -123,7 +123,10 @@
       <?php include_once($rootPath.'/include/header.php'); ?>
 
      <section>
-        <h1 class="mb-4">Contact Us</h1>
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Contact Us</h1>
+        </div>
          <!-- Contact Us form -->
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3">

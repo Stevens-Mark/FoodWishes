@@ -38,7 +38,10 @@
     <!-- If the user exists, the recipes are displayed -->
     <?php if(isset($loggedUser)): ?>
       <section class="mb-4">
-        <h1 class="mb-4">Recipes</h1>
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Recipes</h1>
+        </div>
         <!-- If user enters a search word & no results display message -->
         <?php if(count($recipes) <1) : ?>
           <div class="d-flex justify-content-center align-items-center" style="height:calc( 100vh - 375px );">

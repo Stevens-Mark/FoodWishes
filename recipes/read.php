@@ -75,8 +75,10 @@
       <!-- include header -->
       <?php include_once($rootPath.'/include/header.php'); ?>
       <section class="readPage-container mx-auto">
-        <h1 class="mb-4">Recipe</h1>
-
+      <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Recipe</h1>
+        </div>
         <div class="card">
           <div class="d-flex flex-column card-body">
             <div class="d-flex flex-column-reverse flex-lg-row justify-content-between mb-3">
@@ -98,8 +100,8 @@
         </div>
 
           <div class="mt-auto text-end">
-            <a class="btn btn-warning btn-sm my-4" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe['recipe_id']); ?>">Edit</a>
-            <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Delete</a>
+            <a class="btn btn-warning btn-sm my-4" href="<?php echo($rootUrl)?>recipes/update.php?id=<?php echo($recipe_Id); ?>">Edit</a>
+            <a class="btn btn-danger btn-sm m-2" href="<?php echo($rootUrl)?>recipes/delete.php?id=<?php echo($recipe_Id); ?>">Delete</a>
           </div>
           <!-- If there are comments then display them  -->
           <?php if(count($recipe['comments']) > 0): ?>

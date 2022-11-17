@@ -115,7 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php include_once($rootPath.'/include/header.php'); ?>
 
       <section>
-        <h1 class="mb-4">Sign Up</h1>
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Sign Up</h1>
+        </div>
         <!-- Create account form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
           

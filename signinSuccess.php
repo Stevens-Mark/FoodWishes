@@ -21,7 +21,10 @@
     <main class="container">
       <?php include_once($rootPath.'/include/header.php'); ?>
       <section>
-        <h1 class="mb-4">Congratulations ! </h1> 
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Congratulations !</h1>
+        </div>
         <div class="card">
           <div class="card-body">
           <p class="card-title"><?php echo ucfirst($full_name); ?>, your account has been created. You can now log in to the website ...</p>

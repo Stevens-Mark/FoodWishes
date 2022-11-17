@@ -42,7 +42,10 @@
       <!-- include header -->
       <?php include_once($rootPath.'/include/header.php'); ?>
       <section>
-        <h1 class="mb-4">Delete Your Account !</h1>
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Delete Your Account !</h1>
+        </div>
         <div class="card">
           <div class="card-body">
               <p class="card-text"><b>Account Holder : </b><i class="text-muted"><?php echo ucfirst(displayName($email, $users)); ?></i></p>

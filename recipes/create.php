@@ -131,7 +131,10 @@
       <?php include_once($rootPath.'/include/header.php'); ?>
 
       <section>
-        <h1 class="mb-4">Add A Recipe</h1>
+        <div class="d-flex align-items-center mb-4">
+          <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+          <h1>Add A Recipe</h1>
+        </div>
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3 visually-hidden">
                 <label for="heading" class="form-label">Create</label>

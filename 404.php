@@ -26,8 +26,9 @@
 <body class="backTwo d-flex flex-column min-vh-100" style="background: #CBD18F;">
   <main class="container">
     <?php include_once($rootPath.'/include/header.php'); ?>
-    <div class="d-flex justify-content-center align-items-center" style="height:calc( 100vh - 144px );">
+    <div class="d-flex justify-content-center align-items-center" style="height:calc( 100vh - 180px );">
       <div class="text-center">
+        <img  src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
         <h1><?php echo($error_title) ?></h1>
         <h2><a class="nav-link" href="<?php echo($rootUrl). 'index.php'; ?>"><?php echo($error_message) ?></a></h2>
       </div>

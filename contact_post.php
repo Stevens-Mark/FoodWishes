@@ -92,7 +92,10 @@
     <main class="container">
       <?php include_once($rootPath.'/include/header.php'); ?>
         <section>
-            <h1 class="mb-4">Message Received !</h1>       
+          <div class="d-flex align-items-center mb-4">
+            <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
+            <h1>essage Received !</h1>
+          </div>
             <div class="card">
               <div class="card-body">
                 <h2 class="card-title">Reminder of your information</h2>
