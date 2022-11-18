@@ -183,7 +183,8 @@
                 </div>
                 <div class="mb-3">
                   <label for="summary" class="form-label">Recipe Description</label>
-                  <textarea rows="2"  class="form-control" id="summary" name="summary" placeholder="Put new description here ..." aria-describedby="summary-help"><?php echo strip_tags($recipes['summary']); ?></textarea>
+                  <textarea rows="2"  class="form-control" id="summary" name="summary" placeholder="Put new description here ..." aria-describedby="summary-help"><?php echo strip_tags($recipes['summary']); ?>
+                  </textarea>
                   <div id="summary-help" class="form-text">Put updated description details here (min 20 and max 200 characters).</div>
                   <span class="text-danger"><?php echo $summaryErr;?></span>
                 </div>
@@ -194,13 +195,15 @@
                 </div>
                 <div class="mb-3">
                   <label for="ingredients" class="form-label">Ingredients</label>
-                  <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put new ingredients here ..." aria-describedby="ingredients-help"><?php echo strip_tags($recipes['ingredients']); ?></textarea>
+                  <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put new ingredients here ..." aria-describedby="ingredients-help"><?php echo strip_tags($recipes['ingredients']); ?>
+                  </textarea>
                   <div id="ingredients-help" class="form-text">Put updated ingredients details here (min 10 characters).</div>
                   <span class="text-danger"><?php echo $ingredientsErr;?></span>
                 </div>
                 <div class="mb-3">
                   <label for="recipe" class="form-label">Instructions</label>
-                  <textarea rows="6" class="form-control" id="recipe" name="recipe" placeholder="Put new recipe details here ..."  aria-describedby="description-help"><?php echo strip_tags($recipes['recipe']); ?></textarea>
+                  <textarea rows="6" class="form-control" id="recipe" name="recipe" placeholder="Put new recipe details here ..."  aria-describedby="description-help"><?php echo strip_tags($recipes['recipe']); ?>
+                  </textarea>
                   <div id="description-help" class="form-text">Put updated instructions here (min 20 characters).</div>
                   <span class="text-danger"><?php echo $recipeErr;?></span>
                 </div>

@@ -114,6 +114,7 @@
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,56 +131,70 @@
       <!-- include header -->
       <?php include_once($rootPath.'/include/header.php'); ?>
 
-      <section>
+     <section>
         <div class="d-flex align-items-center mb-4">
           <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
           <h1>Add A Recipe</h1>
         </div>
+
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
+
               <div class="mb-3 visually-hidden">
                 <label for="heading" class="form-label">Create</label>
                 <input type="hidden" class="form-control" id="heading" name="heading" value="Recipe Created !">
               </div>
+
               <div class="mb-3">
-                  <label for="title" class="form-label">Recipe Title</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
-                  <span class="text-danger"><?php echo $titleErr;?></span>
+                <label for="title" class="form-label">Recipe Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Choose a title for your recipe." value="<?php echo $title;?>">
+                <span class="text-danger"><?php echo $titleErr;?></span>
               </div>
+
               <div class="mb-3">
-                  <label for="summary" class="form-label">Recipe Description</label>
-                  <textarea rows="2"  class="form-control"  id="summary" name="summary" placeholder="Put brief recipe description here ..."><?php echo $summary;?></textarea>
-                  <span class="text-danger"><?php echo $summaryErr;?></span>
+                <label for="summary" class="form-label">Recipe Description</label>
+                <textarea rows="2" class="form-control" placeholder="Put a brief description here ..." id="summary" name="summary"><?php echo $summary;?></textarea>
+                <span class="text-danger"><?php echo $summaryErr;?></span>
               </div>
+
               <div class="mb-3">
-                  <label for="duration" class="form-label">Cooking time</label>
-                  <input type="time" class="form-control" id="duration" name="duration" min="00:05" max="06:00" value="<?php echo $duration;?>">
-                  <span class="text-danger"><?php echo $durationErr;?></span>
+                <label for="duration" class="form-label">Cooking time</label>
+                <input type="time" class="form-control" id="duration" name="duration" min="00:05" max="06:00" value="<?php echo $duration;?>">
+                <span class="text-danger"><?php echo $durationErr;?></span>
               </div>
+
               <div class="mb-3">
-                  <label for="ingredients" class="form-label">Ingredients</label>
-                  <textarea rows="3"  class="form-control" id="ingredients" name="ingredients" placeholder="Put ingredients here ..."><?php echo $ingredients;?></textarea>
-                  <span class="text-danger"><?php echo $ingredientsErr;?></span>
+                <label for="ingredients" class="form-label">Ingredients</label>
+                <textarea rows="3" class="form-control" placeholder="Put ingredients here ..." id="ingredients" name="ingredients"><?php echo $ingredients;?></textarea>
+                <span class="text-danger"><?php echo $ingredientsErr;?></span>
               </div>
+
               <div class="mb-3">
-                  <label for="recipe" class="form-label">Instructions</label>
-                  <textarea rows="6"  class="form-control"  id="recipe" name="recipe" placeholder="Put recipe details here ..."><?php echo $recipe;?></textarea>
-                  <span class="text-danger"><?php echo $recipeErr;?></span>
+                <label for="recipe" class="form-label">Instructions</label>
+                <textarea rows="3" class="form-control" placeholder="Put recipe details here ..." id="recipe" name="recipe"><?php echo $recipe;?></textarea>
+                <span class="text-danger"><?php echo $recipeErr;?></span>
               </div>
+              
+
               <!-- File upload ! -->
               <div class="mb-3">
-                  <label for="image" class="form-label">Recipe Image <i>(optional)</i></label>
+
+                  <label for="image" class="form-label">Your File <i>(optional)</i></label>
                   <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
                   <div id="image-help" class="form-text mb-3">Upload either JPG, PNG or GIF (maximum size 1MB).</div>
+
                  <!-- display file upload errors if needed  -->
                 <?php if(($extensionError)) : ?>
                   <p class="card-text text-danger" ><b>File Type</b> : <?php echo(" extension not allowed, please choose a JPEG, PNG or GIF file.") ?></p>
                 <?php endif; ?>
+
                 <?php if(($sizeError)) : ?>
                   <p class="card-text text-danger"><b>File Size</b> : <?php echo($_FILES["image"]["size"]) ?> bytes, but maximum size is 1 MB. </p>
                 <?php endif; ?>
               </div>
+
               <button type="submit" class="btn btn-primary">Send</button>
           </form>
+
           <br />
       </section>     
     </main>
@@ -187,3 +202,4 @@
     <?php include_once($rootPath.'/include/footer.php'); ?>
 </body>
 </html>
+
