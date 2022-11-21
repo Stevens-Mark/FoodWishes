@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/assets/php_mysql_logo.png" />
+  <img src="/assets/Food_wishes.webp" />
 </p>
 
 # PHP/MYSQL Project *(English)*
@@ -129,7 +129,7 @@ Here are the two web pages I used to do this :<br/>
 
 
 <p align="center">
-  <img src="/assets/php_mysql_logo.png" />
+  <img src="/assets/Food_wishes.webp" />
 </p>
 
 # Projet PHP/MYSQL *(français)*
