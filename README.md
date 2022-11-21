@@ -8,8 +8,10 @@ Open website at [Food Wishes](http://stevensmark.infinityfreeapp.com/index.php) 
 
 You can sign up or use the visitor's credentials below:<br/>
 
-email: visitor@test.com<br/>
+email: guest@foodwishes.com<br/>
 Password: Password@321<br/>
+
+If you want, you can delete your account afterwards, but you cannot delete the guest account.
 
 ## Objective
 To develop a Full stack web application using an Apache server, a MySQL database and using PHP as the main programming language.<br/> 
@@ -105,7 +107,26 @@ Using Gmail, you'll need to read their documentation to get an "app password" ge
 
 If you've done everything correctly, then when you click on `My Website` on the MAMP home page in your browser the project should open.</br>
 
-Enjoy
+Enjoy<br/>
+
+## Notes
+
+I have used  [InfinityFree](https://www.infinityfree.net/) to host this project.
+If you’re using free hosting with your own domain or a subdomain, you’ll want to make your website work over HTTPS (SSL). Fortunately, InfinityFree provides all the tools you need to make it so. Please refer to their notes on obtaining a free SSL & then you'll need to add the following code to your `.htaccess` file: <br/>
+This code is NOT in my `.htaccess` file (in the repo version) so you can use the project on localhost.<br/>
+
+RewriteEngine On<br/>
+RewriteCond %{HTTP:X-Forwarded-Proto} !https<br/>
+RewriteCond %{HTTPS} off<br/>
+RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}<br/>
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]<br/>
+
+Here are the two web pages I used to do this :<br/>
+
+- [How to get Free SSL (HTTPS) on InfinityFree](https://forum.infinityfree.net/t/how-to-get-free-ssl-https-on-infinityfree/49323)
+
+- [How to force all traffic to HTTPS](https://forum.infinityfree.net/t/how-to-force-all-traffic-to-https/49322)
+
 
 <p align="center">
   <img src="/assets/php_mysql_logo.png" />
@@ -117,8 +138,10 @@ Ouvrir le site web à [Food Wishes](http://stevensmark.infinityfreeapp.com/index
 
 Vous pouvez vous inscrire ou utiliser les informations d'identification du visiteur ci-dessous :<br/>
 
-e-mail : visitor@test.com<br/>
+e-mail : guest@foodwishes.com<br/>
 Mot de passe : Password@321<br/>
+
+Si vous le souhaitez, vous pouvez supprimer votre compte par la suite, mais vous ne pouvez pas supprimer le compte invité.
 
 ## Objectif
 Développer une application Web Full stack en utilisant un serveur Apache, une base de données MySQL et en utilisant PHP comme langage de programmation principal.<br/>
@@ -213,5 +236,22 @@ En utilisant Gmail, vous devrez lire leur documentation pour obtenir un "mot de 
 
 Si vous avez tout fait correctement, lorsque vous cliquez sur "Mon site Web" sur la page d'accueil MAMP de votre navigateur, le projet devrait s'ouvrir.</br>
 
+## Remarques
+
+J'ai utilisé [InfinityFree](https://www.infinityfree.net/) pour héberger ce projet.
+Si vous utilisez un hébergement gratuit avec votre propre domaine ou un sous-domaine, vous souhaiterez que votre site Web fonctionne via HTTPS (SSL). Heureusement, InfinityFree fournit tous les outils dont vous avez besoin pour y parvenir. Veuillez vous référer à leurs notes sur l'obtention d'un SSL gratuit et vous devrez ensuite ajouter le code suivant à votre fichier `.htaccess` : <br/>
+Ce code n'est PAS dans mon fichier `.htaccess` (dans la version dans mon repo) donc vous pouvez utiliser le projet sur localhost.<br/>
+
+RewriteEngine On<br/>
+RewriteCond %{HTTP:X-Forwarded-Proto} !https<br/>
+RewriteCond %{HTTPS} off<br/>
+RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}<br/>
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]<br/>
+
+Voici les deux pages Web que j'ai utilisées pour faire cela :<br/>
+
+- [Comment obtenir le SSL gratuit (HTTPS) sur InfinityFree](https://forum.infinityfree.net/t/how-to-get-free-ssl-https-on-infinityfree/49323)
+
+- [Comment forcer tout le trafic vers HTTPS](https://forum.infinityfree.net/t/how-to-force-all-traffic-to-https/49322)
 
 

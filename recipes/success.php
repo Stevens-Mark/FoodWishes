@@ -32,7 +32,7 @@
             <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
             <h1><?php echo($heading); ?></h1>
           </div>
-            <div class="card">
+            <div class="card m-4">
               <div class="card-body">
                 <h2 class="card-title mb-4">Your Recipe information</h2>
                 <p class="card-text"><b>Title</b> : <?php echo ucfirst(strip_tags($title)); ?></p>

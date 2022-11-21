@@ -10,13 +10,19 @@ body {
   color: #3A6B35; 
 }
 
+.form-control {
+  font-size: 1rem;
+}
+
 .form-text {
   color: #212529;
   font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .form-label {
   font-weight:500;
+  font-size: 1rem;
 }
 
 .btn-warning {
@@ -46,7 +52,8 @@ body {
 }
 
 .text-danger {
-  font-weight:700
+  font-weight:700;
+  font-size: 1rem;
 }
 
 .logo {

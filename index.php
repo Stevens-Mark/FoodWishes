@@ -68,8 +68,10 @@
 
         <?php endif; ?>
       </section>
-      <div class="text-end">
-      <a class="btn btn-danger mb-4" href="<?php echo($rootUrl)?>destroy.php?id=<?php echo($loggedUser['email']); ?>">Delete Your Account</a></d>
+        <?php if($loggedUser['email'] != 'guest@foodwishes.com'): ?>
+          <div class="text-end">
+          <a class="btn btn-danger mb-4" href="<?php echo($rootUrl)?>destroy.php?id=<?php echo($loggedUser['email']); ?>">Delete Your Account</a></d>
+        <?php endif; ?>
     <?php endif; ?>
 
   </main>
