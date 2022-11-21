@@ -7,6 +7,7 @@
 <!-- form to add a comment to a recipe -->
 <form action="<?php echo($rootUrl . 'comments/addComment_post.php'); ?>" method="POST">
   <div class="mb-3 visually-hidden">
+    <label for="recipe_id" class="form-label">Recipe ID</label>
     <input class="form-control" type="text" name="recipe_id" value="<?php echo($_GET['id']); ?>" />
   </div>
   <div class="mb-3">
