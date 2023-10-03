@@ -28,7 +28,9 @@
   
   // Server settings 
   // $mail->SMTPDebug = SMTP::DEBUG_SERVER;   // Enable verbose debug output 
-  $mail->isSMTP();                            // Set mailer to use SMTP 
+  $mail->isSMTP();   
+  
+  // Set mailer to use SMTP 
   $mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers 
   $mail->SMTPAuth = true;                     // Enable SMTP authentication 
   $mail->Username = $SMTPUsername;            // SMTP username 
@@ -96,7 +98,7 @@
         <section>
           <div class="d-flex align-items-center mb-4">
             <img class="icon-h1" src="<?php echo($rootUrl). '/assets/plateLogo.png'; ?>" alt="" >
-            <h1>essage Received !</h1>
+            <h1>Message Received !</h1>
           </div>
             <div class="card">
               <div class="card-body">

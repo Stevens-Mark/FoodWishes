@@ -4,7 +4,7 @@
 
 # PHP/MYSQL Project *(English)*
 
-Open website at [Food Wishes](http://stevensmark.infinityfreeapp.com/index.php) <br/>
+Open website at [Food Wishes](http://foodwishes2022.infinityfreeapp.com/) <br/>
 
 You can sign up or use the visitor's credentials below:<br/>
 
@@ -103,7 +103,7 @@ Using Gmail, you'll need to read their documentation to get an "app password" ge
   $mail->SMTPSecure = 'ssl';                  // Enable TLS encryption, `ssl` also accepted <br/>
   $mail->Port = 465;                          // TCP port to connect to <br/>
 
-- Run the Api:
+- Run the Api: php -S localhost:8080
 
 If you've done everything correctly, then when you click on `My Website` on the MAMP home page in your browser the project should open.</br>
 
@@ -134,7 +134,7 @@ Here are the two web pages I used to do this :<br/>
 
 # Projet PHP/MYSQL *(français)*
 
-Ouvrir le site web à [Food Wishes](http://stevensmark.infinityfreeapp.com/index.php) <br/>
+Ouvrir le site web à [Food Wishes](http://foodwishes2022.infinityfreeapp.com/) <br/>
 
 Vous pouvez vous inscrire ou utiliser les informations d'identification du visiteur ci-dessous :<br/>
 
